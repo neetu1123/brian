@@ -875,9 +875,9 @@ body {
 .navbar-nav .nav-link {
     color: #2d3a3a;
     font-weight: 500;
-    margin: 0 0.7rem;
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
+    margin: 0 0.2rem;
+    font-size: 1rem;
+    letter-spacing: 0.01rem;
     transition: color 0.2s;
 }
 
@@ -962,7 +962,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1.2rem;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
