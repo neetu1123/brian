@@ -9,7 +9,7 @@
 }
 
 .aboutus-subtitle {
-    color: #1eb2a6;
+    color: #143c5d;
     font-size: 1.05rem;
     letter-spacing: 0.12em;
     font-weight: 700;
@@ -35,7 +35,7 @@
 }
 
 .aboutus-btn {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
     font-weight: 700;
     border-radius: 30px;
@@ -47,7 +47,7 @@
 }
 
 .aboutus-btn:hover {
-    background: #15998c;
+    background: #143c5d;
     color: #fff;
 }
 
@@ -98,7 +98,7 @@
     top: 10px;
     right: -60px;
     font-size: 3.2rem;
-    color: #1eb2a6;
+    color: #143c5d;
     opacity: 0.7;
     z-index: 10;
     pointer-events: none;
@@ -163,7 +163,7 @@
 }
 
 .about-host-subtitle {
-    color: #1eb2a6;
+    color: #143c5d;
     font-size: 1.05rem;
     letter-spacing: 0.12em;
     font-weight: 700;
@@ -189,7 +189,7 @@
 }
 
 .about-host-btn {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
     font-weight: 700;
     border-radius: 30px;
@@ -201,7 +201,7 @@
 }
 
 .about-host-btn:hover {
-    background: #15998c;
+    background: #143c5d;
     color: #fff;
 }
 
@@ -252,7 +252,7 @@
     top: 10px;
     right: -60px;
     font-size: 3.2rem;
-    color: #1eb2a6;
+    color: #143c5d;
     opacity: 0.7;
     z-index: 10;
     pointer-events: none;
@@ -315,7 +315,7 @@
 }
 
 .attraction-subtitle {
-    color: #1eb2a6;
+    color: #143c5d;
     font-size: 1.05rem;
     letter-spacing: 0.12em;
     font-weight: 600;
@@ -337,7 +337,7 @@
     z-index: 2;
     transform: translateY(-50%);
     background: #eaf7f6;
-    color: #1eb2a6;
+    color: #143c5d;
     border-radius: 50%;
     width: 56px;
     height: 56px;
@@ -351,7 +351,7 @@
 }
 
 .attraction-btn:hover {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
 }
 
@@ -391,7 +391,7 @@
 }
 
 .attraction-caption {
-    background: rgba(30, 178, 166, 0.85);
+    background: #143c5d;
     color: #fff;
     font-size: 1.3rem;
     font-weight: 700;
@@ -456,7 +456,7 @@
 }
 
 .property-subtitle {
-    color: #1eb2a6;
+    color: #143c5d;
     font-size: 1.05rem;
     letter-spacing: 0.12em;
     font-weight: 600;
@@ -511,7 +511,7 @@
 }
 
 .property-fav:hover {
-    color: #1eb2a6;
+    color: #143c5d;
     background: #eaf7f6;
 }
 
@@ -524,7 +524,7 @@
 }
 
 .property-meta span {
-    color: #1eb2a6;
+    color: #143c5d;
     font-weight: 600;
     font-size: 1.05rem;
 }
@@ -548,7 +548,7 @@
 
 .property-btn {
     background: #eaf7f6;
-    color: #1eb2a6;
+    color: #143c5d;
     font-weight: 700;
     border-radius: 30px;
     padding: 0.7rem 1.2rem;
@@ -559,7 +559,7 @@
 }
 
 .property-btn:hover {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
 }
 
@@ -649,7 +649,7 @@
 }
 
 .testimonial-btn {
-    background: #7eddd2;
+    background: #143c5d;
     color: #fff;
     border-radius: 50%;
     width: 48px;
@@ -664,7 +664,7 @@
 }
 
 .testimonial-btn:hover {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
 }
 
@@ -707,7 +707,7 @@
 .footer-brand-title {
     display: block;
     font-size: 1.05rem;
-    color: #2d9a92;
+    color: #143c5d;
     letter-spacing: 0.08em;
     font-weight: 500;
     margin-bottom: 0.2rem;
@@ -724,7 +724,7 @@
 
 .footer-brand-dot {
     font-size: 1.1rem;
-    color: #2d9a92;
+    color: #143c5d;
     font-weight: 400;
     letter-spacing: 0.2em;
     margin-left: 0.3rem;
@@ -740,7 +740,7 @@
 }
 
 .footer-social-link {
-    color: #2d9a92;
+    color: #143c5d;
     background: #eaf7f6;
     border-radius: 6px;
     padding: 0.2rem 0.5rem;
@@ -751,7 +751,7 @@
 }
 
 .footer-social-link:hover {
-    background: #2d9a92;
+    background: #143c5d;
     color: #fff;
 }
 
@@ -772,13 +772,13 @@
 }
 
 .footer-link:hover {
-    color: #1eb2a6;
+    color: #143c5d;
     text-decoration: underline;
 }
 
 .footer-contact-list .iconify {
     font-size: 1.2rem;
-    color: #2d9a92;
+    color: #143c5d;
 }
 
 .footer-property-select {
@@ -794,12 +794,12 @@
 }
 
 .footer-property-select:focus {
-    box-shadow: 0 0 0 2px #1eb2a6;
+    box-shadow: 0 0 0 2px #143c5d;
     border: none;
 }
 
 .footer-bottom {
-    background: #2d9a92;
+    background: #143c5d;
     color: #fff;
     font-size: 1rem;
 }
@@ -883,11 +883,11 @@ body {
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link:hover {
-    color: #1eb2a6;
+    color: #143c5d;
 }
 
 .btn-availability {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
     font-weight: 600;
     border-radius: 30px;
@@ -899,7 +899,7 @@ body {
 }
 
 .btn-availability:hover {
-    background: #15998c;
+    background: #143c5d;
 }
 
 .banner-section {
@@ -934,7 +934,7 @@ body {
 
 .banner-content h5 {
     letter-spacing: 0.15em;
-    color: #1eb2a6;
+    color: #143c5d;
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 1.2rem;
@@ -989,12 +989,12 @@ body {
 
 .search-bar .iconify {
     font-size: 1.3rem;
-    color: #1eb2a6;
+    color: #143c5d;
     margin-right: 0.5rem;
 }
 
 .search-bar .btn-search {
-    background: #1eb2a6;
+    background: #143c5d;
     color: #fff;
     border-radius: 30px;
     font-weight: 600;
@@ -1007,7 +1007,7 @@ body {
 }
 
 .search-bar .btn-search:hover {
-    background: #15998c;
+    background: #143c5d;
 }
 
 @media (max-width: 991px) {

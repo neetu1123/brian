@@ -1,15 +1,15 @@
 // Attraction slider JS
 const attractions = [
     {
-        img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
+        img: "images.jpeg",
         caption: "UNIQUE BEACH TOWNS"
     },
     {
-        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+        img: "images.jpeg",
         caption: "WHITE SAND BEACHES"
     },
     {
-        img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+        img: "images.jpeg",
         caption: "LOCAL EATERIES"
     }
 ];
