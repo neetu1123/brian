@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VA MOUNTAIN Cabins</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.jpeg">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <div class="header-bg pb-2 container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="logo.jpeg" alt="VA MOUNTAIN Cabins Logo" class="me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ABOUT</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="rentalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            RENTAL PROPERTIES
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="rentalDropdown">
+                            <li><a class="dropdown-item" href="#">All Rentals</a></li>
+                            <li><a class="dropdown-item" href="#">Beachfront</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">PROPERTY MANAGEMENT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">REAL ESTATE</a>
+                    </li>
+                   
+                    <li class="nav-item  d-none d-lg-block">
+                        <a class="nav-link" href="#" id="contactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            CONTACT US
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="#" class="btn btn-availability">Check Availability</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- Banner Section -->
+    <section class="banner-section">
+        <div class="banner-content container">
+            <h5>VA MOUNTAIN CABINS </h5>
+            <h1>WE CAN'T WAIT TO WELCOME YOU TO THE BEACH</h1>
+            <p>Discover a unique selection of beautiful vacation rentals along the sugar-white sand beaches of Scenic Highway .</p>
+            <form class="search-bar row gx-2 gy-2 justify-content-center align-items-center">
+                <div class="form-group col-auto d-flex align-items-center">
+                    <span class="iconify" data-icon="mdi:calendar-month-outline"></span>
+                    <select class="form-select" aria-label="Check In">
+                        <option selected>CHECK IN</option>
+                        <option value="1">July 16, 2025</option>
+                        <option value="2">July 17, 2025</option>
+                    </select>
+                </div>
+                <div class="form-group col-auto d-flex align-items-center">
+                    <span class="iconify" data-icon="mdi:calendar-month-outline"></span>
+                    <select class="form-select" aria-label="Check Out">
+                        <option selected>CHECK OUT</option>
+                        <option value="1">July 20, 2025</option>
+                        <option value="2">July 21, 2025</option>
+                    </select>
+                </div>
+                <div class="form-group col-auto d-flex align-items-center">
+                    <span class="iconify" data-icon="mdi:bed-outline"></span>
+                    <select class="form-select" aria-label="Bedrooms">
+                        <option selected>BEDROOMS</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+                <div class="form-group col-auto">
+                    <button type="submit" class="btn btn-search">
+                        <span class="iconify" data-icon="mdi:magnify"></span> SEARCH
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- About Us Section -->
+    <section class="aboutus-section py-5">
+        <div class="container">
+            <div class="row align-items-center justify-content-between g-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <span class="aboutus-subtitle">VA MOUNTAIN CABINS </span>
+                    <h2 class="aboutus-title mb-4">ABOUT VA MOUNTAIN CABINS</h2>
+                    <p class="aboutus-desc mb-4">Elevate your vacation experience with Kismet Properties ’s attentive guest services. From booking inquiries to assistance during your stay, we ensure guests feel welcomed and well-cared for, helping you focus on what matters the most: a relaxing vacation with your family.</p>
+                    <a href="#" class="btn aboutus-btn d-inline-flex align-items-center gap-2">
+                        <span class="iconify" data-icon="mdi:email-outline"></span> CONTACT US
+                    </a>
+                </div>
+                <div class="col-lg-6 position-relative d-flex justify-content-center align-items-center">
+                    <div class="aboutus-img-stack position-relative">
+                        <div class="aboutus-img-card aboutus-img-card-1 shadow">
+                            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="Host 1" class="img-fluid rounded-4">
+                        </div>
+                        <div class="aboutus-img-card aboutus-img-card-2 shadow">
+                            <img src="images.jpeg" alt="Host 2" class="img-fluid rounded-4">
+                        </div>
+                        <!-- <span class="iconify aboutus-paperplane" data-icon="mdi:paper-plane-variant"></span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Section -->
+    <section class="property-section py-5">
+        <div class="container">
+            <div class="text-center mb-2">
+                <span class="property-subtitle">DISCOVER OUR RENTALS</span>
+                <h2 class="property-title mb-4">OUR FEATURED PROPERTIES</h2>
+            </div>
+            <div class="row justify-content-center g-4">
+                <!-- Property Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="property-card card h-100 shadow-sm border-0">
+                        <div class="property-img-wrap position-relative">
+                            <img src="images.jpeg" class="card-img-top property-img" alt="Blue Moon">
+                            <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title property-name">BLUE MOON</h5>
+                            <div class="d-flex align-items-center gap-3 mb-2 property-meta">
+                                <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 12</span>
+                                <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 4</span>
+                                <span><span class="iconify me-1" data-icon="mdi:shower"></span> 5</span>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="property-location"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Santa Rosa Beach</span>
+                                <span class="property-rating text-warning">
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <a href="#" class="btn property-btn w-100">ENTER DATES FOR PRICING</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="property-card card h-100 shadow-sm border-0">
+                        <div class="property-img-wrap position-relative">
+                            <img src="images.jpeg" class="card-img-top property-img" alt="New Beginnings">
+                            <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title property-name">NEW BEGINNINGS</h5>
+                            <div class="d-flex align-items-center gap-3 mb-2 property-meta">
+                                <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 8</span>
+                                <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 3</span>
+                                <span><span class="iconify me-1" data-icon="mdi:shower"></span> 3</span>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="property-location"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Santa Rosa Beach</span>
+                                <span class="property-rating text-warning">
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <a href="#" class="btn property-btn w-100">ENTER DATES FOR PRICING</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="property-card card h-100 shadow-sm border-0">
+                        <div class="property-img-wrap position-relative">
+                            <img src="images.jpeg" class="card-img-top property-img" alt="Beach Nest">
+                            <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title property-name">BEACH NEST</h5>
+                            <div class="d-flex align-items-center gap-3 mb-2 property-meta">
+                                <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 10</span>
+                                <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 4</span>
+                                <span><span class="iconify me-1" data-icon="mdi:shower"></span> 5</span>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="property-location"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Santa Rosa Beach</span>
+                                <span class="property-rating text-warning">
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <a href="#" class="btn property-btn w-100">ENTER DATES FOR PRICING</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section py-5">
+        <div class="container">
+            <div class="row justify-content-center align-items-center g-5">
+                <div class="col-lg-5">
+                    <div class="testimonial-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Testimonial" class="img-fluid rounded-4 shadow testimonial-img">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="testimonial-content position-relative">
+                        <span class="iconify testimonial-quote" data-icon="mdi:format-quote-open" style="font-size:3rem; color:#b2e5e0;"></span>
+                        <blockquote class="testimonial-text fw-bold mb-4">"OUR FAMILY HAD A FANTASTIC TIME STAYING AT ONE OF VA MOUNTAIN CABINS' RENTALS. THE PROPERTY WAS IMMACULATE AND HAD EVERYTHING WE NEEDED FOR A COMFORTABLE STAY. THE CUSTOMER SERVICE WAS TOP-NOTCH, WITH PROMPT COMMUNICATION AND THOUGHTFUL TOUCHES THROUGHOUT OUR STAY!"</blockquote>
+                        <div class="testimonial-author text-muted mb-4">— Emma & Mike from Nashville, TN</div>
+                        <div class="testimonial-nav d-flex gap-3">
+                            <button class="btn testimonial-btn" id="testimonial-prev" aria-label="Previous testimonial">
+                                <span class="iconify" data-icon="mdi:arrow-left"></span>
+                            </button>
+                            <button class="btn testimonial-btn" id="testimonial-next" aria-label="Next testimonial">
+                                <span class="iconify" data-icon="mdi:arrow-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="testimonial.js"></script>
+    <!-- Attraction Section -->
+    <section class="attraction-section py-5">
+        <div class="container">
+            <div class="text-center mb-2">
+                <span class="attraction-subtitle">MUST-SEE GEMS</span>
+                <h2 class="attraction-title mb-4">EXPLORE ALL THAT SCENIC HIGHWAY  HAS TO OFFER</h2>
+            </div>
+            <div class="position-relative">
+                <button class="btn attraction-btn attraction-btn-left d-flex align-items-center justify-content-center" id="attraction-prev" aria-label="Previous attraction">
+                    <span class="iconify" data-icon="mdi:chevron-left"></span>
+                </button>
+                <div class="row justify-content-center g-4 flex-nowrap overflow-hidden" id="attraction-cards-row">
+                    <!-- Attraction Card 1 -->
+                    <div class="col-lg-4 col-md-6 attraction-card-col">
+                        <div class="attraction-card card h-100 border-0">
+                            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" class="card-img-top attraction-img" alt="Unique Beach Towns">
+                            <div class="card-img-overlay d-flex align-items-end justify-content-center p-0">
+                                <div class="attraction-caption w-100 text-center">UNIQUE BEACH TOWNS</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Attraction Card 2 -->
+                    <div class="col-lg-4 col-md-6 attraction-card-col">
+                        <div class="attraction-card card h-100 border-0">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="card-img-top attraction-img" alt="White Sand Beaches">
+                            <div class="card-img-overlay d-flex align-items-end justify-content-center p-0">
+                                <div class="attraction-caption w-100 text-center">WHITE SAND BEACHES</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Attraction Card 3 -->
+                    <div class="col-lg-4 col-md-6 attraction-card-col">
+                        <div class="attraction-card card h-100 border-0">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="card-img-top attraction-img" alt="Local Eateries">
+                            <div class="card-img-overlay d-flex align-items-end justify-content-center p-0">
+                                <div class="attraction-caption w-100 text-center">LOCAL EATERIES</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn attraction-btn attraction-btn-right d-flex align-items-center justify-content-center" id="attraction-next" aria-label="Next attraction">
+                    <span class="iconify" data-icon="mdi:chevron-right"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+    <script src="attraction.js"></script>
+    <!-- About Host Section -->
+    <section class="about-host-section py-5">
+        <div class="container">
+            <div class="row align-items-center justify-content-between g-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <span class="about-host-subtitle">VA MOUNTAIN CABINS </span>
+                    <h2 class="about-host-title mb-4">ABOUT VA MOUNTAIN CABINS</h2>
+                    <p class="about-host-desc mb-4">Elevate your vacation experience with Kismet Properties ’s attentive guest services. From booking inquiries to assistance during your stay, we ensure guests feel welcomed and well-cared for, helping you focus on what matters the most: a relaxing vacation with your family.</p>
+                    <a href="#" class="btn about-host-btn d-inline-flex align-items-center gap-2">
+                        <span class="iconify" data-icon="mdi:email-outline"></span> CONTACT US
+                    </a>
+                </div>
+                <div class="col-lg-6 position-relative d-flex justify-content-center align-items-center">
+                    <div class="about-host-img-stack position-relative">
+                        <div class="about-host-img-card about-host-img-card-1 shadow">
+                            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="Host 1" class="img-fluid rounded-4">
+                        </div>
+                        <div class="about-host-img-card about-host-img-card-2 shadow">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Host 2" class="img-fluid rounded-4">
+                        </div>
+                        <!-- <span class="iconify about-host-paperplane" data-icon="mdi:paper-plane-variant"></span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Footer Section -->
+    <footer class="footer-section pt-5">
+        <div class="container">
+            <div class="row align-items-start gy-5">
+                <div class="col-lg-4 text-center text-lg-start mb-4 mb-lg-0">
+                    <img src="logo.jpeg" alt="VA MOUNTAIN Cabins Logo" style="height: 70px;">
+                    <div class="mt-3 mb-2">
+                        <span class="footer-brand-title">SCENIC HIGHWAY </span>
+                        <h2 class="footer-brand-name">VA MOUNTAIN <span class="footer-brand-dot">CABINS</span></h2>
+                    </div>
+                    <p class="footer-desc mb-3">At VA MOUNTAIN Cabins , we believe in crafting unforgettable experiences along the stunning  coastline. Let us be your guide to coastal bliss and create cherished memories that last a lifetime.</p>
+                    <div class="footer-social d-flex justify-content-center justify-content-lg-start gap-2 mt-2">
+                        <a href="#" class="footer-social-link"><span class="iconify" data-icon="mdi:facebook" style="font-size: 1.6rem;"></span></a>
+                        <a href="#" class="footer-social-link"><span class="iconify" data-icon="mdi:instagram" style="font-size: 1.6rem;"></span></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-4 col-6 mb-4 mb-md-0">
+                    <h6 class="footer-heading">CONTACT</h6>
+                    <ul class="list-unstyled footer-contact-list">
+                        <li class="mb-2 d-flex align-items-center"><span class="iconify me-2" data-icon="mdi:email-outline" style="color:#2d9a92;"></span> <a href="mailto:brianchughes@gmail.com" class="footer-link fw-bold">brianchughes@gmail.com</a></li>
+                        <li class="d-flex align-items-center"><span class="iconify me-2" data-icon="mdi:phone-outline" style="color:#2d9a92;"></span> <a href="tel:+18048390770" class="footer-link fw-bold">+18048390770</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4 mb-md-0">
+                    <h6 class="footer-heading">LINKS</h6>
+                    <ul class="list-unstyled footer-links-list">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Rental Properties</a></li>
+                        <li><a href="#" class="footer-link">Property Management</a></li>
+                        <li><a href="#" class="footer-link">Real Estate</a></li>
+                        <li><a href="#" class="footer-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-link">Owner Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-12">
+                    <h6 class="footer-heading">FIND A PROPERTY</h6>
+                    <select class="form-select footer-property-select mt-2">
+                        <option selected>RENTAL PROPERTIES</option>
+                        <option>Beachfront</option>
+                        <option>Pet Friendly</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom mt-5 py-3">
+            <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+                <div class="footer-copyright text-center text-md-start mb-2 mb-md-0">
+                    Copyright &copy; 2024 <span class="fw-bold">VA MOUNTAIN Cabins </span>. All rights reserved.
+                </div>
+                <div class="footer-bottom-links text-center text-md-end">
+                    <a href="#" class="footer-link me-3">Privacy Policy</a>
+                    <a href="#" class="footer-link me-3">Terms & Conditions</a>
+                    <span class="footer-link">Website by Magnetic Strategy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
