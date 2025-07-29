@@ -695,9 +695,6 @@
 
 /* Footer Section */
 .footer-section {
-    background: #fff;
-    border-top-left-radius: 60px 40px;
-    border-top-right-radius: 60px 40px;
     position: relative;
     z-index: 2;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
@@ -717,7 +714,7 @@
     font-family: 'Montserrat', cursive;
     font-size: 2.1rem;
     font-weight: 700;
-    color: #2d3a3a;
+    color: var(--gold);
     margin-bottom: 0.2rem;
     display: inline-block;
 }
@@ -740,7 +737,7 @@
 }
 
 .footer-social-link {
-    color: #143c5d;
+    color: #a0c6e5;
     background: #eaf7f6;
     border-radius: 6px;
     padding: 0.2rem 0.5rem;
@@ -764,7 +761,7 @@
 }
 
 .footer-link {
-    color: #2d3a3a;
+    color: #cedddd;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;

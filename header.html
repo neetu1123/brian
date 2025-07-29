@@ -1,0 +1,169 @@
+<!-- Header/Navbar -->
+<style>
+    .main-header {
+        background: linear-gradient(to left, var(--secondary-dark), var(--primary-dark)) !important;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        padding: 0.5rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .navbar-brand {
+        padding: 0.5rem 0;
+    }
+    
+    .navbar-brand img {
+        height: 65px;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-brand img:hover {
+        transform: scale(1.05);
+    }
+    
+    .navbar-nav .nav-link {
+        color: var(--primary-dark);
+        font-weight: 700;
+        padding: 1rem 1.2rem;
+        margin: 0 0.1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        letter-spacing: 0.5px;
+    }
+    
+    .navbar-nav .nav-link:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        background-color: var(--gold);
+        bottom: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover:after,
+    .navbar-nav .nav-link.active:after {
+        width: 70%;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+        color: var(--gold);
+    }
+    
+    .dropdown-menu {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        padding: 0.8rem 0;
+        margin-top: 0.5rem;
+        border-top: 3px solid var(--gold);
+    }
+    
+    .dropdown-item {
+        color: var(--primary-dark);
+        font-weight: 600;
+        padding: 0.7rem 1.5rem;
+        transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover {
+        background-color: rgba(239, 173, 41, 0.1);
+        color: var(--gold);
+        padding-left: 1.8rem;
+    }
+    
+    .btn-availability {
+        background-color: var(--gold);
+        color: white;
+        font-weight: 700;
+        border-radius: 50px;
+        padding: 10px 25px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(239, 173, 41, 0.3);
+        border: 2px solid var(--gold);
+    }
+    
+    .btn-availability:hover {
+        background-color: transparent;
+        color: var(--gold);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(239, 173, 41, 0.4);
+    }
+    
+    .navbar-toggler {
+        border-color: var(--gold);
+        padding: 0.4rem 0.7rem;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(239, 173, 41, 0.25);
+    }
+    
+    @media (max-width: 991px) {
+        .navbar-nav .nav-link {
+            padding: 0.8rem 1rem;
+        }
+        
+        .navbar-nav .nav-link:after {
+            bottom: 0.3rem;
+        }
+        
+        .nav-item.ms-lg-3 {
+            margin-top: 1rem !important;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-availability {
+            display: block;
+            text-align: center;
+        }
+    }
+</style>
+<div class="main-header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light px-0">
+            <a class="navbar-brand d-flex align-items-center" href="new-index.html">
+                <img src="logo.jpeg" alt="VA MOUNTAIN Cabins Logo" class="me-2">
+            </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="new-index.html">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="new-about.html">ABOUT US</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rentalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         PROPERTIES
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="rentalDropdown">
+                        <li><a class="dropdown-item" href="new-property.html"><i class="iconify me-2" data-icon="mdi:home-outline" style="color:var(--gold);"></i>All Rentals</a></li>
+                        <li><a class="dropdown-item" href="new-property.html"><i class="iconify me-2" data-icon="mdi:mountain" style="color:var(--gold);"></i>Mountain View</a></li>
+                        <li><a class="dropdown-item" href="new-property.html"><i class="iconify me-2" data-icon="mdi:shopping-outline" style="color:var(--gold);"></i>Grocery & Services</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="blog.html">BLOGS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="new-attraction.html">ATTRACTIONS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="new-contact.html">CONTACT US</a>
+                </li>
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                    <a href="new-property.html" class="btn btn-availability"><i class="iconify me-1" data-icon="mdi:calendar-check"></i> Check Availability</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</div>

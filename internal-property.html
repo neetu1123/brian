@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons from Font Awesome as replacement for Vue icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .tab-active {
+            border-bottom: 3px solid #14b8a6;
+            color: #14b8a6;
+        }
+
+        .calendar-date {
+            transition: all 0.2s ease;
+        }
+
+        .calendar-date:hover {
+            transform: scale(1.05);
+        }
+
+        .review-card {
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .slideshow-active {
+            animation: fadeInOut 0.5s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .thumbnail-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s ease;
+        }
+
+        .progress-bar {
+            transition: width 0.1s linear;
+        }
+
+        /* Mobile dropdown styling */
+        select.appearance-none {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- public/Gallery Component -->
+    <div class="mt-28 bg-white">
+        <!-- Main public/Gallery Section -->
+        <div class="container mx-auto px-4 py-6">
+            <!-- Image Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 rounded-2xl" id="imageGrid">
+                <!-- Main large image -->
+                <div class="col-span-2 row-span-2 relative cursor-pointer group" onclick="openLightbox(0)">
+                    <img src="images.jpeg" alt="Cabin Exterior" class="w-full object-fit">
+                </div>
+
+                <!-- Secondary images -->
+                <div class="relative cursor-pointer group" onclick="openLightbox(1)">
+                    <img src="images.jpeg" alt="Cabin Side View" class="w-full object-fit">
+                </div>
+                <div class="relative cursor-pointer group" onclick="openLightbox(2)">
+                    <img src="images.jpeg" alt="Deck View" class="w-full object-fit">
+                </div>
+
+                <div class="relative cursor-pointer group" onclick="openLightbox(3)">
+                    <img src="images.jpeg" alt="King Bedroom" class="w-full object-fit">
+                </div>
+
+                <div class="relative cursor-pointer group" onclick="openLightbox(4)">
+                    <img src="images.jpeg" alt="Game Room" class="w-full object-fit">
+                </div>
+            </div>
+
+            <!-- Show All Button -->
+            <div class="mt-4 flex justify-end -translate-y-32 -translate-x-3">
+                <button onclick="openLightbox(4)" title="Show all photos"
+                    class="flex items-center space-x-2 bg-gray-500 text-white border-gray-300 px-4 py-2 hover:bg-gray-600 transition-colors shadow-sm">
+                    <span class="font-medium">Show All</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div id="lightboxModal" class="fixed inset-0 bg-black opacity-95 z-40 hidden">
+            <!-- Progress Bar for Slideshow -->
+            <div id="progressBar" class="absolute top-0 left-0 h-1 bg-blue-600 progress-bar z-10 hidden"
+                style="width: 0%"></div>
+
+            <!-- Top Controls -->
+            <div class="absolute top-0 left-0 right-0 z-30 image-overlay">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-white text-lg font-medium" id="imageCounter" aria-live="polite">1 / 12</span>
+                    </div>
+                    <div class="flex items-center space-x-4 border border-gray-800 bg-gray-500 p-2">
+                        <button onclick="startSlideshow()" id="slideshowBtn" aria-label="Start slideshow"
+                            title="Start slideshow" class="flex items-center text-white cursor-pointer textContent">
+                            <i class="fa-solid fa-play" id="slideshowIcon"></i>
+                        </button>
+                        <button onclick="toggleThumbnails()" aria-label="Show thumbnails" title="Show thumbnails"
+                            class="text-white cursor-pointer textContent">
+                            <i class="fa-solid fa-border-all text-lg"></i>
+                        </button>
+                        <button onclick="searchImages()" aria-label="Search images" title="Search images"
+                            class="text-white cursor-pointer">
+                            <i class="fa-solid fa-search text-lg"></i>
+                        </button>
+                        <button onclick="toggleFullscreen()" aria-label="Toggle fullscreen" title="Toggle fullscreen"
+                            class="text-white cursor-pointer">
+                            <i class="fa-solid fa-expand text-lg" id="fullscreenIcon"></i>
+                        </button>
+                        <button onclick="openShareModal()" aria-label="Share image" title="Share image"
+                            class="text-white cursor-pointer">
+                            <i class="fa-solid fa-share-nodes text-lg"></i>
+                        </button>
+                        <button onclick="closeLightbox()" aria-label="Close lightbox" title="Close lightbox"
+                            class="text-white cursor-pointer">
+                            <i class="fa-solid fa-times text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Image Container -->
+            <div class="flex items-center justify-center h-full px-16">
+                <button onclick="previousImage()" aria-label="Previous image" title="Previous image"
+                    class="absolute left-6 text-white cursor-pointer z-20">
+                    <i class="fa-solid fa-chevron-left text-2xl"></i>
+                </button>
+
+                <div class="max-w-5xl max-h-full flex items-center justify-center">
+                    <img id="lightboxImage" src="" alt="" class="max-w-full max-h-full object-contain slideshow-active">
+                </div>
+
+                <button onclick="nextImage()" aria-label="Next image" title="Next image"
+                    class="absolute right-6 text-white cursor-pointer z-20">
+                    <i class="fa-solid fa-chevron-right text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Thumbnail Panel -->
+            <div id="thumbnailPanel"
+                class="absolute right-0 top-3 h-full bg-black bg-opacity-90 w-80 transform translate-x-full transition-transform duration-300 z-20 overflow-y-auto">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="toggleThumbnails()" class="text-white hover:text-gray-300">
+                            <i class="fa-solid fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2" id="thumbnailGrid">
+                        <!-- Thumbnails will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div id="shareModal" class="fixed inset-0 bg-black opacity-90 z-50 hidden">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-semibold">Share</h3>
+                    <button id="copied" class="">
+                        <span class="sr-only">copied</span>
+                    </button>
+                    <button onclick="closeShareModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="flex space-x-3 mb-4">
+                    <button onclick="shareToFacebook()"
+                        class="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-facebook text-xl"></i>
+                        <span>Facebook</span>
+                    </button>
+                    <button onclick="shareToTwitter()"
+                        class="flex-1 bg-blue-400 text-white py-3 px-4 rounded-lg hover:bg-blue-500 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-twitter text-xl"></i>
+                        <span>Twitter</span>
+                    </button>
+                    <button onclick="shareToPinterest()"
+                        class="flex-1 bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-pinterest text-xl"></i>
+                        <span>Pinterest</span>
+                    </button>
+                </div>
+
+                <div class="border-t pt-4">
+                    <input type="text" value="https://www.relaxresetbookdirect.com/cabin-w-fire-pit-and-mtn-views"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                    <button onclick="copyLink()"
+                        class="w-full mt-2 bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors">
+                        Copy Link
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Show All Images Modal -->
+        <div id="showAllModal" class="fixed inset-0 bg-black bg-opacity-95 z-40 hidden overflow-y-auto">
+            <div class="min-h-screen p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-white text-2xl font-semibold">All Photos - Cabin w/ Fire Pit and Mtn Views</h2>
+                    <button onclick="closeShowAll()"
+                        class="text-white bg-black bg-opacity-50 px-4 py-2 rounded-lg hover:bg-opacity-70 transition-colors">
+                        <i class="fa-solid fa-times text-lg"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="allImagesGrid">
+                    <!-- All images will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Selection Tab Component -->
+    <div class="container mx-auto bg-white">
+        <!-- Navigation Tabs -->
+        <nav class="border-b border-gray-200 sticky top-24 bg-white z-30">
+            <!-- Desktop version: buttons -->
+            <div class="hidden md:flex space-x-8 px-6">
+                <!-- Tab buttons will be generated by JavaScript -->
+            </div>
+
+            <!-- Mobile version: dropdown select -->
+            <div class="md:hidden px-6 py-2">
+                <div class="relative">
+                    <select id="tabSelect"
+                        class="w-full appearance-none py-3 px-4 border border-gray-200 bg-white rounded-md text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <!-- Options will be generated by JavaScript -->
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-teal-600">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="xl:flex">
+            <!-- Main Content -->
+            <div class="flex-1 p-6">
+                <!-- Description Section -->
+                <section id="description" class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">DESCRIPTION</h2>
+                    <div class="text-gray-600 space-y-4">
+                        <p>Welcome to Sweet Tea by Kismet Properties of 30A!</p>
+                        <p>Experience beachfront bliss at Sweet Tea, a first-floor condo with breathtaking Gulf views.
+                            This charming property offers the perfect balance of comfort and luxury for your beach
+                            getaway.
+                        </p>
+                        <div id="moreDescription" class="space-y-4 hidden">
+                            <p>Nestled in a prime location along the stunning coastline, Sweet Tea provides unparalleled
+                                access to pristine sandy beaches and crystal-clear waters. Wake up to the soothing sounds
+                                of waves and enjoy magnificent sunrises from your private patio.</p>
+                            <p>The interior features a tastefully designed living space with coastal-inspired décor,
+                                comfortable furnishings, and all the amenities you need for a relaxing stay. The fully
+                                equipped kitchen allows you to prepare delicious meals when you're not sampling the local
+                                cuisine.</p>
+                            <p>With one bedroom and one bathroom, this cozy retreat is ideal for couples or small
+                                families seeking a memorable beach experience. The bedroom boasts a plush king-sized bed,
+                                ensuring restful nights after sun-soaked days.</p>
+                        </div>
+
+                        <button id="showMoreDescriptionBtn"
+                            class="text-teal-600 font-medium hover:text-teal-800 flex items-center space-x-1">
+                            <span>Show more</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Amenities Section -->
+                <section id="amenities" class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">AMENITIES</h2>
+
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">BATHROOMS</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-check text-teal-600 mr-2"></i>
+                                <span>1 full bathroom</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-check text-teal-600 mr-2"></i>
+                                <span>Shower/tub combination</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">CHECK-IN TYPE</h3>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-key text-teal-600 mr-2"></i>
+                            <span>Keyless entry</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Availability Section -->
+                <section id="availability" class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">AVAILABILITY</h2>
+
+                    <div class="mb-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-teal-600 rounded-full mr-2"></div>
+                                <span>Today</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-gray-300 rounded-full mr-2"></div>
+                                <span>Past</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-teal-400 rounded-full mr-2"></div>
+                                <span>Booked</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-gray-600 rounded-full mr-2"></div>
+                                <span>Available</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- June 2025 Calendar -->
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <button onclick="previousMonth()"
+                                    class="text-gray-700 hover:text-teal-600 transition-colors">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <h3 class="text-lg font-medium">June 2025</h3>
+                                <button onclick="nextMonth()" class="text-gray-700 hover:text-teal-600 transition-colors">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-7 gap-1" id="juneCalendar">
+                                <!-- Days of week headers -->
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">SUN</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">MON</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">TUE</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">WED</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">THU</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">FRI</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">SAT</div>
+                                
+                                <!-- Calendar days will be generated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- July 2025 Calendar -->
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <button onclick="previousMonth()"
+                                    class="text-gray-700 hover:text-teal-600 transition-colors">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <h3 class="text-lg font-medium">July 2025</h3>
+                                <button onclick="nextMonth()" class="text-gray-700 hover:text-teal-600 transition-colors">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-7 gap-1" id="julyCalendar">
+                                <!-- Days of week headers -->
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">SUN</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">MON</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">TUE</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">WED</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">THU</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">FRI</div>
+                                <div class="text-xs text-center font-medium text-gray-500 p-2">SAT</div>
+                                
+                                <!-- Calendar days will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Location Section -->
+                <section id="location" class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">LOCATION</h2>
+                    <div class="text-gray-600 mb-6">
+                        <p>This one bedroom, one bath unit is located directly on the beach with a private walkway and
+                            offers stunning views of the Gulf of Mexico. Just steps away from the water, you'll enjoy
+                            the perfect beach getaway with all the comforts of home.</p>
+                    </div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6891.418183215019!2d-86.00546030365994!3d30.273868899235136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8893f27adf435501%3A0x58f4f92a2f0bd3a!2sInlet%20Beach%2C%20FL%2032413%2C%20USA!5e0!3m2!1sen!2sin!4v1750258386523!5m2!1sen!2sin"
+                        width="1100" height="450" style="border:0;" allowfullscreen loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" class="w-full"></iframe>
+                </section>
+
+                <!-- Cancellation Policy Section -->
+                <section id="cancellation" class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">CANCELLATION POLICY</h2>
+                    <div class="text-gray-600 space-y-4">
+                        <p>One hundred percent (100.00%) of the total booking charges (less $250.00 cancellation fee)
+                            will be refunded if the cancellation is made more than 60 days prior to the arrival date of
+                            the reservation.</p>
+                        
+                        <div id="moreCancellation" class="space-y-4 hidden">
+                            <p>Fifty percent (50.00%) of the total booking charges (less $250.00 cancellation fee) will
+                                be refunded if the cancellation is made more than 30 days prior to the arrival date of
+                                the reservation.</p>
+                            <p>No refunds will be provided for cancellations made within 30 days of arrival. We highly
+                                recommend purchasing travel insurance to protect your investment.</p>
+                        </div>
+
+                        <button id="showMoreCancellationBtn"
+                            class="text-teal-600 font-medium hover:text-teal-800 flex items-center space-x-1">
+                            <span>Show more</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Reviews Section -->
+                <section id="reviews" class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">REVIEWS</h2>
+
+                    <div class="mb-6">
+                        <p class="text-gray-600" id="reviewRange">Showing 1 - 3 of 132 reviews</p>
+                    </div>
+
+                    <div class="space-y-6" id="reviewsContainer">
+                        <!-- Reviews will be generated by JavaScript -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-center space-x-2 mt-8" id="pagination">
+                        <!-- Pagination buttons will be generated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Booking Sidebar -->
+            <div class="bg-gray-50 p-6 border-l border-gray-200 sticky top-40 h-screen">
+                <div class="bg-teal-100 text-teal-800 text-center py-2 px-4 rounded-lg mb-6 font-semibold">
+                    BOOK DIRECT & SAVE
+                </div>
+
+                <div class="space-y-4 mb-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">CHECK IN</label>
+                            <input type="date" class="w-full border border-gray-300 rounded-md p-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">CHECK OUT</label>
+                            <input type="date" class="w-full border border-gray-300 rounded-md p-2">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">GUESTS</label>
+                        <select class="w-full border border-gray-300 rounded-md p-2">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                        </select>
+                    </div>
+
+                    <button
+                        class="w-full bg-teal-600 text-white font-medium py-3 rounded-md hover:bg-teal-700 transition-colors">
+                        CHECK AVAILABILITY
+                    </button>
+
+                    <div class="mt-6 border-t border-gray-300 pt-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">$250 x 5 nights</span>
+                            <span class="text-gray-800 font-medium">$1,250.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Cleaning fee</span>
+                            <span class="text-gray-800 font-medium">$120.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Service fee</span>
+                            <span class="text-gray-800 font-medium">$75.00</span>
+                        </div>
+                        <div class="flex justify-between font-semibold border-t border-gray-300 pt-2 mt-2">
+                            <span>Total</span>
+                            <span>$1,445.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-4 mt-6">
+                    <h3 class="font-semibold text-gray-900 mb-2">House Rules</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-clock mr-2 text-gray-400"></i>
+                            <span>Check-in: After 4:00 PM</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-clock mr-2 text-gray-400"></i>
+                            <span>Checkout: Before 10:00 AM</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-ban-smoking mr-2 text-gray-400"></i>
+                            <span>No smoking</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-paw mr-2 text-gray-400"></i>
+                            <span>No pets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="A_Curated_Vacation_logo_page-0001__1_-removebg-preview.png" alt="Host Logo" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="font-medium">Hosted by Curated Vacation</div>
+                            <div class="text-sm text-gray-600">Member since 2022</div>
+                        </div>
+                    </div>
+
+                    <button class="flex items-center text-teal-600 hover:text-teal-700">
+                        <i class="fa-solid fa-comment-dots mr-2"></i>
+                        <span>Message host</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // public/Gallery Component JavaScript
+        const images = [
+            { src: 'images.jpeg', alt: 'Cabin Exterior' },
+            { src: 'images.jpeg', alt: 'Cabin Side View' },
+            { src: 'images.jpeg', alt: 'Deck View' },
+            { src: 'images.jpeg', alt: 'King Bedroom' },
+            { src: 'images.jpeg', alt: 'Game Room with Pool Table' },
+            { src: 'images.jpeg', alt: 'Living Room' },
+            { src: 'images.jpeg', alt: 'Kitchen' },
+            { src: 'images.jpeg', alt: 'Bathroom' },
+            { src: 'images.jpeg', alt: 'Hot Tub Area' },
+            { src: 'images.jpeg', alt: 'Mountain View' },
+            { src: 'images.jpeg', alt: 'Forest Setting' },
+            { src: 'images.jpeg', alt: 'Fire Pit Area' },
+            { src: 'images.jpeg', alt: 'Deck View' },
+            { src: 'images.jpeg', alt: 'Cabin Side View' },
+            { src: 'images.jpeg', alt: 'King Bedroom' },
+            { src: 'images.jpeg', alt: 'Game Room with Pool Table' },
+            { src: 'images.jpeg', alt: 'Cabin Exterior' },
+            { src: 'images.jpeg', alt: 'Living Room' },
+            { src: 'images.jpeg', alt: 'Kitchen' },
+            { src: 'images.jpeg', alt: 'Bathroom' },
+            { src: 'images.jpeg', alt: 'Hot Tub Area' },
+            { src: 'images.jpeg', alt: 'Mountain View' },
+            { src: 'images.jpeg', alt: 'Forest Setting' },
+            { src: 'images.jpeg', alt: 'Fire Pit Area' },
+            { src: 'images.jpeg', alt: 'Fire Pit Area' },
+            { src: 'images.jpeg', alt: 'Fire Pit Area' }
+        ];
+
+        let currentImageIndex = 0;
+        let isSlideshow = false;
+        let slideshowInterval;
+        let isFullscreen = false;
+        let thumbnailsVisible = false;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateLightboxImage();
+            populateThumbnails();
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            stopSlideshow();
+            exitFullscreen();
+        }
+
+        function updateLightboxImage() {
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = images[currentImageIndex].src;
+            lightboxImage.alt = images[currentImageIndex].alt;
+            document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${images.length}`;
+
+            // Update active thumbnail
+            updateActiveThumbnail();
+        }
+
+        function nextImage() {
+            const lightboxImage = document.getElementById('lightboxImage');
+            // Remove the current class to reset animation
+            lightboxImage.classList.remove('slideshow-active');
+            // Force reflow
+            void lightboxImage.offsetWidth;
+
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateLightboxImage();
+
+            // Add animation class
+            lightboxImage.classList.add('slideshow-active');
+        }
+
+        function previousImage() {
+            const lightboxImage = document.getElementById('lightboxImage');
+            // Remove the current class to reset animation
+            lightboxImage.classList.remove('slideshow-active');
+            // Force reflow
+            void lightboxImage.offsetWidth;
+
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateLightboxImage();
+
+            // Add animation class
+            lightboxImage.classList.add('slideshow-active');
+        }
+
+        function startSlideshow() {
+            if (!isSlideshow) {
+                isSlideshow = true;
+                document.getElementById('slideshowIcon').classList.remove('fa-play');
+                document.getElementById('slideshowIcon').classList.add('fa-pause');
+                
+                document.getElementById('progressBar').classList.remove('hidden');
+
+                let progress = 0;
+                const progressBar = document.getElementById('progressBar');
+                const slideDuration = 3000; // 3 seconds per slide
+                const updateInterval = 20; // Update every 20ms for smoother animation
+                const increment = (updateInterval / slideDuration) * 100;
+
+                slideshowInterval = setInterval(() => {
+                    progress += increment;
+                    progressBar.style.width = `${progress}%`;
+
+                    if (progress >= 100) {
+                        progress = 0;
+                        progressBar.style.width = '0%';
+                        // Add fadeOut class to current image
+                        const lightboxImage = document.getElementById('lightboxImage');
+                        lightboxImage.classList.add('slideshow-active');
+                        nextImage();
+                        // Remove fadeOut class after animation completes
+                        setTimeout(() => {
+                            lightboxImage.classList.remove('slideshow-active');
+                        }, 500);
+                    }
+                }, updateInterval);
+            } else {
+                stopSlideshow();
+            }
+        }
+
+        function stopSlideshow() {
+            isSlideshow = false;
+            clearInterval(slideshowInterval);
+            document.getElementById('slideshowIcon').classList.remove('fa-pause');
+            document.getElementById('slideshowIcon').classList.add('fa-play');
+            document.getElementById('progressBar').classList.add('hidden');
+            document.getElementById('progressBar').style.width = '0%';
+        }
+
+        function toggleFullscreen() {
+            if (!isFullscreen) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                }
+                document.getElementById('fullscreenIcon').classList.remove('fa-expand');
+                document.getElementById('fullscreenIcon').classList.add('fa-compress');
+                isFullscreen = true;
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+                document.getElementById('fullscreenIcon').classList.remove('fa-compress');
+                document.getElementById('fullscreenIcon').classList.add('fa-expand');
+                isFullscreen = false;
+            }
+        }
+
+        function exitFullscreen() {
+            if (isFullscreen && document.exitFullscreen) {
+                document.exitFullscreen();
+                document.getElementById('fullscreenIcon').classList.remove('fa-compress');
+                document.getElementById('fullscreenIcon').classList.add('fa-expand');
+                isFullscreen = false;
+            }
+        }
+
+        function toggleThumbnails() {
+            const panel = document.getElementById('thumbnailPanel');
+            if (!thumbnailsVisible) {
+                panel.classList.remove('translate-x-full');
+                thumbnailsVisible = true;
+            } else {
+                panel.classList.add('translate-x-full');
+                thumbnailsVisible = false;
+            }
+        }
+
+        function populateThumbnails() {
+            const thumbnailGrid = document.getElementById('thumbnailGrid');
+            thumbnailGrid.innerHTML = '';
+
+            images.forEach((image, index) => {
+                const thumbnailDiv = document.createElement('div');
+                thumbnailDiv.className = 'relative cursor-pointer thumbnail-hover';
+                thumbnailDiv.onclick = () => selectThumbnail(index);
+                thumbnailDiv.innerHTML = `
+                        <img src="${image.src}" alt="${image.alt}" class="w-full h-24 object-cover rounded-lg ${index === currentImageIndex ? 'ring-2 ring-blue-500' : ''}">
+                        ${index === currentImageIndex ? '<div class="absolute inset-0 bg-opacity-20 rounded-lg"></div>' : ''}
+                    `;
+                thumbnailGrid.appendChild(thumbnailDiv);
+            });
+        }
+
+        function selectThumbnail(index) {
+            currentImageIndex = index;
+            updateLightboxImage();
+        }
+
+        function updateActiveThumbnail() {
+            const thumbnails = document.querySelectorAll('#thumbnailGrid > div');
+            thumbnails.forEach((thumb, index) => {
+                const img = thumb.querySelector('img');
+                const overlay = thumb.querySelector('div');
+                if (index === currentImageIndex) {
+                    img.classList.add('ring-2', 'ring-blue-500');
+                    if (!overlay) {
+                        thumb.innerHTML += '<div class="absolute inset-0 bg-opacity-20 rounded-lg"></div>';
+                    }
+                } else {
+                    img.classList.remove('ring-2', 'ring-blue-500');
+                    if (overlay) {
+                        overlay.remove();
+                    }
+                }
+            });
+        }
+
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex', 'items-center', 'justify-center');
+        }
+
+        function closeShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'items-center', 'justify-center');
+        }
+
+        function shareToFacebook() {
+            const url = encodeURIComponent('https://www.relaxresetbookdirect.com/cabin-w-fire-pit-and-mtn-views');
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareToTwitter() {
+            const url = encodeURIComponent('https://www.relaxresetbookdirect.com/cabin-w-fire-pit-and-mtn-views');
+            const text = encodeURIComponent('Check out this amazing cabin with fire pit and mountain views!');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareToPinterest() {
+            const url = encodeURIComponent('https://www.relaxresetbookdirect.com/cabin-w-fire-pit-and-mtn-views');
+            const description = encodeURIComponent('Amazing cabin with fire pit and mountain views');
+            const media = encodeURIComponent(images[currentImageIndex].src);
+            window.open(`https://pinterest.com/pin/create/button/?url=${url}&description=${description}&media=${media}`, '_blank', 'width=600,height=400');
+        }
+
+        async function copyLink() {
+            const input = document.querySelector('#shareModal input');
+            const text = input.value;
+
+            try {
+                // Use modern Clipboard API if available
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    // Fallback to older method
+                    input.select();
+                    document.execCommand('copy');
+                }
+
+                const button = document.getElementById('copied');
+                button.textContent = 'Copied!';
+                button.classList.add('bg-green-600', 'hover:bg-green-700', 'text-white', 'px-4', 'py-2', 'rounded-lg');
+                button.classList.remove('bg-gray-800', 'hover:bg-gray-900');
+
+                setTimeout(() => {
+                    button.textContent = '';
+                    button.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    button.innerHTML = '<span class="sr-only">copied</span>';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy link. Please try selecting and copying manually.');
+            }
+        }
+
+        function searchImages() {
+            alert('Search functionality would be implemented here!');
+        }
+
+        function closeShowAll() {
+            document.getElementById('showAllModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Selection Tab Component JavaScript
+        const tabs = [
+            { id: 'description', name: 'DESCRIPTION' },
+            { id: 'amenities', name: 'AMENITIES' },
+            { id: 'availability', name: 'AVAILABILITY' },
+            { id: 'location', name: 'LOCATION' },
+            { id: 'cancellation', name: 'CANCELLATION POLICY' },
+            { id: 'reviews', name: 'REVIEWS' },
+        ];
+        
+        let activeTab = 'description';
+        let showMoreDescription = false;
+        let showMoreCancellation = false;
+        let currentPage = 1;
+        const itemsPerPage = 3;
+        const totalReviews = 132;
+        const totalPages = Math.ceil(totalReviews / itemsPerPage);
+
+        const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+        const juneCalendarDates = [
+            { day: 1, status: 'past' },
+            { day: 2, status: 'past' },
+            { day: 3, status: 'past' },
+            { day: 4, status: 'past' },
+            { day: 5, status: 'past' },
+            { day: 6, status: 'past' },
+            { day: 7, status: 'past' },
+            { day: 8, status: 'past' },
+            { day: 9, status: 'past' },
+            { day: 10, status: 'past' },
+            { day: 11, status: 'past' },
+            { day: 12, status: 'past' },
+            { day: 13, status: 'past' },
+            { day: 14, status: 'past' },
+            { day: 15, status: 'past' },
+            { day: 16, status: 'past' },
+            { day: 17, status: 'past' },
+            { day: 18, status: 'today' },
+            { day: 19, status: 'booked' },
+            { day: 20, status: 'booked' },
+            { day: 21, status: 'booked' },
+            { day: 22, status: 'booked' },
+            { day: 23, status: 'booked' },
+            { day: 24, status: 'booked' },
+            { day: 25, status: 'booked' },
+            { day: 26, status: 'booked' },
+            { day: 27, status: 'booked' },
+            { day: 28, status: 'booked' },
+            { day: 29, status: 'booked' },
+            { day: 30, status: 'booked' },
+        ];
+
+        const julyCalendarDates = [
+            { day: 1, status: 'booked' },
+            { day: 2, status: 'booked' },
+            { day: 3, status: 'booked' },
+            { day: 4, status: 'booked' },
+            { day: 5, status: 'booked' },
+            { day: 6, status: 'booked' },
+            { day: 7, status: 'booked' },
+            { day: 8, status: 'booked' },
+            { day: 9, status: 'booked' },
+            { day: 10, status: 'booked' },
+            { day: 11, status: 'available' },
+            { day: 12, status: 'available' },
+            { day: 13, status: 'booked' },
+            { day: 14, status: 'booked' },
+            { day: 15, status: 'booked' },
+            { day: 16, status: 'booked' },
+            { day: 17, status: 'booked' },
+            { day: 18, status: 'booked' },
+            { day: 19, status: 'available' },
+            { day: 20, status: 'booked' },
+            { day: 21, status: 'booked' },
+            { day: 22, status: 'booked' },
+            { day: 23, status: 'booked' },
+            { day: 24, status: 'booked' },
+            { day: 25, status: 'booked' },
+            { day: 26, status: 'booked' },
+            { day: 27, status: 'booked' },
+            { day: 28, status: 'booked' },
+            { day: 29, status: 'booked' },
+            { day: 30, status: 'booked' },
+            { day: 31, status: 'booked' },
+        ];
+
+        const allReviews = [
+            {
+                title: 'Wonderful stay',
+                author: 'Mel H',
+                date: 'Jun 2025',
+                content: 'Loved the location.',
+                rating: 5
+            },
+            {
+                title: 'Quick getaway',
+                author: 'Thurston D',
+                date: 'May 2025',
+                content: 'Just perfect!',
+                rating: 5
+            },
+            {
+                title: 'Great location with clean and comfortable accommodations.',
+                author: 'Michael P',
+                date: 'Mar 2025',
+                content: 'A fun get-away beach experience. We look forward to coming back.',
+                rating: 5
+            },
+            {
+                title: 'Perfect beach vacation',
+                author: 'Sarah J',
+                date: 'Feb 2025',
+                content: 'Everything was as described. Beautiful view and easy beach access.',
+                rating: 5
+            },
+            {
+                title: 'Relaxing weekend',
+                author: 'David L',
+                date: 'Jan 2025',
+                content: 'Clean, comfortable, and right on the beach. What more could you ask for?',
+                rating: 5
+            },
+            {
+                title: 'Amazing property',
+                author: 'Jessica R',
+                date: 'Dec 2024',
+                content: 'We loved our stay! The property was clean and the view was incredible.',
+                rating: 5
+            },
+        ];
+
+        // Initialize tabs
+        function initializeTabs() {
+            const tabContainer = document.querySelector('.md\\:flex.space-x-8.px-6');
+            const tabSelect = document.getElementById('tabSelect');
+            
+            // Clear existing tabs
+            tabContainer.innerHTML = '';
+            tabSelect.innerHTML = '';
+            
+            // Add tabs
+            tabs.forEach(tab => {
+                // Desktop tabs
+                const button = document.createElement('button');
+                button.className = `py-4 px-2 text-sm cursor-pointer font-medium text-gray-700 hover:text-teal-600 ${activeTab === tab.id ? 'tab-active' : ''}`;
+                button.textContent = tab.name;
+                button.addEventListener('click', () => scrollSmoothToSection(tab.id));
+                tabContainer.appendChild(button);
+                
+                // Mobile select options
+                const option = document.createElement('option');
+                option.value = tab.id;
+                option.textContent = tab.name;
+                option.selected = activeTab === tab.id;
+                tabSelect.appendChild(option);
+            });
+            
+            // Add event listener to mobile select
+            tabSelect.addEventListener('change', () => scrollSmoothToSection(tabSelect.value));
+        }
+
+        // Show/hide more text for description and cancellation
+        function initializeShowMoreButtons() {
+            document.getElementById('showMoreDescriptionBtn').addEventListener('click', function() {
+                const moreDescription = document.getElementById('moreDescription');
+                const button = this;
+                if (moreDescription.classList.contains('hidden')) {
+                    moreDescription.classList.remove('hidden');
+                    button.querySelector('span').textContent = 'Show less';
+                    button.querySelector('i').classList.remove('fa-chevron-down');
+                    button.querySelector('i').classList.add('fa-chevron-up');
+                } else {
+                    moreDescription.classList.add('hidden');
+                    button.querySelector('span').textContent = 'Show more';
+                    button.querySelector('i').classList.remove('fa-chevron-up');
+                    button.querySelector('i').classList.add('fa-chevron-down');
+                }
+            });
+
+            document.getElementById('showMoreCancellationBtn').addEventListener('click', function() {
+                const moreCancellation = document.getElementById('moreCancellation');
+                const button = this;
+                if (moreCancellation.classList.contains('hidden')) {
+                    moreCancellation.classList.remove('hidden');
+                    button.querySelector('span').textContent = 'Show less';
+                    button.querySelector('i').classList.remove('fa-chevron-down');
+                    button.querySelector('i').classList.add('fa-chevron-up');
+                } else {
+                    moreCancellation.classList.add('hidden');
+                    button.querySelector('span').textContent = 'Show more';
+                    button.querySelector('i').classList.remove('fa-chevron-up');
+                    button.querySelector('i').classList.add('fa-chevron-down');
+                }
+            });
+        }
+
+        // Calendar initialization
+        function initializeCalendars() {
+            const juneCalendarGrid = document.getElementById('juneCalendar');
+            const julyCalendarGrid = document.getElementById('julyCalendar');
+            
+            // Add June calendar dates
+            juneCalendarDates.forEach(date => {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = `calendar-date rounded-full w-10 h-10 flex items-center justify-center cursor-pointer text-sm ${getCalendarDateClass(date)}`;
+                dayDiv.textContent = date.day;
+                juneCalendarGrid.appendChild(dayDiv);
+            });
+            
+            // Add July calendar dates
+            julyCalendarDates.forEach(date => {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = `calendar-date rounded-full w-10 h-10 flex items-center justify-center cursor-pointer text-sm ${getCalendarDateClass(date)}`;
+                dayDiv.textContent = date.day;
+                julyCalendarGrid.appendChild(dayDiv);
+            });
+        }
+
+        function getCalendarDateClass(date) {
+            switch (date.status) {
+                case 'past':
+                    return 'bg-gray-300 text-gray-600';
+                case 'today':
+                    return 'bg-teal-600 text-white font-semibold';
+                case 'available':
+                    return 'bg-gray-600 text-white';
+                case 'booked':
+                    return 'bg-teal-400 text-white';
+                default:
+                    return '';
+            }
+        }
+
+        // Reviews and pagination
+        function updateReviews() {
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            reviewsContainer.innerHTML = '';
+            
+            // Calculate visible reviews
+            const reviewStart = (currentPage - 1) * itemsPerPage;
+            const reviewEnd = Math.min(reviewStart + itemsPerPage, allReviews.length);
+            const visibleReviews = allReviews.slice(reviewStart, reviewEnd);
+            
+            // Add reviews
+            visibleReviews.forEach(review => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.className = 'bg-white p-6 border border-gray-200 rounded-lg shadow-sm review-card';
+                
+                let stars = '';
+                for (let i = 0; i < review.rating; i++) {
+                    stars += '<i class="fa-solid fa-star text-yellow-400"></i>';
+                }
+                
+                reviewDiv.innerHTML = `
+                    <div class="flex justify-between mb-2">
+                        <h3 class="font-medium text-lg">${review.title}</h3>
+                        <div class="flex space-x-1">${stars}</div>
+                    </div>
+                    <div class="flex items-center text-gray-500 text-sm mb-3">
+                        <span>${review.author}</span>
+                        <span class="mx-2">•</span>
+                        <span>${review.date}</span>
+                    </div>
+                    <p class="text-gray-600">${review.content}</p>
+                `;
+                
+                reviewsContainer.appendChild(reviewDiv);
+            });
+            
+            // Update review range text
+            const rangeStart = (currentPage - 1) * itemsPerPage + 1;
+            const rangeEnd = Math.min(currentPage * itemsPerPage, totalReviews);
+            document.getElementById('reviewRange').textContent = `Showing ${rangeStart} - ${rangeEnd} of ${totalReviews} reviews`;
+            
+            // Update pagination
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            // Previous button
+            const prevButton = document.createElement('button');
+            prevButton.className = `w-10 h-10 flex items-center justify-center rounded-md ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`;
+            prevButton.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', prevPage);
+            pagination.appendChild(prevButton);
+            
+            // Page buttons
+            const displayedPages = getDisplayedPages();
+            displayedPages.forEach(page => {
+                if (page === '...') {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.className = 'w-10 h-10 flex items-center justify-center';
+                    ellipsis.textContent = '...';
+                    pagination.appendChild(ellipsis);
+                } else {
+                    const pageButton = document.createElement('button');
+                    pageButton.className = `w-10 h-10 flex items-center justify-center rounded-md ${currentPage === page ? 'bg-teal-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`;
+                    pageButton.textContent = page;
+                    pageButton.addEventListener('click', () => goToPage(page));
+                    pagination.appendChild(pageButton);
+                }
+            });
+            
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.className = `w-10 h-10 flex items-center justify-center rounded-md ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`;
+            nextButton.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', nextPage);
+            pagination.appendChild(nextButton);
+        }
+
+        function getDisplayedPages() {
+            if (totalPages <= 7) {
+                return Array.from({ length: totalPages }, (_, i) => i + 1);
+            }
+
+            const pages = [1];
+
+            if (currentPage > 3) {
+                pages.push('...');
+            }
+
+            // Pages around current
+            const rangeStart = Math.max(2, currentPage - 1);
+            const rangeEnd = Math.min(totalPages - 1, currentPage + 1);
+
+            for (let i = rangeStart; i <= rangeEnd; i++) {
+                pages.push(i);
+            }
+
+            if (currentPage < totalPages - 2) {
+                pages.push('...');
+            }
+
+            pages.push(totalPages);
+
+            return pages;
+        }
+
+        function previousMonth() {
+            // Logic to navigate to previous month
+            // Would need API call in real application
+            alert('Previous month navigation would be implemented here');
+        }
+
+        function nextMonth() {
+            // Logic to navigate to next month
+            // Would need API call in real application
+            alert('Next month navigation would be implemented here');
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updateReviews();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateReviews();
+            }
+        }
+
+        function goToPage(page) {
+            if (typeof page === 'number') {
+                currentPage = page;
+                updateReviews();
+            }
+        }
+
+        function scrollSmoothToSection(sectionId) {
+            activeTab = sectionId;
+            initializeTabs(); // Update active tab styling
+            
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Calculate position with offset for the fixed header
+                const offset = 180; // Adding extra space below the header
+                const elementPosition = section.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                // Scroll to the adjusted position
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Keyboard navigation handler
+        function handleKeyDown(e) {
+            if (document.getElementById('lightboxModal').classList.contains('hidden')) return;
+
+            switch (e.key) {
+                case 'ArrowLeft':
+                    previousImage();
+                    break;
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    nextImage();
+                    break;
+                case 'Escape':
+                    closeLightbox();
+                    break;
+                case 'f':
+                case 'F':
+                    toggleFullscreen();
+                    break;
+            }
+        }
+
+        // Fullscreen change handler
+        function handleFullscreenChange() {
+            isFullscreen = !!document.fullscreenElement;
+            if (isFullscreen) {
+                document.getElementById('fullscreenIcon').classList.remove('fa-expand');
+                document.getElementById('fullscreenIcon').classList.add('fa-compress');
+            } else {
+                document.getElementById('fullscreenIcon').classList.remove('fa-compress');
+                document.getElementById('fullscreenIcon').classList.add('fa-expand');
+            }
+        }
+
+        // Initialize everything when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTabs();
+            initializeShowMoreButtons();
+            initializeCalendars();
+            updateReviews();
+            
+            // Set up event listeners for keyboard navigation
+            window.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!-- Footer Section -->
+<footer class="footer-section pt-5">
+    <div class="container">
+        <div class="row align-items-start gy-5">
+            <div class="col-lg-4 text-center text-lg-start mb-4 mb-lg-0">
+                <img src="logo.jpeg" alt="VA MOUNTAIN Cabins Logo" style="height: 70px;">
+                <div class="mt-3 mb-2">
+                    <span class="footer-brand-title">SCENIC HIGHWAY </span>
+                    <h2 class="footer-brand-name">VA MOUNTAIN <span class="footer-brand-dot">CABINS</span></h2>
+                </div>
+                <p class="footer-desc mb-3">At VA MOUNTAIN Cabins, we believe in crafting unforgettable experiences along the stunning coastline. Let us be your guide to coastal bliss and create cherished memories that last a lifetime.</p>
+                <div class="footer-social d-flex justify-content-center justify-content-lg-start gap-2 mt-2">
+                    <a href="#" class="footer-social-link"><span class="iconify" data-icon="mdi:facebook" style="font-size: 1.6rem; color: var(--gold);"></span></a>
+                    <a href="#" class="footer-social-link"><span class="iconify" data-icon="mdi:instagram" style="font-size: 1.6rem; color: var(--gold);"></span></a>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-4 col-6 mb-4 mb-md-0">
+                <h6 class="footer-heading" style="color: var(--gold);">CONTACT</h6>
+                <ul class="list-unstyled footer-contact-list">
+                    <li class="mb-2 d-flex align-items-center"><span class="iconify me-2" data-icon="mdi:email-outline" style="color:var(--gold);"></span> <a href="mailto:brianchughes@gmail.com" class="footer-link fw-bold">brianchughes@gmail.com</a></li>
+                    <li class="d-flex align-items-center"><span class="iconify me-2" data-icon="mdi:phone-outline" style="color:var(--gold);"></span> <a href="tel:+18048390770" class="footer-link fw-bold">+18048390770</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6 mb-4 mb-md-0">
+                <h6 class="footer-heading" style="color: var(--gold);">LINKS</h6>
+                <ul class="list-unstyled footer-links-list">
+                    <li><a href="about.html" class="footer-link">About Us</a></li>
+                    <li><a href="new-property.html" class="footer-link">Rental Properties</a></li>
+                    <li><a href="#" class="footer-link">Property Management</a></li>
+                    <li><a href="#" class="footer-link">Real Estate</a></li>
+                    <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+                    <li><a href="#" class="footer-link">Owner Portal</a></li>
+                    <li><a href="new-property.html" class="footer-link">Grocery & Services</a></li>
+                    <li><a href="attraction.html" class="footer-link">Attractions</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-4 col-12">
+                <h6 class="footer-heading" style="color: var(--gold);">FIND A PROPERTY</h6>
+                <select class="form-select footer-property-select mt-2">
+                    <option selected>RENTAL PROPERTIES</option>
+                    <option>Beachfront</option>
+                    <option>Pet Friendly</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom mt-5 py-3">
+        <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <div class="footer-copyright text-center text-md-start mb-2 mb-md-0">
+                Copyright &copy; 2024 <span class="fw-bold">VA MOUNTAIN Cabins</span>. All rights reserved.
+            </div>
+            <div class="footer-bottom-links text-center text-md-end">
+                <a href="#" class="footer-link me-3">Privacy Policy</a>
+                <a href="#" class="footer-link me-3">Terms & Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script>
+    // Set active link based on current page
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage || 
+                (currentPage === '' && href === 'index.html') || 
+                (currentPage === 'index.html' && href === 'index.html')) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>

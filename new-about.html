@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - VA Mountain Cabins</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.jpeg">
+    <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+                
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>
+    <style>
+       
+        .about_images {
+            height: 600px; 
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 767px) {
+            .about_images {
+                height: 400px; 
+                width: 100%;
+            } 
+        }
+
+        
+        .section-b-space {
+            padding: 5rem 0;
+        }
+        
+        .abt-info {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .abt-content {
+            flex: 1;
+        }
+        
+        .abt-content h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .abt-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .abt-image {
+            flex: 1;
+        }
+        
+        .about_img img:hover {
+            transform: scale(1.02);
+        }
+        
+        .btn-custom {
+            background-color: var(--gold);
+            color: white;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 15px 30px;
+        }
+
+        .btn-custom:hover {
+            color: #ffffff;
+            transform: scale(1.01);
+        }
+        
+        
+        
+        @media (max-width: 1399px) {
+            .abt-info{
+                display: block;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1018px) {
+            .abt-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+        
+        
+           
+    
+        
+        .lightText {
+            color: var(--gold);
+        }
+        
+        .textColor {
+            color: var(--secondary-light);
+        }
+        
+        .duration-300 {
+            transition-duration: .3s;
+        }
+        
+        .about_theme {
+            background-color: var(--secondary-dark);
+            color: white;
+        }
+        
+        .about-text {
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+    
+    <!-- Our Story Section -->
+    <section class="section-b-space about_theme">
+        <div class="container">
+            <div class="abt-info">
+                <div class="abt-image">
+                    <div class="about_img">
+                        <img src="images.jpeg" class="img-fluid about_images" alt="About Us">
+                    </div>
+                </div>
+                <div class="abt-content">
+                    <div class="">
+                        <div class="cont">
+                            <h2 class="lightText fw-bold pb-3">Our Story</h2>
+                            <div class="textColor fw-bold py-2">VA Mountain Cabins began with a simple love for the Virginia mountains and a desire to share this stunning region with others.</div>
+                            <p class="about-text">What started as a single cabin rental in 2010 has grown into a collection of premium properties offering unforgettable vacation experiences. Our founders, John and Mary Johnson, fell in love with the area during their honeymoon and decided to purchase their first cabin shortly after.</p>
+                            <p class="about-text">Their passion for hospitality and the natural beauty of the region led them to acquire more properties and establish what is now VA Mountain Cabins. Today, we maintain the same dedication to exceptional service, beautiful accommodations, and creating memorable experiences for our guests that has defined us since the beginning.</p>
+                        </div>
+                        <div class="">
+                            <a href="#" class="btn btn-custom rounded-pill d-inline-flex align-items-center gap-2 mt-3">
+                                Book Now
+                                <span class="iconify" data-icon="mdi:arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+</body>
+</html>

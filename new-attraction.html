@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractions - VA Mountain Cabins</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.jpeg">
+    <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+                
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>
+    <style>
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            color: var(--secondary-dark);
+            margin-bottom: 40px;
+        }
+        
+        .section-description {
+            color: var(--primary-dark);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .section-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .section-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .section-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .learn-more-btn {
+            background: var(--secondary-dark);
+            color: var(--primary-light);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(10, 61, 101, 0.3);
+        }
+        
+        .learn-more-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(10, 61, 101, 0.4);
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-image img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-primary-light">
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+    
+    <!-- Hero Banner -->
+    
+    
+    <div class="container">
+        <!-- Scenic Views Section -->
+        <div class="section">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12 order-1 order-md-1 mb-4 mb-md-0">
+                    <div class="section-image">
+                         <img src="images.jpeg" alt="Scenic Views" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 order-2 order-md-2">
+                    <div class="ps-md-4">
+                        <h2 class="section-title">Scenic Mountain Views</h2>
+                        <p class="section-description">Experience breathtaking panoramic views of the Virginia Mountains from numerous lookout points and scenic drives. The Blue Ridge Parkway offers some of the most stunning vistas in the eastern United States, with countless opportunities to pull over and take in the majestic landscape.</p>
+                        <p class="section-description">From mountain peaks to rolling valleys, the changing seasons bring different but equally spectacular color palettes to these vistas. Photographers will find endless inspiration while outdoor enthusiasts can enjoy the many hiking trails leading to scenic overlooks.</p>
+                        <a href="#" class="learn-more-btn">Explore More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hiking Trails Section -->
+        <div class="section bg-accent py-5 rounded-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12 order-2 order-md-1 mb-4 mb-md-0">
+                    <div class="pe-md-4">
+                        <h2 class="section-title">Hiking Adventures</h2>
+                        <p class="section-description">Lace up your boots and hit the trails! The Virginia Mountains offer hiking experiences for all skill levels, from gentle nature walks to challenging summit trails. The Appalachian Trail passes through this region, providing access to one of America's most famous long-distance hiking routes.</p>
+                        <p class="section-description">Local favorites include McAfee Knob, Dragon's Tooth, and Tinker Cliffs, known collectively as the "Triple Crown" of Virginia hiking. These moderate to difficult trails reward hikers with unforgettable views and photo opportunities.</p>
+                        <a href="#" class="learn-more-btn">Find Trails</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 order-1 order-md-2">
+                    <div class="section-image">
+                        <img src="images.jpeg" alt="Hiking Trails" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local Eateries Section -->
+        <div class="section">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12 order-1 order-md-1 mb-4 mb-md-0">
+                    <div class="section-image">
+                        <img src="images.jpeg" alt="Local Restaurants" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 order-2 order-md-2">
+                    <div class="ps-md-4">
+                        <h2 class="section-title">Local Cuisine & Craft Beverages</h2>
+                        <p class="section-description">Savor the flavors of the Virginia Mountains at local restaurants, cafés, and breweries. The region is known for its farm-to-table dining experiences, featuring fresh ingredients from nearby farms and gardens.</p>
+                        <p class="section-description">Don't miss the thriving craft beverage scene, including award-winning wineries along the Blue Ridge Wine Trail, craft breweries creating innovative mountain-inspired beers, and distilleries producing small-batch spirits. Many venues offer tastings, tours, and spectacular views to complement your culinary adventure.</p>
+                        <a href="#" class="learn-more-btn">Taste Local Flavors</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Attractions Map -->
+       
+    </div>
+    
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

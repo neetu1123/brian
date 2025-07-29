@@ -1,0 +1,131 @@
+/* Custom styles for property.html with new color palette */
+body {
+    background-color: var(--primary-light);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.service-card {
+    background: var(--accent);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--secondary-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.card-content {
+    padding: 30px 25px;
+    color: var(--primary-dark);
+    position: relative;
+    z-index: 2;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--secondary-dark);
+}
+
+.card-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: var(--primary-dark);
+}
+
+.read-more-btn {
+    background: var(--secondary-dark);
+    color: var(--primary-light);
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(10, 61, 101, 0.3);
+}
+
+.read-more-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(10, 61, 101, 0.4);
+    color: var(--accent);
+}
+
+.read-more-btn::after {
+    content: '→';
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover::after {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .card-content {
+        padding: 20px;
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+    }
+    
+    .card-image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 20px 0;
+    }
+    
+    .card-image {
+        height: 180px;
+    }
+    
+    .card-content {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .card-description {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+}

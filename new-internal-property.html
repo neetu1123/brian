@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Nest - VA Mountain Cabins</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.jpeg">
+    <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+                
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>
+    <style>
+        .property-details {
+            padding-top: 30px;
+        }
+        
+        .gallery-container {
+            margin-bottom: 30px;
+        }
+        
+        .main-image {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .thumbnail {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .property-title {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .property-location {
+            color: var(--secondary-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .property-features {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            color: var(--primary-dark);
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: var(--gold);
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--secondary-dark);
+            margin-bottom: 20px;
+        }
+        
+        .booking-widget {
+            background-color: var(--accent);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .date-input {
+            margin-bottom: 15px;
+        }
+        
+        .nav-tabs {
+            border-bottom: 2px solid var(--secondary-light);
+            margin-bottom: 25px;
+        }
+        
+        .nav-link {
+            color: var(--primary-dark);
+            font-weight: 500;
+            padding: 10px 20px;
+            border: none;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .nav-link.active {
+            color: var(--gold);
+            border-bottom: 3px solid var(--gold);
+            background-color: transparent;
+        }
+        
+        .amenities-list {
+            column-count: 2;
+            column-gap: 30px;
+        }
+        
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            break-inside: avoid;
+        }
+        
+        .amenity-icon {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .review-card {
+            background-color: var(--accent);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .review-date {
+            color: var(--secondary-dark);
+            font-size: 0.9rem;
+        }
+        
+        .review-stars {
+            color: gold;
+            margin-bottom: 10px;
+        }
+        
+        .review-text {
+            color: var(--secondary-dark);
+        }
+    </style>
+</head>
+<body class="bg-primary-light">
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+    
+    <div class="container property-details">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Property Gallery -->
+                <div class="gallery-container">
+                    <img src="images.jpeg" alt="Mountain Nest Main View" class="main-image shadow">
+                    <div class="thumbnail-container">
+                        <img src="images.jpeg" alt="Living Room" class="thumbnail shadow">
+                        <img src="images.jpeg" alt="Kitchen" class="thumbnail shadow">
+                        <img src="images.jpeg" alt="Master Bedroom" class="thumbnail shadow">
+                        <img src="images.jpeg" alt="Deck View" class="thumbnail shadow">
+                        <img src="images.jpeg" alt="Bathroom" class="thumbnail shadow">
+                    </div>
+                </div>
+                
+                <!-- Property Info -->
+                <h1 class="property-title">Mountain Nest Cabin</h1>
+                <p class="property-location">
+                    <span class="iconify me-2" data-icon="mdi:map-marker"></span> Blue Ridge, Virginia
+                </p>
+                
+                <div class="property-features">
+                    <div class="feature">
+                        <span class="iconify feature-icon" data-icon="mdi:account-group"></span> 
+                        <span>8 Guests</span>
+                    </div>
+                    <div class="feature">
+                        <span class="iconify feature-icon" data-icon="mdi:bed"></span> 
+                        <span>3 Bedrooms</span>
+                    </div>
+                    <div class="feature">
+                        <span class="iconify feature-icon" data-icon="mdi:shower"></span> 
+                        <span>2 Bathrooms</span>
+                    </div>
+                </div>
+                
+                <div class="price">$249 <span style="font-size: 1rem;">/ night</span></div>
+                <p class="price-note">Plus cleaning fee and service fee</p>
+                
+                <!-- Content Tabs -->
+                <ul class="nav nav-tabs" id="propertyTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="amenities-tab" data-bs-toggle="tab" href="#amenities" role="tab">Amenities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="location-tab" data-bs-toggle="tab" href="#location" role="tab">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="propertyTabContent">
+                    <!-- Description Tab -->
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <p>Nestled in the heart of Virginia's Blue Ridge Mountains, Mountain Nest Cabin offers a perfect blend of rustic charm and modern comfort. This three-bedroom cabin features panoramic mountain views from the spacious deck, a cozy stone fireplace, and a luxurious hot tub perfect for stargazing.</p>
+                        
+                        <p>The open-concept main living area includes a fully-equipped kitchen with stainless steel appliances, a dining area with seating for 8, and a comfortable living room with a large smart TV. Large windows throughout flood the space with natural light and showcase the stunning natural surroundings.</p>
+                        
+                        <p>The master bedroom features a king-sized bed and en-suite bathroom with a soaking tub and walk-in shower. Two additional bedrooms include a queen bed and two twin beds, making this cabin perfect for families or groups of friends.</p>
+                        
+                        <p>Located just 15 minutes from hiking trails and 20 minutes from downtown Blue Ridge, you'll have easy access to outdoor adventures and local restaurants and shops. This private mountain retreat offers the perfect base for exploring all that Virginia's mountains have to offer.</p>
+                    </div>
+                    
+                    <!-- Amenities Tab -->
+                    <div class="tab-pane fade" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
+                        <h4 class="mb-4 text-secondary-dark">Cabin Amenities</h4>
+                        <div class="amenities-list">
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:wifi"></span>
+                                <span>Free WiFi</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:fire"></span>
+                                <span>Wood-burning Fireplace</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:hot-tub"></span>
+                                <span>Outdoor Hot Tub</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:television"></span>
+                                <span>Smart TV with Streaming</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:grill"></span>
+                                <span>Gas Grill</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:washing-machine"></span>
+                                <span>Washer & Dryer</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:air-conditioner"></span>
+                                <span>Air Conditioning</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:snowflake"></span>
+                                <span>Heating</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:coffee-maker"></span>
+                                <span>Coffee Maker</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:silverware-fork-knife"></span>
+                                <span>Fully Equipped Kitchen</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:deck"></span>
+                                <span>Private Deck</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:parking"></span>
+                                <span>Free Parking</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Location Tab -->
+                    <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+                        <h4 class="mb-3 text-secondary-dark">Location & Nearby Attractions</h4>
+                        <p>Mountain Nest Cabin is located in the picturesque Blue Ridge Mountains, offering privacy while still being conveniently close to attractions and necessities.</p>
+                        
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202914.8082469425!2d-80.13484433150594!3d37.239192089547705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884d7dce28c8ca0d%3A0x5f402706bc2136b8!2sBlue%20Ridge%2C%20VA!5e0!3m2!1sen!2sus!4v1627565889999!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3 text-secondary-dark">Distances</h5>
+                                <ul>
+                                    <li>15 min to hiking trails</li>
+                                    <li>20 min to downtown Blue Ridge</li>
+                                    <li>25 min to grocery stores</li>
+                                    <li>30 min to fishing spots</li>
+                                    <li>45 min to nearest ski resort</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3 text-secondary-dark">Local Attractions</h5>
+                                <ul>
+                                    <li>Blue Ridge Parkway</li>
+                                    <li>Appalachian Trail Access</li>
+                                    <li>Local Wineries & Breweries</li>
+                                    <li>Scenic Waterfalls</li>
+                                    <li>Historical Downtown Area</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reviews Tab -->
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="mb-0 text-secondary-dark">Guest Reviews</h4>
+                            <div>
+                                <span class="fw-bold">4.9/5</span> 
+                                <span class="text-warning">
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                </span>
+                                <span class="text-muted">(45 reviews)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample Reviews -->
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">Sarah M.</div>
+                                <div class="review-date">June 2025</div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                            </div>
+                            <div class="review-text">
+                                <p>This cabin exceeded all our expectations! The views from the deck are absolutely breathtaking, especially at sunset. The hot tub was perfect after a day of hiking nearby trails. The cabin was spotlessly clean and had everything we needed. We will definitely be back!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">Mark T.</div>
+                                <div class="review-date">May 2025</div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                            </div>
+                            <div class="review-text">
+                                <p>We had the most relaxing weekend at Mountain Nest. The cabin is beautifully decorated and has all the amenities you could want. The kitchen was well-stocked for cooking, the beds were comfortable, and the location was peaceful and private while still being close to activities. The hosts were responsive and provided great local recommendations.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">Jennifer R.</div>
+                                <div class="review-date">April 2025</div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star-half"></span>
+                            </div>
+                            <div class="review-text">
+                                <p>Our family of six had a wonderful stay at Mountain Nest. The cabin layout was perfect for us, with plenty of space for everyone. The kids loved exploring the property and watching wildlife from the deck. It was the perfect balance of rustic charm and modern comforts. The only minor issue was the spotty wifi, but it was actually nice to disconnect a bit.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-secondary-dark mt-3">Load More Reviews</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Booking Widget -->
+                <div class="booking-widget">
+                    <h4 class="mb-4 text-primary-dark">Book Your Stay</h4>
+                    <form>
+                        <div class="date-input">
+                            <label class="form-label">Check-in</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="date-input">
+                            <label class="form-label">Check-out</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="date-input">
+                            <label class="form-label">Guests</label>
+                            <select class="form-control">
+                                <option>1 guest</option>
+                                <option>2 guests</option>
+                                <option>3 guests</option>
+                                <option>4 guests</option>
+                                <option>5 guests</option>
+                                <option>6 guests</option>
+                                <option>7 guests</option>
+                                <option>8 guests</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn w-100" style="background-color: var(--gold); color: white;">Check Availability</button>
+                    </form>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>$249 x 5 nights</span>
+                        <span>$1,245</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Cleaning fee</span>
+                        <span>$100</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Service fee</span>
+                        <span>$95</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total</span>
+                        <span>$1,440</span>
+                    </div>
+                </div>
+                
+                <!-- Host Info -->
+                <div class="bg-accent p-4 rounded-3 shadow-sm">
+                    <h5 class="text-primary-dark">Hosted by John</h5>
+                    <p class="text-secondary-dark mb-3">Superhost · 4 years hosting</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images.jpeg" alt="Host" class="rounded-circle me-3" width="50" height="50">
+                        <div>
+                            <div class="text-warning mb-1">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                            </div>
+                            <span class="text-secondary-dark">45 Reviews</span>
+                        </div>
+                    </div>
+                    <p class="text-secondary-dark mb-3">As a longtime local resident, I love sharing the beauty of the Virginia mountains with my guests. I'm always available to provide recommendations for trails, restaurants, and activities.</p>
+                    <button class="btn btn-outline-secondary w-100">Contact Host</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder" class="mt-5"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

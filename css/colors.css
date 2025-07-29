@@ -1,0 +1,155 @@
+/* VA Mountain Cabins Color Palette */
+:root {
+    --primary-dark: #152435;    /* PANTONE 289C Dark blue */
+    --primary-light: #F7F7F7;   /* Off-white */
+    --secondary-dark: #043A66;  /* Medium blue */
+    --secondary-light: #BFD0DE; /* Light blue/gray */
+    --accent: #F1FBFF;          /* Very light blue */
+    --gold: #EFAD29;            /* Gold accent */
+}
+
+/* Background color classes */
+.bg-primary-dark {
+    background-color: var(--primary-dark);
+}
+
+.bg-primary-light {
+    background-color: var(--primary-light);
+}
+
+.bg-secondary-dark {
+    background-color: var(--secondary-dark);
+}
+
+.bg-secondary-light {
+    background-color: var(--secondary-light);
+}
+
+.bg-accent {
+    background-color: var(--accent);
+}
+
+/* Text color classes */
+.text-primary-dark {
+    color: var(--primary-dark);
+}
+
+.text-primary-light {
+    color: var(--primary-light);
+}
+
+.text-secondary-dark {
+    color: var(--secondary-dark);
+}
+
+.text-secondary-light {
+    color: var(--secondary-light);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+/* Border color classes */
+.border-primary-dark {
+    border-color: var(--primary-dark);
+}
+
+.border-primary-light {
+    border-color: var(--primary-light);
+}
+
+.border-secondary-dark {
+    border-color: var(--secondary-dark);
+}
+
+.border-secondary-light {
+    border-color: var(--secondary-light);
+}
+
+.border-accent {
+    border-color: var(--accent);
+}
+
+/* Button styling with color palette */
+.btn-primary-dark {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+}
+
+.btn-primary-dark:hover {
+    background-color: var(--secondary-dark);
+}
+
+.btn-secondary-dark {
+    background-color: var(--secondary-dark);
+    color: var(--primary-light);
+}
+
+.btn-secondary-dark:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary-light {
+    background-color: var(--secondary-light);
+    color: var(--primary-dark);
+}
+
+.btn-secondary-light:hover {
+    background-color: var(--accent);
+}
+
+/* Override some Bootstrap defaults */
+/* .navbar {
+    background-color: var(--primary-dark) !important;
+} */
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--primary-light) !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: var(--accent) !important;
+}
+
+.dropdown-menu {
+    background-color: var(--primary-dark) !important;
+}
+
+.dropdown-item {
+    color: var(--primary-light) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--secondary-dark) !important;
+    color: var(--accent) !important;
+}
+
+.footer-section {
+    background: linear-gradient(to left, var(--secondary-dark), var(--primary-dark)) !important;
+    color: var(--primary-light) !important;
+}
+
+.footer-bottom {
+    background-color: var(--secondary-dark) !important;
+}
+
+.card {
+    border-color: var(--secondary-light) !important;
+}
+
+.card-header {
+    background-color: var(--secondary-light) !important;
+    color: var(--primary-dark) !important;
+}
+
+.btn-availability {
+    background-color: var(--secondary-dark) !important;
+    color: var(--primary-light) !important;
+}
+
+.btn-availability:hover {
+    background-color: var(--primary-dark) !important;
+    color: var(--accent) !important;
+}
