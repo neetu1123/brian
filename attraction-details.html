@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractions Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+   <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.jpeg">
+    <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+                
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>
+  <style>
+        :root {
+            --primary-dark: #152435;
+            --primary-light: #F7F7F7;
+            --secondary-dark: #043A66;
+            --secondary-light: #BFD0DE;
+            --accent: #F1FBFF;
+            --gold: #EFAD29;
+            --p60: 60px;
+            --p12: 12px;
+            --p1: 1px;
+            --p40: 40px;
+            --m15: 15px;
+        }
+
+        body {
+            background-color: var(--secondary-dark);
+            color: var(--primary-dark);
+        }
+
+        .fs-50 {
+            font-size: 30px;
+            text-decoration: underline;
+        }
+
+        .fs-20 {
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .attraction_theme {
+            background-color: var(--primary-dark);
+        }
+
+        .heading {
+            color: var(--gold);
+        }
+
+        .margin_atr {
+            margin-top: 80px;
+        }
+
+        @media (min-width: 992px) {
+            .margin_atr {
+                margin-top: 100px;
+            }
+        }
+
+        /* .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        } */
+
+        .lead {
+            color: #ffffff;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .activity-section {
+            margin-bottom: 50px;
+        }
+
+        .activity-image {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .activity-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .activity-description {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card {
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        @media (max-width: 767.98px) {
+            .order-md-1, .order-md-2 {
+                order: 0 !important;
+            }
+        }
+
+        .attraction_theme .text-custom {
+            color: #ffffff;
+        }
+
+        .main-btn {
+            background-color: #d69922;
+            border-color: var(--gold);
+            color: var(--primary-dark);
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .main-btn:hover {
+            background-color: #d69922;
+            border-color: #d69922;
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .Blog-details {
+            padding: var(--p60) var(--p12);
+            padding-top: 80px;
+        }
+
+        .breadcrumb {
+            padding-left: var(--p1);
+        }
+
+        section.Blog-details img {
+            width: auto;
+            max-width: 45%;
+            margin-right: 20px;
+            max-height: 500px;
+            object-fit: cover;
+            height: 326px;
+            float: left;
+        }
+
+        section.Blog-details .container div {
+            width: 100%;
+        }
+
+        section.Blog-details .container div {
+            width: 100%;
+            min-height: 400px;
+        }
+
+        @media (max-width: 980px) {
+            section.Blog-details img {
+                min-width: 450px;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: var(--m15);
+                margin-right: 0px;
+                max-height: 400px;
+                object-fit: cover;
+                height: 100%;
+            }
+            
+            section.Blog-details .container {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .Blog-details {
+                padding: var(--p40) var(--p12);
+            }
+            
+            section.Blog-details .container {
+                display: flex;
+                flex-direction: column;
+                gap: 0px;
+            }
+            
+            section.Blog-details h1 {
+                display: none;
+            }
+            
+            section.Blog-details img {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                margin-right: 0px;
+                max-height: 300px;
+                object-fit: cover;
+                height: 100%;
+            }
+            
+            section.Blog-details .container div {
+                width: 100%;
+            }
+        }
+
+        .modal-header {
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+            border-bottom: 1px solid var(--secondary-light);
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        .modal-title {
+            color: var(--gold);
+        }
+
+       
+    </style>
+</head>
+<body>
+      <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+    <section class="alternating-sections-wrapper py-5 ">
+        <div class="container">
+            <div class="mb-3">
+                <a href="/new-attraction.html" class="heading fw-medium d-inline-flex align-items-center fs-2" style="text-decoration: none">
+                    <i class="fas fa-arrow-left me-2 fs-20"></i> 
+                    <span class="fs-50">Back to Attractions</span>
+                </a>
+            </div>
+            
+            <div class="row">
+                <!-- Attraction 1 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="activity-image">
+                            <img src="images.jpeg" class="card-img-top rounded-top" alt="Mountain Adventure">
+                        </div>
+                        <div class="card-body d-flex flex-column attraction_theme">
+                            <h2 class="activity-title text-center heading">Mountain Adventure</h2>
+                            <p class="activity-description flex-grow-1 text-center text-custom">
+                                Experience breathtaking mountain views and thrilling hiking trails. Perfect for adventure seekers looking to explore nature's wonders and challenge themselves with spectacular outdoor activities.
+                            </p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary main-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal1">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attraction 2 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="activity-image">
+                            <img src="images.jpeg" class="card-img-top rounded-top" alt="Beach Paradise">
+                        </div>
+                        <div class="card-body d-flex flex-column attraction_theme">
+                            <h2 class="activity-title text-center heading">Beach Paradise</h2>
+                            <p class="activity-description flex-grow-1 text-center text-custom">
+                                Relax on pristine sandy beaches with crystal clear waters. Enjoy water sports, beach volleyball, and stunning sunsets in this tropical paradise destination.
+                            </p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary main-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal2">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attraction 3 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="activity-image">
+                            <img src="images.jpeg" class="card-img-top rounded-top" alt="City Explorer">
+                        </div>
+                        <div class="card-body d-flex flex-column attraction_theme">
+                            <h2 class="activity-title text-center heading">City Explorer</h2>
+                            <p class="activity-description flex-grow-1 text-center text-custom">
+                                Discover urban attractions, museums, shopping districts, and cultural landmarks. Experience the vibrant city life with guided tours and local experiences.
+                            </p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary main-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal3">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attraction 4 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="activity-image">
+                            <img src="images.jpeg" class="card-img-top rounded-top" alt="Forest Retreat">
+                        </div>
+                        <div class="card-body d-flex flex-column attraction_theme">
+                            <h2 class="activity-title text-center heading">Forest Retreat</h2>
+                            <p class="activity-description flex-grow-1 text-center text-custom">
+                                Immerse yourself in peaceful forest environments with wildlife watching, nature photography, and serene walking trails through ancient woodlands.
+                            </p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary main-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal4">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attraction 5 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="activity-image">
+                            <img src="images.jpeg" class="card-img-top rounded-top" alt="Lake Adventure">
+                        </div>
+                        <div class="card-body d-flex flex-column attraction_theme">
+                            <h2 class="activity-title text-center heading">Lake Adventure</h2>
+                            <p class="activity-description flex-grow-1 text-center text-custom">
+                                Enjoy peaceful lake activities including kayaking, fishing, and scenic boat tours. Perfect for families and those seeking tranquil water experiences.
+                            </p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary main-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal5">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attraction 6 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="activity-image">
+                            <img src="images.jpeg" class="card-img-top rounded-top" alt="Desert Safari">
+                        </div>
+                        <div class="card-body d-flex flex-column attraction_theme">
+                            <h2 class="activity-title text-center heading">Desert Safari</h2>
+                            <p class="activity-description flex-grow-1 text-center text-custom">
+                                Experience the magic of vast desert landscapes with camel rides, stargazing, and traditional desert camping under the magnificent night sky.
+                            </p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary main-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal6">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <!-- <div class="row align-items-center mt-4">
+                <div class="col-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- Modal 1 -->
+    <div class="modal fade" id="descriptionModal1" tabindex="-1" aria-labelledby="descriptionModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel1">Mountain Adventure</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <img src="images.jpeg" alt="Mountain Adventure" class="img-fluid mb-3">
+                    <h4>Discover the Ultimate Mountain Experience</h4>
+                    <p>Embark on an unforgettable journey through majestic mountain ranges that will leave you breathless. Our Mountain Adventure package offers the perfect blend of excitement, natural beauty, and outdoor recreation.</p>
+                    
+                    <h5>What's Included:</h5>
+                    <ul>
+                        <li>Professional mountain guides</li>
+                        <li>High-quality hiking equipment</li>
+                        <li>Scenic trail routes for all skill levels</li>
+                        <li>Photography opportunities at summit viewpoints</li>
+                        <li>Traditional mountain lodge accommodation</li>
+                    </ul>
+                    
+                    <h5>Activities:</h5>
+                    <p>Challenge yourself with various hiking trails ranging from beginner-friendly paths to advanced mountaineering routes. Experience rock climbing, nature photography, bird watching, and enjoy panoramic views from mountain peaks. Each trail offers unique geological formations and diverse ecosystems.</p>
+                    
+                    <h5>Best Time to Visit:</h5>
+                    <p>The mountain adventure is available year-round, with each season offering distinct experiences. Spring brings wildflower blooms, summer offers clear skies and warm weather, autumn showcases colorful foliage, and winter provides snow-covered landscapes perfect for winter sports.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="descriptionModal2" tabindex="-1" aria-labelledby="descriptionModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel2">Beach Paradise</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <img src="images.jpeg" alt="Beach Paradise" class="img-fluid mb-3">
+                    <h4>Tropical Beach Paradise Awaits</h4>
+                    <p>Escape to pristine beaches with powdery white sand and turquoise waters. Our Beach Paradise destination offers the ultimate tropical getaway with endless sunshine and relaxation.</p>
+                    
+                    <h5>Beach Activities:</h5>
+                    <ul>
+                        <li>Snorkeling and diving in coral reefs</li>
+                        <li>Beach volleyball and water sports</li>
+                        <li>Sunset sailing and boat tours</li>
+                        <li>Beach yoga and wellness sessions</li>
+                        <li>Local seafood and beachside dining</li>
+                    </ul>
+                    
+                    <h5>Marine Life:</h5>
+                    <p>Discover vibrant coral reefs teeming with tropical fish, sea turtles, and marine life. Professional diving instructors are available for both beginners and experienced divers. Snorkeling equipment is provided for shallow water exploration.</p>
+                    
+                    <h5>Accommodation:</h5>
+                    <p>Choose from beachfront resorts, cozy beach bungalows, or luxury overwater villas. All accommodations offer stunning ocean views and easy beach access. Enjoy world-class amenities including spa services, infinity pools, and gourmet restaurants.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="descriptionModal3" tabindex="-1" aria-labelledby="descriptionModalLabel3" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel3">City Explorer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <img src="images.jpeg" alt="City Explorer" class="img-fluid mb-3">
+                    <h4>Urban Adventure and Cultural Discovery</h4>
+                    <p>Immerse yourself in vibrant city life with our comprehensive City Explorer package. Discover architectural marvels, cultural landmarks, and hidden local gems that make each city unique.</p>
+                    
+                    <h5>City Highlights:</h5>
+                    <ul>
+                        <li>Guided walking tours of historic districts</li>
+                        <li>Museum and gallery visits</li>
+                        <li>Local food tours and cooking classes</li>
+                        <li>Shopping in unique boutiques and markets</li>
+                        <li>Rooftop bars and skyline viewing points</li>
+                    </ul>
+                    
+                    <h5>Cultural Experiences:</h5>
+                    <p>Experience local traditions through street festivals, live music venues, and cultural performances. Visit renowned museums, art galleries, and historical sites that tell the story of the city's rich heritage and modern development.</p>
+                    
+                    <h5>Transportation:</h5>
+                    <p>Navigate the city easily with guided transportation including metro tours, bike rentals, and hop-on-hop-off bus services. Professional local guides provide insider knowledge and recommendations for authentic experiences.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div class="modal fade" id="descriptionModal4" tabindex="-1" aria-labelledby="descriptionModalLabel4" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel4">Forest Retreat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <img src="images.jpeg" alt="Forest Retreat" class="img-fluid mb-3">
+                    <h4>Peaceful Forest Sanctuary</h4>
+                    <p>Find tranquility in ancient forests where towering trees create natural cathedrals and wildlife roams freely. Our Forest Retreat offers the perfect escape from urban life into nature's embrace.</p>
+                    
+                    <h5>Forest Activities:</h5>
+                    <ul>
+                        <li>Guided nature walks and bird watching</li>
+                        <li>Wildlife photography workshops</li>
+                        <li>Forest meditation and yoga sessions</li>
+                        <li>Tree identification and botany tours</li>
+                        <li>Eco-friendly camping experiences</li>
+                    </ul>
+                    
+                    <h5>Wildlife Encounters:</h5>
+                    <p>Observe diverse forest inhabitants including deer, foxes, various bird species, and smaller woodland creatures. Professional naturalists guide you through the forest ecosystem, sharing knowledge about conservation efforts and sustainable forest management.</p>
+                    
+                    <h5>Accommodation:</h5>
+                    <p>Stay in eco-friendly forest lodges, treehouses, or traditional cabins that blend harmoniously with the natural environment. All accommodations are designed to minimize environmental impact while providing comfort and stunning forest views.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5 -->
+    <div class="modal fade" id="descriptionModal5" tabindex="-1" aria-labelledby="descriptionModalLabel5" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel5">Lake Adventure</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <img src="images.jpeg" alt="Lake Adventure" class="img-fluid mb-3">
+                    <h4>Serene Lake Adventures</h4>
+                    <p>Experience the peaceful beauty of pristine lakes surrounded by stunning landscapes. Perfect for water enthusiasts and those seeking relaxation by crystal-clear waters.</p>
+                    
+                    <h5>Water Activities:</h5>
+                    <ul>
+                        <li>Kayaking and canoeing adventures</li>
+                        <li>Fishing with professional guides</li>
+                        <li>Swimming in designated areas</li>
+                        <li>Stand-up paddleboarding</li>
+                        <li>Scenic boat tours and sunset cruises</li>
+                    </ul>
+                    
+                    <h5>Lakeside Experience:</h5>
+                    <p>Enjoy peaceful mornings with the sound of gentle waves and bird songs. Participate in fishing expeditions led by local experts who know the best spots for various fish species. Evening boat tours offer spectacular sunset views reflected on the water's surface.</p>
+                    
+                    <h5>Family-Friendly:</h5>
+                    <p>The lake adventure is perfect for families with children, offering safe swimming areas, easy hiking trails around the lake perimeter, and educational programs about aquatic ecosystems and water conservation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6 -->
+    <div class="modal fade" id="descriptionModal6" tabindex="-1" aria-labelledby="descriptionModalLabel6" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel6">Desert Safari</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <img src="images.jpeg" alt="Desert Safari" class="img-fluid mb-3">
+                    <h4>Magical Desert Adventure</h4>
+                    <p>Journey into vast desert landscapes where golden sand dunes stretch to the horizon. Experience the magic of desert life, traditional culture, and unforgettable starry nights.</p>
+                    
+                    <h5>Desert Activities:</h5>
+                    <ul>
+                        <li>Camel trekking across sand dunes</li>
+                        <li>4WD desert excursions</li>
+                        <li>Traditional Bedouin camping</li>
+                        <li>Stargazing with astronomy guides</li>
+                        <li>Desert photography workshops</li>
+                    </ul>
+                    
+                    <h5>Cultural Immersion:</h5>
+                    <p>Experience authentic desert culture through traditional music, dance performances, and storytelling around campfires. Learn about desert survival techniques, navigation methods, and the history of nomadic peoples who have called the desert home for centuries.</p>
+                    
+                    <h5>Night Sky Experience:</h5>
+                    <p>The desert offers some of the world's clearest night skies, perfect for stargazing and astrophotography. Professional astronomers provide telescopes and guide you through constellations, planets, and celestial phenomena visible in the pristine desert atmosphere.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Footer placeholder -->
+    <div id="footer-placeholder" class="mt-5"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

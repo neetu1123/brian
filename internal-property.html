@@ -82,7 +82,7 @@
 
         /* Gallery specific styles */
         .gallery-section {
-            margin-top: 7rem;
+            margin-top: 1rem;
             background-color: white;
         }
 
@@ -522,6 +522,10 @@
         <!-- Main Gallery Section -->
         <div class="container py-4">
             <!-- Image Grid -->
+            <h3 class="fw-bold text-secondary-dark">VA MOUNTAIN CABINS</h3>
+            <div class="adr-area" style="margin-bottom: 20px;">
+                                                    <h6 class="text-secondary-dark"><i class="fa-solid fa-location-dot text-secondary-dark"></i> lorem, xy</h6>
+                                            </div>
             <div class="gallery-grid" id="imageGrid">
                 <!-- Main large image -->
                 <div class="main-gallery-image" onclick="openLightbox(0)">
@@ -845,17 +849,53 @@
                     </div>
                     <!-- Policies Tab -->
                     <div class="tab-pane fade" id="policies" role="tabpanel" aria-labelledby="policies-tab">
-                        <h4 class="mb-3 text-secondary-dark">Policies</h4>
-                        <ul class="list-group mb-3">
-                            <li class="list-group-item">Check-in: 3:00 PM</li>
-                            <li class="list-group-item">Check-out: 11:00 AM</li>
-                            <li class="list-group-item">No smoking inside the cabin</li>
-                            <li class="list-group-item">No pets allowed</li>
-                            <li class="list-group-item">Quiet hours: 10:00 PM - 7:00 AM</li>
-                            <li class="list-group-item">Minimum age to rent: 25</li>
-                            <li class="list-group-item">Cancellation policy: Full refund 14 days before check-in</li>
-                        </ul>
-                        <div class="alert alert-info">Please review all policies before booking. Contact us for any questions.</div>
+                        <div id="policies" class="section-container">
+                            <h4 class="textColor fw-bold mb-4">Things to know</h4>
+                            <div class="row">
+                                <div class="col-lg-12 rule card mb-3">
+                                    <div class="area card-body">
+                                        <h4 class="main textColor fw-bold">House Rules</h4>
+                                        <div class="rules-short"><p>Advance booking required with 50% payment.</p></div>
+                                        <div class="rules-full hidden-content"><p>Advance booking required with 50% payment.</p></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 safety card mb-3">
+                                    <div class="area card-body">
+                                        <h4 class="main textColor fw-bold">Safety &amp; Property</h4>
+                                        <div class="safety-short">
+                                            <p>Exterior security cameras on property</p>
+                                            <p>Carbon monoxide alarm</p>
+                                            <p>Smoke alarm</p>
+                                        </div>
+                                        <div class="safety-full hidden-content">
+                                            <p>Exterior security cameras on property</p>
+                                            <p>Carbon monoxide alarm</p>
+                                            <p>Smoke alarm</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cancel card mb-3 col-lg-12">
+                                    <div class="area card-body">
+                                        <h4 class="main textColor fw-bold">Cancellation policy</h4>
+                                        <div class="cancellation-short" style="display: block;"><p>One hundred percent (100.00%) of the total booking charges (less $250.00 cancellation fee) will be refunded if the cancellation is made more than 60 days prior to the arrival date of the reservation. Fifty percent (50.00%) of the total booking charges (less $250.00 cancellation...</p></div>
+                                        <div class="cancellation-full hidden-content">
+                                            <p>One hundred percent (100.00%) of the total booking charges (less $250.00 cancellation fee) will be refunded if the cancellation is made more than 60 days prior to the arrival date of the reservation. Fifty percent (50.00%) of the total booking charges (less $250.00 cancellation fee) will be refunded if the cancellation is made more than 30 days prior to the arrival date of the reservation. For cancellations made within 30 days prior to the arrival date, no refund will be issued.</p>
+                                            <p><strong>Additional Terms:</strong></p>
+                                            <ul>
+                                                <li>All cancellations must be made in writing via email or certified mail</li>
+                                                <li>Cancellation fees are non-refundable administrative costs</li>
+                                                <li>Weather-related cancellations follow the same policy unless deemed unsafe by local authorities</li>
+                                                <li>Travel insurance is recommended for protection against unforeseen circumstances</li>
+                                                <li>No-show reservations are treated as same-day cancellations</li>
+                                            </ul>
+                                            <p><strong>Modification Policy:</strong></p>
+                                            <p>Modifications to existing reservations may be subject to rate differences and availability. A $50 modification fee applies to all changes made within 30 days of arrival.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <button class="show-more-btn" data-section="cancellation">Show More <i class="fas fa-chevron-down"></i></button> -->
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Reviews Tab -->
