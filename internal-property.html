@@ -4,12 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Details</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Icons from Font Awesome as replacement for Vue icons -->
+    <title>Mountain Nest - VA Mountain Cabins</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.jpeg">
+    <!-- Icons from Font Awesome for gallery -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+                
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>
     <style>
-        /* Custom styles */
+        /* Custom gallery styles */
         .tab-active {
             border-bottom: 3px solid #14b8a6;
             color: #14b8a6;
@@ -51,125 +76,549 @@
             transition: transform 0.2s ease;
         }
 
-        .progress-bar {
+        .progress-bar-animation {
             transition: width 0.1s linear;
         }
 
-        /* Mobile dropdown styling */
-        select.appearance-none {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+        /* Gallery specific styles */
+        .gallery-section {
+            margin-top: 7rem;
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 0.5rem;
+            border-radius: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .main-gallery-image {
+            grid-column: span 2;
+            grid-row: span 2;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .secondary-gallery-image {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .show-all-btn {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            transform: translateY(-8rem) translateX(-0.75rem);
+        }
+        
+        .thumbnail-img {
+            width: 100%;
+            height: 96px; /* Equivalent to h-24 in Tailwind */
+            object-fit: cover;
+        }
+        
+        .active-thumbnail {
+            border: 2px solid #0d6efd; /* Bootstrap primary color */
+        }
+        
+        .bg-overlay {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Lightbox styles */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1040;
+            display: none;
+        }
+
+        .lightbox-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: #0d6efd; /* Bootstrap primary color */
+            z-index: 1010;
+            display: none;
+        }
+
+        .lightbox-controls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+        
+        /* Thumbnail panel styles */
+        .thumbnail-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 300px;
+            background-color: rgba(33, 37, 41, 0.95); /* Bootstrap dark color with opacity */
+            z-index: 1050;
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+        
+        .thumbnail-hidden {
+            transform: translateX(100%);
+        }
+        
+        #thumbnailGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .lightbox-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 0 4rem;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            color: white;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .lightbox-prev {
+            left: 1.5rem;
+        }
+
+        .lightbox-next {
+            right: 1.5rem;
+        }
+
+        .lightbox-image-container {
+            max-width: 1280px;
+            max-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* This style is already defined above */
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .thumbnail-item {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .thumbnail-active {
+            border: 2px solid #3b82f6;
+        }
+
+        /* Share modal */
+        .share-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 50;
+            display: none;
+        }
+
+        .share-modal-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            max-width: 28rem;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .share-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: white;
+            transition: background-color 0.2s;
+        }
+
+        .facebook-btn {
+            background-color: #2563eb;
+        }
+        
+        .facebook-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .twitter-btn {
+            background-color: #60a5fa;
+        }
+        
+        .twitter-btn:hover {
+            background-color: #3b82f6;
+        }
+
+        .pinterest-btn {
+            background-color: #dc2626;
+        }
+        
+        .pinterest-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Show all modal */
+        .show-all-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 40;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .all-images-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .all-images-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .all-images-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .all-images-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* New property styles */
+        .property-details {
+            padding-top: 30px;
+        }
+        
+        .gallery-container {
+            margin-bottom: 30px;
+        }
+        
+        .main-image {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .thumbnail {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .property-title {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .property-location {
+            color: var(--secondary-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .property-features {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            color: var(--primary-dark);
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: var(--gold);
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--secondary-dark);
+            margin-bottom: 20px;
+        }
+        
+        .booking-widget {
+            background-color: var(--accent);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .date-input {
+            margin-bottom: 15px;
+        }
+        
+        .nav-tabs {
+            border-bottom: 2px solid var(--secondary-light);
+            margin-bottom: 25px;
+        }
+        
+        .nav-link {
+            color: var(--primary-dark);
+            font-weight: 500;
+            padding: 10px 20px;
+            border: none;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .nav-link.active {
+            color: var(--gold);
+            border-bottom: 3px solid var(--gold);
+            background-color: transparent;
+        }
+        
+        .amenities-list {
+            column-count: 2;
+            column-gap: 30px;
+        }
+        
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            break-inside: avoid;
+        }
+        
+        .amenity-icon {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .review-card {
+            background-color: var(--accent);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .review-date {
+            color: var(--secondary-dark);
+            font-size: 0.9rem;
+        }
+        
+        .review-stars {
+            color: gold;
+            margin-bottom: 10px;
+        }
+        
+        .review-text {
+            color: var(--secondary-dark);
         }
     </style>
 </head>
 
-<body class="bg-gray-50">
-    <!-- public/Gallery Component -->
-    <div class="mt-28 bg-white">
-        <!-- Main public/Gallery Section -->
-        <div class="container mx-auto px-4 py-6">
+<body>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+    
+    <!-- Gallery Component -->
+    <div class="gallery-section">
+        <!-- Main Gallery Section -->
+        <div class="container py-4">
             <!-- Image Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 rounded-2xl" id="imageGrid">
+            <div class="gallery-grid" id="imageGrid">
                 <!-- Main large image -->
-                <div class="col-span-2 row-span-2 relative cursor-pointer group" onclick="openLightbox(0)">
-                    <img src="images.jpeg" alt="Cabin Exterior" class="w-full object-fit">
+                <div class="main-gallery-image" onclick="openLightbox(0)">
+                    <img src="images.jpeg" alt="Cabin Exterior" class="gallery-img">
                 </div>
 
                 <!-- Secondary images -->
-                <div class="relative cursor-pointer group" onclick="openLightbox(1)">
-                    <img src="images.jpeg" alt="Cabin Side View" class="w-full object-fit">
+                <div class="secondary-gallery-image" onclick="openLightbox(1)">
+                    <img src="images.jpeg" alt="Cabin Side View" class="gallery-img">
                 </div>
-                <div class="relative cursor-pointer group" onclick="openLightbox(2)">
-                    <img src="images.jpeg" alt="Deck View" class="w-full object-fit">
-                </div>
-
-                <div class="relative cursor-pointer group" onclick="openLightbox(3)">
-                    <img src="images.jpeg" alt="King Bedroom" class="w-full object-fit">
+                <div class="secondary-gallery-image" onclick="openLightbox(2)">
+                    <img src="images.jpeg" alt="Deck View" class="gallery-img">
                 </div>
 
-                <div class="relative cursor-pointer group" onclick="openLightbox(4)">
-                    <img src="images.jpeg" alt="Game Room" class="w-full object-fit">
+                <div class="secondary-gallery-image" onclick="openLightbox(3)">
+                    <img src="images.jpeg" alt="King Bedroom" class="gallery-img">
+                </div>
+
+                <div class="secondary-gallery-image" onclick="openLightbox(4)">
+                    <img src="images.jpeg" alt="Game Room" class="gallery-img">
                 </div>
             </div>
 
             <!-- Show All Button -->
-            <div class="mt-4 flex justify-end -translate-y-32 -translate-x-3">
-                <button onclick="openLightbox(4)" title="Show all photos"
-                    class="flex items-center space-x-2 bg-gray-500 text-white border-gray-300 px-4 py-2 hover:bg-gray-600 transition-colors shadow-sm">
-                    <span class="font-medium">Show All</span>
+            <div class="show-all-btn">
+                <button onclick="openShowAll()" title="Show all photos" class="btn btn-secondary shadow-sm">
+                    <span>Show All</span>
                 </button>
             </div>
         </div>
 
         <!-- Lightbox Modal -->
-        <div id="lightboxModal" class="fixed inset-0 bg-black opacity-95 z-40 hidden">
+        <div id="lightboxModal" class="lightbox-modal">
             <!-- Progress Bar for Slideshow -->
-            <div id="progressBar" class="absolute top-0 left-0 h-1 bg-blue-600 progress-bar z-10 hidden"
-                style="width: 0%"></div>
+            <div id="progressBar" class="lightbox-progress progress-bar-animation" style="width: 0%"></div>
 
             <!-- Top Controls -->
-            <div class="absolute top-0 left-0 right-0 z-30 image-overlay">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-white text-lg font-medium" id="imageCounter" aria-live="polite">1 / 12</span>
+            <div class="lightbox-controls">
+                <div class="px-2 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center py-2">
+                    <div class="d-flex align-items-center me-4">
+                        <span class="text-white fs-5 fw-medium" id="imageCounter" aria-live="polite">1 / 12</span>
                     </div>
-                    <div class="flex items-center space-x-4 border border-gray-800 bg-gray-500 p-2">
+                    <div class="d-flex align-items-center border border-dark bg-secondary p-2">
                         <button onclick="startSlideshow()" id="slideshowBtn" aria-label="Start slideshow"
-                            title="Start slideshow" class="flex items-center text-white cursor-pointer textContent">
+                            title="Start slideshow" class="btn btn-sm text-white me-2">
                             <i class="fa-solid fa-play" id="slideshowIcon"></i>
                         </button>
                         <button onclick="toggleThumbnails()" aria-label="Show thumbnails" title="Show thumbnails"
-                            class="text-white cursor-pointer textContent">
-                            <i class="fa-solid fa-border-all text-lg"></i>
+                            class="btn btn-sm text-white me-2">
+                            <i class="fa-solid fa-border-all"></i>
                         </button>
                         <button onclick="searchImages()" aria-label="Search images" title="Search images"
-                            class="text-white cursor-pointer">
-                            <i class="fa-solid fa-search text-lg"></i>
+                            class="btn btn-sm text-white me-2">
+                            <i class="fa-solid fa-search"></i>
                         </button>
                         <button onclick="toggleFullscreen()" aria-label="Toggle fullscreen" title="Toggle fullscreen"
-                            class="text-white cursor-pointer">
-                            <i class="fa-solid fa-expand text-lg" id="fullscreenIcon"></i>
+                            class="btn btn-sm text-white me-2">
+                            <i class="fa-solid fa-expand" id="fullscreenIcon"></i>
                         </button>
                         <button onclick="openShareModal()" aria-label="Share image" title="Share image"
-                            class="text-white cursor-pointer">
-                            <i class="fa-solid fa-share-nodes text-lg"></i>
+                            class="btn btn-sm text-white me-2">
+                            <i class="fa-solid fa-share-nodes"></i>
                         </button>
                         <button onclick="closeLightbox()" aria-label="Close lightbox" title="Close lightbox"
-                            class="text-white cursor-pointer">
-                            <i class="fa-solid fa-times text-lg"></i>
+                            class="btn btn-sm text-white">
+                            <i class="fa-solid fa-times"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Main Image Container -->
-            <div class="flex items-center justify-center h-full px-16">
+            <div class="lightbox-main">
                 <button onclick="previousImage()" aria-label="Previous image" title="Previous image"
-                    class="absolute left-6 text-white cursor-pointer z-20">
-                    <i class="fa-solid fa-chevron-left text-2xl"></i>
+                    class="lightbox-nav-btn lightbox-prev btn text-white">
+                    <i class="fa-solid fa-chevron-left fs-2"></i>
                 </button>
 
-                <div class="max-w-5xl max-h-full flex items-center justify-center">
-                    <img id="lightboxImage" src="" alt="" class="max-w-full max-h-full object-contain slideshow-active">
+                <div class="lightbox-image-container">
+                    <img id="lightboxImage" src="" alt="" class="lightbox-img slideshow-active">
                 </div>
 
                 <button onclick="nextImage()" aria-label="Next image" title="Next image"
-                    class="absolute right-6 text-white cursor-pointer z-20">
-                    <i class="fa-solid fa-chevron-right text-2xl"></i>
+                    class="lightbox-nav-btn lightbox-next btn text-white">
+                    <i class="fa-solid fa-chevron-right fs-2"></i>
                 </button>
             </div>
 
             <!-- Thumbnail Panel -->
-            <div id="thumbnailPanel"
-                class="absolute right-0 top-3 h-full bg-black bg-opacity-90 w-80 transform translate-x-full transition-transform duration-300 z-20 overflow-y-auto">
+            <div id="thumbnailPanel" class="thumbnail-panel">
                 <div class="p-4">
-                    <div class="flex items-center justify-between mb-4">
-                        <button onclick="toggleThumbnails()" class="text-white hover:text-gray-300">
-                            <i class="fa-solid fa-times text-xl"></i>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <button onclick="toggleThumbnails()" class="btn btn-sm text-white">
+                            <i class="fa-solid fa-times"></i>
                         </button>
                     </div>
-                    <div class="grid grid-cols-2 gap-2" id="thumbnailGrid">
+                    <div class="thumbnail-grid" id="thumbnailGrid">
                         <!-- Thumbnails will be populated by JavaScript -->
                     </div>
                 </div>
@@ -177,41 +626,37 @@
         </div>
 
         <!-- Share Modal -->
-        <div id="shareModal" class="fixed inset-0 bg-black opacity-90 z-50 hidden">
-            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-semibold">Share</h3>
+        <div id="shareModal" class="share-modal">
+            <div class="share-modal-content">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h3 class="fs-5 fw-semibold">Share</h3>
                     <button id="copied" class="">
-                        <span class="sr-only">copied</span>
+                        <span class="visually-hidden">copied</span>
                     </button>
-                    <button onclick="closeShareModal()" class="text-gray-500 hover:text-gray-700">
-                        <i class="fa-solid fa-times text-xl"></i>
+                    <button onclick="closeShareModal()" class="btn btn-sm text-secondary">
+                        <i class="fa-solid fa-times"></i>
                     </button>
                 </div>
 
-                <div class="flex space-x-3 mb-4">
-                    <button onclick="shareToFacebook()"
-                        class="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
-                        <i class="fa-brands fa-facebook text-xl"></i>
+                <div class="share-buttons">
+                    <button onclick="shareToFacebook()" class="share-btn facebook-btn">
+                        <i class="fa-brands fa-facebook"></i>
                         <span>Facebook</span>
                     </button>
-                    <button onclick="shareToTwitter()"
-                        class="flex-1 bg-blue-400 text-white py-3 px-4 rounded-lg hover:bg-blue-500 transition-colors flex items-center justify-center space-x-2">
-                        <i class="fa-brands fa-twitter text-xl"></i>
+                    <button onclick="shareToTwitter()" class="share-btn twitter-btn">
+                        <i class="fa-brands fa-twitter"></i>
                         <span>Twitter</span>
                     </button>
-                    <button onclick="shareToPinterest()"
-                        class="flex-1 bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center space-x-2">
-                        <i class="fa-brands fa-pinterest text-xl"></i>
+                    <button onclick="shareToPinterest()" class="share-btn pinterest-btn">
+                        <i class="fa-brands fa-pinterest"></i>
                         <span>Pinterest</span>
                     </button>
                 </div>
 
-                <div class="border-t pt-4">
+                <div class="border-top pt-3">
                     <input type="text" value="https://www.relaxresetbookdirect.com/cabin-w-fire-pit-and-mtn-views"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly>
-                    <button onclick="copyLink()"
-                        class="w-full mt-2 bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors">
+                        class="form-control mb-2" readonly>
+                    <button onclick="copyLink()" class="btn btn-dark w-100">
                         Copy Link
                     </button>
                 </div>
@@ -219,335 +664,355 @@
         </div>
 
         <!-- Show All Images Modal -->
-        <div id="showAllModal" class="fixed inset-0 bg-black bg-opacity-95 z-40 hidden overflow-y-auto">
-            <div class="min-h-screen p-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-white text-2xl font-semibold">All Photos - Cabin w/ Fire Pit and Mtn Views</h2>
-                    <button onclick="closeShowAll()"
-                        class="text-white bg-black bg-opacity-50 px-4 py-2 rounded-lg hover:bg-opacity-70 transition-colors">
-                        <i class="fa-solid fa-times text-lg"></i>
+        <div id="showAllModal" class="show-all-modal">
+            <div class="min-vh-100 p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h2 class="text-white fs-3 fw-semibold">All Photos - Cabin w/ Fire Pit and Mtn Views</h2>
+                    <button onclick="closeShowAll()" class="btn btn-dark">
+                        <i class="fa-solid fa-times"></i>
                     </button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="allImagesGrid">
+                <div class="all-images-grid" id="allImagesGrid">
                     <!-- All images will be populated by JavaScript -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Selection Tab Component -->
-    <div class="container mx-auto bg-white">
-        <!-- Navigation Tabs -->
-        <nav class="border-b border-gray-200 sticky top-24 bg-white z-30">
-            <!-- Desktop version: buttons -->
-            <div class="hidden md:flex space-x-8 px-6">
-                <!-- Tab buttons will be generated by JavaScript -->
-            </div>
-
-            <!-- Mobile version: dropdown select -->
-            <div class="md:hidden px-6 py-2">
-                <div class="relative">
-                    <select id="tabSelect"
-                        class="w-full appearance-none py-3 px-4 border border-gray-200 bg-white rounded-md text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500">
-                        <!-- Options will be generated by JavaScript -->
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-teal-600">
-                        <i class="fa-solid fa-chevron-down"></i>
+    <div class="container property-details">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Property Info -->
+                <h1 class="property-title">Mountain Nest Cabin</h1>
+                <p class="property-location">
+                    <span class="iconify me-2" data-icon="mdi:map-marker"></span> Blue Ridge, Virginia
+                </p>
+                
+                <div class="property-features">
+                    <div class="feature">
+                        <span class="iconify feature-icon" data-icon="mdi:account-group"></span> 
+                        <span>8 Guests</span>
+                    </div>
+                    <div class="feature">
+                        <span class="iconify feature-icon" data-icon="mdi:bed"></span> 
+                        <span>3 Bedrooms</span>
+                    </div>
+                    <div class="feature">
+                        <span class="iconify feature-icon" data-icon="mdi:shower"></span> 
+                        <span>2 Bathrooms</span>
                     </div>
                 </div>
-            </div>
-        </nav>
-
-        <div class="xl:flex">
-            <!-- Main Content -->
-            <div class="flex-1 p-6">
-                <!-- Description Section -->
-                <section id="description" class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">DESCRIPTION</h2>
-                    <div class="text-gray-600 space-y-4">
-                        <p>Welcome to Sweet Tea by Kismet Properties of 30A!</p>
-                        <p>Experience beachfront bliss at Sweet Tea, a first-floor condo with breathtaking Gulf views.
-                            This charming property offers the perfect balance of comfort and luxury for your beach
-                            getaway.
-                        </p>
-                        <div id="moreDescription" class="space-y-4 hidden">
-                            <p>Nestled in a prime location along the stunning coastline, Sweet Tea provides unparalleled
-                                access to pristine sandy beaches and crystal-clear waters. Wake up to the soothing sounds
-                                of waves and enjoy magnificent sunrises from your private patio.</p>
-                            <p>The interior features a tastefully designed living space with coastal-inspired décor,
-                                comfortable furnishings, and all the amenities you need for a relaxing stay. The fully
-                                equipped kitchen allows you to prepare delicious meals when you're not sampling the local
-                                cuisine.</p>
-                            <p>With one bedroom and one bathroom, this cozy retreat is ideal for couples or small
-                                families seeking a memorable beach experience. The bedroom boasts a plush king-sized bed,
-                                ensuring restful nights after sun-soaked days.</p>
-                        </div>
-
-                        <button id="showMoreDescriptionBtn"
-                            class="text-teal-600 font-medium hover:text-teal-800 flex items-center space-x-1">
-                            <span>Show more</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </div>
-                </section>
-
-                <!-- Amenities Section -->
-                <section id="amenities" class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">AMENITIES</h2>
-
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">BATHROOMS</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="flex items-center">
-                                <i class="fa-solid fa-check text-teal-600 mr-2"></i>
-                                <span>1 full bathroom</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fa-solid fa-check text-teal-600 mr-2"></i>
-                                <span>Shower/tub combination</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border border-gray-200 rounded-lg p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">CHECK-IN TYPE</h3>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-key text-teal-600 mr-2"></i>
-                            <span>Keyless entry</span>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Availability Section -->
-                <section id="availability" class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">AVAILABILITY</h2>
-
-                    <div class="mb-6">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex items-center">
-                                <div class="w-4 h-4 bg-teal-600 rounded-full mr-2"></div>
-                                <span>Today</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-4 h-4 bg-gray-300 rounded-full mr-2"></div>
-                                <span>Past</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-4 h-4 bg-teal-400 rounded-full mr-2"></div>
-                                <span>Booked</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-4 h-4 bg-gray-600 rounded-full mr-2"></div>
-                                <span>Available</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- June 2025 Calendar -->
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <button onclick="previousMonth()"
-                                    class="text-gray-700 hover:text-teal-600 transition-colors">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </button>
-                                <h3 class="text-lg font-medium">June 2025</h3>
-                                <button onclick="nextMonth()" class="text-gray-700 hover:text-teal-600 transition-colors">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-
-                            <div class="grid grid-cols-7 gap-1" id="juneCalendar">
-                                <!-- Days of week headers -->
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">SUN</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">MON</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">TUE</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">WED</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">THU</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">FRI</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">SAT</div>
-                                
-                                <!-- Calendar days will be generated by JavaScript -->
-                            </div>
-                        </div>
-
-                        <!-- July 2025 Calendar -->
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <button onclick="previousMonth()"
-                                    class="text-gray-700 hover:text-teal-600 transition-colors">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </button>
-                                <h3 class="text-lg font-medium">July 2025</h3>
-                                <button onclick="nextMonth()" class="text-gray-700 hover:text-teal-600 transition-colors">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-
-                            <div class="grid grid-cols-7 gap-1" id="julyCalendar">
-                                <!-- Days of week headers -->
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">SUN</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">MON</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">TUE</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">WED</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">THU</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">FRI</div>
-                                <div class="text-xs text-center font-medium text-gray-500 p-2">SAT</div>
-                                
-                                <!-- Calendar days will be generated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Location Section -->
-                <section id="location" class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">LOCATION</h2>
-                    <div class="text-gray-600 mb-6">
-                        <p>This one bedroom, one bath unit is located directly on the beach with a private walkway and
-                            offers stunning views of the Gulf of Mexico. Just steps away from the water, you'll enjoy
-                            the perfect beach getaway with all the comforts of home.</p>
-                    </div>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6891.418183215019!2d-86.00546030365994!3d30.273868899235136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8893f27adf435501%3A0x58f4f92a2f0bd3a!2sInlet%20Beach%2C%20FL%2032413%2C%20USA!5e0!3m2!1sen!2sin!4v1750258386523!5m2!1sen!2sin"
-                        width="1100" height="450" style="border:0;" allowfullscreen loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade" class="w-full"></iframe>
-                </section>
-
-                <!-- Cancellation Policy Section -->
-                <section id="cancellation" class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">CANCELLATION POLICY</h2>
-                    <div class="text-gray-600 space-y-4">
-                        <p>One hundred percent (100.00%) of the total booking charges (less $250.00 cancellation fee)
-                            will be refunded if the cancellation is made more than 60 days prior to the arrival date of
-                            the reservation.</p>
+                
+                <div class="price">$249 <span style="font-size: 1rem;">/ night</span></div>
+                <p class="price-note">Plus cleaning fee and service fee</p>
+                
+                <!-- Content Tabs -->
+                <ul class="nav nav-tabs" id="propertyTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="amenities-tab" data-bs-toggle="tab" href="#amenities" role="tab">Amenities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="location-tab" data-bs-toggle="tab" href="#location" role="tab">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="availability-tab" data-bs-toggle="tab" href="#availability" role="tab">Availability</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="policies-tab" data-bs-toggle="tab" href="#policies" role="tab">Policies</a>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="propertyTabContent">
+                    <!-- Description Tab -->
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <p>Nestled in the heart of Virginia's Blue Ridge Mountains, Mountain Nest Cabin offers a perfect blend of rustic charm and modern comfort. This three-bedroom cabin features panoramic mountain views from the spacious deck, a cozy stone fireplace, and a luxurious hot tub perfect for stargazing.</p>
                         
-                        <div id="moreCancellation" class="space-y-4 hidden">
-                            <p>Fifty percent (50.00%) of the total booking charges (less $250.00 cancellation fee) will
-                                be refunded if the cancellation is made more than 30 days prior to the arrival date of
-                                the reservation.</p>
-                            <p>No refunds will be provided for cancellations made within 30 days of arrival. We highly
-                                recommend purchasing travel insurance to protect your investment.</p>
+                        <p>The open-concept main living area includes a fully-equipped kitchen with stainless steel appliances, a dining area with seating for 8, and a comfortable living room with a large smart TV. Large windows throughout flood the space with natural light and showcase the stunning natural surroundings.</p>
+                        
+                        <p>The master bedroom features a king-sized bed and en-suite bathroom with a soaking tub and walk-in shower. Two additional bedrooms include a queen bed and two twin beds, making this cabin perfect for families or groups of friends.</p>
+                        
+                        <p>Located just 15 minutes from hiking trails and 20 minutes from downtown Blue Ridge, you'll have easy access to outdoor adventures and local restaurants and shops. This private mountain retreat offers the perfect base for exploring all that Virginia's mountains have to offer.</p>
+                    </div>
+                    
+                    <!-- Amenities Tab -->
+                    <div class="tab-pane fade" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
+                        <h4 class="mb-4 text-secondary-dark">Cabin Amenities</h4>
+                        <div class="amenities-list">
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:wifi"></span>
+                                <span>Free WiFi</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:fire"></span>
+                                <span>Wood-burning Fireplace</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:hot-tub"></span>
+                                <span>Outdoor Hot Tub</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:television"></span>
+                                <span>Smart TV with Streaming</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:grill"></span>
+                                <span>Gas Grill</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:washing-machine"></span>
+                                <span>Washer & Dryer</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:air-conditioner"></span>
+                                <span>Air Conditioning</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:snowflake"></span>
+                                <span>Heating</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:coffee-maker"></span>
+                                <span>Coffee Maker</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:silverware-fork-knife"></span>
+                                <span>Fully Equipped Kitchen</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:deck"></span>
+                                <span>Private Deck</span>
+                            </div>
+                            <div class="amenity-item">
+                                <span class="iconify amenity-icon" data-icon="mdi:parking"></span>
+                                <span>Free Parking</span>
+                            </div>
                         </div>
-
-                        <button id="showMoreCancellationBtn"
-                            class="text-teal-600 font-medium hover:text-teal-800 flex items-center space-x-1">
-                            <span>Show more</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
                     </div>
-                </section>
-
-                <!-- Reviews Section -->
-                <section id="reviews" class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">REVIEWS</h2>
-
-                    <div class="mb-6">
-                        <p class="text-gray-600" id="reviewRange">Showing 1 - 3 of 132 reviews</p>
+                    
+                    <!-- Location Tab -->
+                    <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+                        <h4 class="mb-3 text-secondary-dark">Location & Nearby Attractions</h4>
+                        <p>Mountain Nest Cabin is located in the picturesque Blue Ridge Mountains, offering privacy while still being conveniently close to attractions and necessities.</p>
+                        
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202914.8082469425!2d-80.13484433150594!3d37.239192089547705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884d7dce28c8ca0d%3A0x5f402706bc2136b8!2sBlue%20Ridge%2C%20VA!5e0!3m2!1sen!2sus!4v1627565889999!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3 text-secondary-dark">Distances</h5>
+                                <ul>
+                                    <li>15 min to hiking trails</li>
+                                    <li>20 min to downtown Blue Ridge</li>
+                                    <li>25 min to grocery stores</li>
+                                    <li>30 min to fishing spots</li>
+                                    <li>45 min to nearest ski resort</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3 text-secondary-dark">Local Attractions</h5>
+                                <ul>
+                                    <li>Blue Ridge Parkway</li>
+                                    <li>Appalachian Trail Access</li>
+                                    <li>Local Wineries & Breweries</li>
+                                    <li>Scenic Waterfalls</li>
+                                    <li>Historical Downtown Area</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="space-y-6" id="reviewsContainer">
-                        <!-- Reviews will be generated by JavaScript -->
+                    
+                    <!-- Availability Tab -->
+                    <div class="tab-pane fade" id="availability" role="tabpanel" aria-labelledby="availability-tab">
+                        <h4 class="mb-3 text-secondary-dark">Availability Calendar</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <h5 class="mb-2">June 2025</h5>
+                                <div id="juneCalendar" class="d-flex flex-wrap gap-2"></div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <h5 class="mb-2">July 2025</h5>
+                                <div id="julyCalendar" class="d-flex flex-wrap gap-2"></div>
+                            </div>
+                        </div>
+                        <div class="text-muted">Select your dates to check availability. For latest info, contact host.</div>
                     </div>
-
-                    <!-- Pagination -->
-                    <div class="flex items-center justify-center space-x-2 mt-8" id="pagination">
-                        <!-- Pagination buttons will be generated by JavaScript -->
+                    <!-- Policies Tab -->
+                    <div class="tab-pane fade" id="policies" role="tabpanel" aria-labelledby="policies-tab">
+                        <h4 class="mb-3 text-secondary-dark">Policies</h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item">Check-in: 3:00 PM</li>
+                            <li class="list-group-item">Check-out: 11:00 AM</li>
+                            <li class="list-group-item">No smoking inside the cabin</li>
+                            <li class="list-group-item">No pets allowed</li>
+                            <li class="list-group-item">Quiet hours: 10:00 PM - 7:00 AM</li>
+                            <li class="list-group-item">Minimum age to rent: 25</li>
+                            <li class="list-group-item">Cancellation policy: Full refund 14 days before check-in</li>
+                        </ul>
+                        <div class="alert alert-info">Please review all policies before booking. Contact us for any questions.</div>
                     </div>
-                </section>
+                    
+                    <!-- Reviews Tab -->
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="mb-0 text-secondary-dark">Guest Reviews</h4>
+                            <div>
+                                <span class="fw-bold">4.9/5</span> 
+                                <span class="text-warning">
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                </span>
+                                <span class="text-muted">(45 reviews)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample Reviews -->
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">Sarah M.</div>
+                                <div class="review-date">June 2025</div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                            </div>
+                            <div class="review-text">
+                                <p>This cabin exceeded all our expectations! The views from the deck are absolutely breathtaking, especially at sunset. The hot tub was perfect after a day of hiking nearby trails. The cabin was spotlessly clean and had everything we needed. We will definitely be back!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">Mark T.</div>
+                                <div class="review-date">May 2025</div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                            </div>
+                            <div class="review-text">
+                                <p>We had the most relaxing weekend at Mountain Nest. The cabin is beautifully decorated and has all the amenities you could want. The kitchen was well-stocked for cooking, the beds were comfortable, and the location was peaceful and private while still being close to activities. The hosts were responsive and provided great local recommendations.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">Jennifer R.</div>
+                                <div class="review-date">April 2025</div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star-half"></span>
+                            </div>
+                            <div class="review-text">
+                                <p>Our family of six had a wonderful stay at Mountain Nest. The cabin layout was perfect for us, with plenty of space for everyone. The kids loved exploring the property and watching wildlife from the deck. It was the perfect balance of rustic charm and modern comforts. The only minor issue was the spotty wifi, but it was actually nice to disconnect a bit.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-secondary-dark mt-3">Load More Reviews</button>
+                    </div>
+                </div>
             </div>
-
-            <!-- Booking Sidebar -->
-            <div class="bg-gray-50 p-6 border-l border-gray-200 sticky top-40 h-screen">
-                <div class="bg-teal-100 text-teal-800 text-center py-2 px-4 rounded-lg mb-6 font-semibold">
-                    BOOK DIRECT & SAVE
+            
+            <div class="col-lg-4">
+                <!-- Booking Widget -->
+                <div class="booking-widget">
+                    <h4 class="mb-4 text-primary-dark">Book Your Stay</h4>
+                    <form>
+                        <div class="date-input">
+                            <label class="form-label">Check-in</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="date-input">
+                            <label class="form-label">Check-out</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="date-input">
+                            <label class="form-label">Guests</label>
+                            <select class="form-control">
+                                <option>1 guest</option>
+                                <option>2 guests</option>
+                                <option>3 guests</option>
+                                <option>4 guests</option>
+                                <option>5 guests</option>
+                                <option>6 guests</option>
+                                <option>7 guests</option>
+                                <option>8 guests</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn w-100" style="background-color: var(--gold); color: white;">Check Availability</button>
+                    </form>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>$249 x 5 nights</span>
+                        <span>$1,245</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Cleaning fee</span>
+                        <span>$100</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Service fee</span>
+                        <span>$95</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total</span>
+                        <span>$1,440</span>
+                    </div> 
                 </div>
-
-                <div class="space-y-4 mb-6">
-                    <div class="grid grid-cols-2 gap-4">
+                
+                <!-- Host Info -->
+                <!-- <div class="bg-accent p-4 rounded-3 shadow-sm">
+                    <h5 class="text-primary-dark">Hosted by John</h5>
+                    <p class="text-secondary-dark mb-3">Superhost · 4 years hosting</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images.jpeg" alt="Host" class="rounded-circle me-3" width="50" height="50">
                         <div>
-                            <label class="block text-sm text-gray-600 mb-1">CHECK IN</label>
-                            <input type="date" class="w-full border border-gray-300 rounded-md p-2">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-600 mb-1">CHECK OUT</label>
-                            <input type="date" class="w-full border border-gray-300 rounded-md p-2">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm text-gray-600 mb-1">GUESTS</label>
-                        <select class="w-full border border-gray-300 rounded-md p-2">
-                            <option value="1">1 Guest</option>
-                            <option value="2">2 Guests</option>
-                            <option value="3">3 Guests</option>
-                            <option value="4">4 Guests</option>
-                        </select>
-                    </div>
-
-                    <button
-                        class="w-full bg-teal-600 text-white font-medium py-3 rounded-md hover:bg-teal-700 transition-colors">
-                        CHECK AVAILABILITY
-                    </button>
-
-                    <div class="mt-6 border-t border-gray-300 pt-6">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-gray-600">$250 x 5 nights</span>
-                            <span class="text-gray-800 font-medium">$1,250.00</span>
-                        </div>
-                        <div class="flex justify-between mb-2">
-                            <span class="text-gray-600">Cleaning fee</span>
-                            <span class="text-gray-800 font-medium">$120.00</span>
-                        </div>
-                        <div class="flex justify-between mb-2">
-                            <span class="text-gray-600">Service fee</span>
-                            <span class="text-gray-800 font-medium">$75.00</span>
-                        </div>
-                        <div class="flex justify-between font-semibold border-t border-gray-300 pt-2 mt-2">
-                            <span>Total</span>
-                            <span>$1,445.00</span>
+                            <div class="text-warning mb-1">
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                                <span class="iconify" data-icon="mdi:star"></span>
+                            </div>
+                            <span class="text-secondary-dark">45 Reviews</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-lg p-4 mt-6">
-                    <h3 class="font-semibold text-gray-900 mb-2">House Rules</h3>
-                    <div class="space-y-2 text-sm text-gray-600">
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-clock mr-2 text-gray-400"></i>
-                            <span>Check-in: After 4:00 PM</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-clock mr-2 text-gray-400"></i>
-                            <span>Checkout: Before 10:00 AM</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-ban-smoking mr-2 text-gray-400"></i>
-                            <span>No smoking</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-paw mr-2 text-gray-400"></i>
-                            <span>No pets</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <img src="A_Curated_Vacation_logo_page-0001__1_-removebg-preview.png" alt="Host Logo" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <div class="font-medium">Hosted by Curated Vacation</div>
-                            <div class="text-sm text-gray-600">Member since 2022</div>
-                        </div>
-                    </div>
-
-                    <button class="flex items-center text-teal-600 hover:text-teal-700">
-                        <i class="fa-solid fa-comment-dots mr-2"></i>
-                        <span>Message host</span>
-                    </button>
-                </div>
+                    <p class="text-secondary-dark mb-3">As a longtime local resident, I love sharing the beauty of the Virginia mountains with my guests. I'm always available to provide recommendations for trails, restaurants, and activities.</p>
+                    <button class="btn btn-outline-secondary w-100">Contact Host</button>
+                </div> -->
             </div>
         </div>
+    </div>
+    
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder" class="mt-5"></div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </div>
 
     <script>
@@ -589,14 +1054,14 @@
 
         function openLightbox(index) {
             currentImageIndex = index;
-            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.getElementById('lightboxModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
             updateLightboxImage();
             populateThumbnails();
         }
 
         function closeLightbox() {
-            document.getElementById('lightboxModal').classList.add('hidden');
+            document.getElementById('lightboxModal').style.display = 'none';
             document.body.style.overflow = 'auto';
             stopSlideshow();
             exitFullscreen();
@@ -646,7 +1111,7 @@
                 document.getElementById('slideshowIcon').classList.remove('fa-play');
                 document.getElementById('slideshowIcon').classList.add('fa-pause');
                 
-                document.getElementById('progressBar').classList.remove('hidden');
+                document.getElementById('progressBar').style.display = 'block';
 
                 let progress = 0;
                 const progressBar = document.getElementById('progressBar');
@@ -681,7 +1146,7 @@
             clearInterval(slideshowInterval);
             document.getElementById('slideshowIcon').classList.remove('fa-pause');
             document.getElementById('slideshowIcon').classList.add('fa-play');
-            document.getElementById('progressBar').classList.add('hidden');
+            document.getElementById('progressBar').style.display = 'none';
             document.getElementById('progressBar').style.width = '0%';
         }
 
@@ -715,10 +1180,10 @@
         function toggleThumbnails() {
             const panel = document.getElementById('thumbnailPanel');
             if (!thumbnailsVisible) {
-                panel.classList.remove('translate-x-full');
+                panel.classList.remove('thumbnail-hidden');
                 thumbnailsVisible = true;
             } else {
-                panel.classList.add('translate-x-full');
+                panel.classList.add('thumbnail-hidden');
                 thumbnailsVisible = false;
             }
         }
@@ -729,11 +1194,11 @@
 
             images.forEach((image, index) => {
                 const thumbnailDiv = document.createElement('div');
-                thumbnailDiv.className = 'relative cursor-pointer thumbnail-hover';
+                thumbnailDiv.className = 'position-relative cursor-pointer thumbnail-hover';
                 thumbnailDiv.onclick = () => selectThumbnail(index);
                 thumbnailDiv.innerHTML = `
-                        <img src="${image.src}" alt="${image.alt}" class="w-full h-24 object-cover rounded-lg ${index === currentImageIndex ? 'ring-2 ring-blue-500' : ''}">
-                        ${index === currentImageIndex ? '<div class="absolute inset-0 bg-opacity-20 rounded-lg"></div>' : ''}
+                        <img src="${image.src}" alt="${image.alt}" class="w-100 thumbnail-img rounded ${index === currentImageIndex ? 'active-thumbnail' : ''}">
+                        ${index === currentImageIndex ? '<div class="position-absolute top-0 start-0 w-100 h-100 bg-overlay rounded"></div>' : ''}
                     `;
                 thumbnailGrid.appendChild(thumbnailDiv);
             });
@@ -750,12 +1215,12 @@
                 const img = thumb.querySelector('img');
                 const overlay = thumb.querySelector('div');
                 if (index === currentImageIndex) {
-                    img.classList.add('ring-2', 'ring-blue-500');
+                    img.classList.add('active-thumbnail');
                     if (!overlay) {
-                        thumb.innerHTML += '<div class="absolute inset-0 bg-opacity-20 rounded-lg"></div>';
+                        thumb.innerHTML += '<div class="position-absolute top-0 start-0 w-100 h-100 bg-overlay rounded"></div>';
                     }
                 } else {
-                    img.classList.remove('ring-2', 'ring-blue-500');
+                    img.classList.remove('active-thumbnail');
                     if (overlay) {
                         overlay.remove();
                     }
@@ -765,14 +1230,14 @@
 
         function openShareModal() {
             const modal = document.getElementById('shareModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex', 'items-center', 'justify-center');
+            modal.style.display = 'flex';
+            modal.classList.add('d-flex', 'align-items-center', 'justify-content-center');
         }
 
         function closeShareModal() {
             const modal = document.getElementById('shareModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex', 'items-center', 'justify-center');
+            modal.style.display = 'none';
+            modal.classList.remove('d-flex', 'align-items-center', 'justify-content-center');
         }
 
         function shareToFacebook() {
@@ -809,13 +1274,13 @@
 
                 const button = document.getElementById('copied');
                 button.textContent = 'Copied!';
-                button.classList.add('bg-green-600', 'hover:bg-green-700', 'text-white', 'px-4', 'py-2', 'rounded-lg');
-                button.classList.remove('bg-gray-800', 'hover:bg-gray-900');
+                button.classList.add('bg-success', 'text-white', 'px-3', 'py-1', 'rounded');
+                button.classList.remove('bg-dark');
 
                 setTimeout(() => {
                     button.textContent = '';
-                    button.classList.remove('bg-green-600', 'hover:bg-green-700');
-                    button.innerHTML = '<span class="sr-only">copied</span>';
+                    button.classList.remove('bg-success');
+                    button.innerHTML = '<span class="visually-hidden">copied</span>';
                 }, 2000);
             } catch (err) {
                 console.error('Failed to copy: ', err);
@@ -826,9 +1291,29 @@
         function searchImages() {
             alert('Search functionality would be implemented here!');
         }
+        
+        function openShowAll() {
+            const modal = document.getElementById('showAllModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Populate all images
+            const allImagesGrid = document.getElementById('allImagesGrid');
+            allImagesGrid.innerHTML = '';
+            
+            images.forEach((image, index) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'position-relative';
+                imgContainer.innerHTML = `
+                    <img src="${image.src}" alt="${image.alt}" class="w-100 rounded" onclick="openLightbox(${index})">
+                    <p class="text-white mt-2">${image.alt}</p>
+                `;
+                allImagesGrid.appendChild(imgContainer);
+            });
+        }
 
         function closeShowAll() {
-            document.getElementById('showAllModal').classList.add('hidden');
+            document.getElementById('showAllModal').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
@@ -884,6 +1369,15 @@
             { day: 29, status: 'booked' },
             { day: 30, status: 'booked' },
         ];
+        
+        // Initialize thumbnails when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure thumbnailPanel starts hidden
+            const thumbnailPanel = document.getElementById('thumbnailPanel');
+            if (thumbnailPanel) {
+                thumbnailPanel.classList.add('thumbnail-hidden');
+            }
+        });
 
         const julyCalendarDates = [
             { day: 1, status: 'booked' },

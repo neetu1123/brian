@@ -139,7 +139,64 @@
             line-height: 1.7;
         }
         
+        /* CTA Section Styles */
+        .cta-section {
+            background-color: #f5f5f5;
+            position: relative;
+        }
         
+        .cta-content {
+            background-color: var(--secondary-dark);
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+        
+        .cta-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-buttons {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-outline-custom {
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 15px 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--gold);
+            color: white;
+            transform: scale(1.01);
+        }
     </style>
 </head>
 <body>
@@ -174,6 +231,31 @@
             </div>
         </div>
     </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="cta-content p-5">
+                        <h2 class="cta-title mb-4">Ready for Your Mountain Getaway?</h2>
+                        <p class="cta-text mb-4">Discover the perfect cabin for your next vacation in the beautiful Virginia mountains. Book now and enjoy special seasonal discounts!</p>
+                        <div class="cta-buttons d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="#" class="btn btn-custom rounded-pill d-inline-flex align-items-center gap-2">
+                                Browse Cabins
+                                <span class="iconify" data-icon="mdi:cabin"></span>
+                            </a>
+                            <a href="#" class="btn btn-outline-custom rounded-pill d-inline-flex align-items-center gap-2">
+                                Contact Us
+                                <span class="iconify" data-icon="mdi:phone"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Footer placeholder -->
     <div id="footer-placeholder"></div>
 </body>

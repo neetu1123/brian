@@ -547,8 +547,8 @@
 }
 
 .property-btn {
-    background: #eaf7f6;
-    color: #143c5d;
+    background: var(--secondary-dark);
+    color: #ffffff;
     font-weight: 700;
     border-radius: 30px;
     padding: 0.7rem 1.2rem;
@@ -559,7 +559,7 @@
 }
 
 .property-btn:hover {
-    background: #143c5d;
+    background: var(--primary-dark);
     color: #fff;
 }
 

@@ -84,10 +84,19 @@
 .btn-secondary-dark {
     background-color: var(--secondary-dark);
     color: var(--primary-light);
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(30, 178, 166, 0.08);
+    /* background: var(--primary-dark); */
 }
 
 .btn-secondary-dark:hover {
     background-color: var(--primary-dark);
+    color: #ffffff;
 }
 
 .btn-secondary-light {
@@ -153,3 +162,9 @@
     background-color: var(--primary-dark) !important;
     color: var(--accent) !important;
 }
+
+/* .container {
+    max-width: 1400px !important;
+    margin: 0 auto;
+    padding: 20px;
+} */
