@@ -29,6 +29,10 @@
     background-color: var(--accent);
 }
 
+.bg-tertiary {
+    background-color: var(--gold);
+}
+
 /* Text color classes */
 .text-primary-dark {
     color: var(--primary-dark);
@@ -48,6 +52,10 @@
 
 .text-accent {
     color: var(--accent);
+}
+
+.text-tertiary {
+    color: var(--gold);
 }
 
 /* Border color classes */
@@ -78,7 +86,9 @@
 }
 
 .btn-primary-dark:hover {
-    background-color: var(--secondary-dark);
+    background-color: var(--primary-dark);
+    color: var(--secondary-light);
+
 }
 
 .btn-secondary-dark {

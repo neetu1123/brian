@@ -120,7 +120,7 @@
             margin-top: 1rem;
             display: flex;
             justify-content: flex-end;
-            transform: translateY(-8rem) translateX(-0.75rem);
+            transform: translateY(-5rem) translateX(-0.75rem);
         }
         
         .thumbnail-img {
@@ -343,9 +343,9 @@
         }
         
         /* New property styles */
-        .property-details {
+        /* .property-details {
             padding-top: 30px;
-        }
+        } */
         
         .gallery-container {
             margin-bottom: 30px;
@@ -429,8 +429,18 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 30px;
+            margin-left: 15px;
         }
         
+        .property-details-bg {
+            background-color: var(--accent);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+
         .date-input {
             margin-bottom: 15px;
         }
@@ -510,6 +520,9 @@
         .review-text {
             color: var(--secondary-dark);
         }
+        .property-img {
+            border-radius: 2;
+        }
     </style>
 </head>
 
@@ -518,7 +531,7 @@
     <div id="header-placeholder"></div>
     
     <!-- Gallery Component -->
-    <div class="gallery-section">
+    <div class="gallery-section mx-3">
         <!-- Main Gallery Section -->
         <div class="container py-4">
             <!-- Image Grid -->
@@ -527,13 +540,13 @@
                                                     <h6 class="text-secondary-dark"><i class="fa-solid fa-location-dot text-secondary-dark"></i> lorem, xy</h6>
                                             </div>
             <div class="gallery-grid" id="imageGrid">
-                <!-- Main large image -->
+                <!-- Main large i mage -->
                 <div class="main-gallery-image" onclick="openLightbox(0)">
                     <img src="images.jpeg" alt="Cabin Exterior" class="gallery-img">
                 </div>
 
                 <!-- Secondary images -->
-                <div class="secondary-gallery-image" onclick="openLightbox(1)">
+                <div class="secondary-gallery-image " onclick="openLightbox(1)">
                     <img src="images.jpeg" alt="Cabin Side View" class="gallery-img">
                 </div>
                 <div class="secondary-gallery-image" onclick="openLightbox(2)">
@@ -685,7 +698,7 @@
 
     <div class="container property-details">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8 property-details-bg">
                 <!-- Property Info -->
                 <h1 class="property-title">Mountain Nest Cabin</h1>
                 <p class="property-location">

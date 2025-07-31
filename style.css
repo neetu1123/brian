@@ -306,6 +306,29 @@
     }
 }
 
+
+.testimonial_index-btn {
+    /* position: absolute; */
+    /* top: 50%; */
+    z-index: 2;
+    /* transform: translateY(-50%); */
+    background: var(--primary-dark);
+    color: #fff;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    font-size: 2rem;
+    border: none;
+    /* box-shadow: 0 2px 8px rgba(30, 178, 166, 0.10); */
+    /* transition: background 0.2s, color 0.2s; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.testimonial_index-btn:hover {
+    background: var(--primary-dark);
+    color: #fff;
+}
 /* Attraction Section */
 .attraction-section {
     background: #fff;
@@ -349,6 +372,8 @@
     align-items: center;
     justify-content: center;
 }
+
+
 
 .attraction-btn:hover {
     background: #143c5d;
