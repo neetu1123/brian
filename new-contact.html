@@ -31,8 +31,13 @@
         });
     </script>
     <style>
+        .py-md-6 {
+            padding-top: 5rem !important;
+            padding-bottom: 5rem !important;
+        }
+        
         .contact-section {
-            padding: 80px 0;
+            padding: 10px 0;
         }
 
         .contact-form {
@@ -40,27 +45,42 @@
             padding: 40px;
             border-radius: 18px;
             box-shadow: 0 12px 32px rgba(4,58,102,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(4,58,102,0.18);
         }
 
         .form-control, .form-select {
             border: 2px solid var(--secondary-light);
-            padding: 6px;
+            padding: 8px 15px;
             margin-bottom: 14px;
             border-radius: 8px;
             background-color: var(--primary-light);
             font-size: 1.05rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
+            color: var(--primary-dark);
         }
 
         .form-control:focus, .form-select:focus {
             border-color: var(--secondary-dark);
             box-shadow: 0 0 0 0.2rem rgba(4,58,102,0.18);
+            transform: translateY(-2px);
         }
 
         .form-label {
             color: var(--primary-dark);
             font-weight: 600;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        
+        .hover-gold:hover {
+            color: var(--gold) !important;
+            transition: color 0.3s ease;
         }
         
         .contact-info-card {
@@ -150,6 +170,7 @@
         .vacation-rental-section {
             margin-top: 44px;
             overflow: hidden;
+            position: relative;
         }
 
         .vacation-bg-image {
@@ -159,6 +180,7 @@
             justify-content: center;
             /* border-radius: 18px; */
             box-shadow: 0 14px 36px rgba(21,36,53,0.13);
+            background-color: var(--primary-dark);
         }
 
         .btn-accent {
@@ -202,6 +224,9 @@
             .vacation-bg-image {
                 min-height: 450px;
             }
+            .rental-content {
+                padding: 40px 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -211,11 +236,28 @@
             .display-4 {
                 font-size: calc(1.375rem + 1.5vw);
             }
+            .contact-info-card {
+                margin-bottom: 20px;
+            }
+            .form-control, .form-select {
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 576px) {
             .vacation-bg-image {
                 min-height: 350px;
+            }
+            .book-now-btn {
+                padding: 10px 20px !important;
+                font-size: 1rem;
+            }
+            .contact-section {
+                padding: 10px 0;
+            }
+            .py-md-5 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
             }
         }
     </style>
@@ -225,77 +267,86 @@
     <div id="header-placeholder"></div>
     
     <!-- GET IN TOUCH Section -->
-    <div class="py-5 text-center bg-primary-light">
+    <div class="py-2 text-center bg-primary-light">
         <div class="container">
-            <p class="text-secondary-dark small text-uppercase mb-1">GET IN TOUCH</p>
-            <h1 class="display-6 text-primary-dark fw-bold mb-4">CONTACT US</h1>
-            <p class="text-secondary-dark mx-auto" style="max-width: 700px;"> Whether you're curious about our properties, or craving personalized recommendations, our friendly team is here to make your stay hassle-free.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="text-secondary-dark small text-uppercase my-1 fw-bold">GET IN TOUCH</p>
+                    <h1 class="display-5 text-primary-dark fw-bold mb-2">CONTACT US</h1>
+                    <div class="d-flex justify-content-center mb-3">
+                        <div style="width: 80px; height: 3px; background-color: var(--gold);"></div>
+                    </div>
+                    <p class="text-secondary-dark mx-auto fs-6" style="max-width: 700px;"> Whether you're curious about our properties, or craving personalized recommendations, our friendly team is here to make your stay hassle-free.</p>
+                </div>
+            </div>
         </div>
     </div>
     
     <!-- Contact Section -->
-    <section class="">
+    <section class="contact-section">
         <div class="container">
-            <div class="row g-2">
+            <div class="row">
                 <!-- Contact Details Column -->
                 <div class="col-lg-5 mb-4">
-                    <p class="text-secondary-dark small text-uppercase mb-1">CONTACT</p>
-                    <h2 class="text-primary-dark fw-bold mb-4">CONTACT DETAILS</h2>
-                    <p class="text-secondary-dark mb-5">Don't hesitate to reach out! We're here to help you make lasting memories with our vacation homes.</p>
-                    
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px;">
-                            <span class="iconify text-tertiary" data-icon="mdi:phone" style="font-size: 24px;"></span>
+                    <div class="p-4  h-100" >
+                        <p class="text-secondary-dark small text-uppercase mb-1 fw-bold">CONTACT</p>
+                        <h2 class="text-primary-dark fw-bold mb-4">CONTACT DETAILS</h2>
+                        <p class="text-secondary-dark mb-5">Don't hesitate to reach out! We're here to help you make lasting memories with our vacation homes.</p>
+                        
+                        <div class="d-flex align-items-center mb-4 contact-info-item">
+                            <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px; transition: all 0.3s;">
+                                <span class="iconify text-accent" data-icon="mdi:phone" style="font-size: 24px;"></span>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="text-primary-dark fw-bold mb-1">PHONE</h6>
+                                <p class="mb-0"><a href="tel:+18048390770" class="text-secondary-dark text-decoration-none hover-gold">(804) 839-0770</a></p>
+                            </div>
                         </div>
-                        <div class="ms-3">
-                            <h6 class="text-primary-dark fw-bold mb-1">PHONE</h6>
-                            <p class="mb-0"><a href="tel:+18048390770" class="text-secondary-dark text-decoration-none">(804) 839-0770</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="d-flex align-items-center">
-                        <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px;">
-                            <span class="iconify text-tertiary" data-icon="mdi:email" style="font-size: 24px;"></span>
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="text-primary-dark fw-bold mb-1">EMAIL</h6>
-                            <p class="mb-0"><a href="mailto:brianchughes@gmail.com" class="text-secondary-dark text-decoration-none">brianchughes@gmail.com</a></p>
+                        
+                        <div class="d-flex align-items-center contact-info-item">
+                            <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px; transition: all 0.3s;">
+                                <span class="iconify text-accent" data-icon="mdi:email" style="font-size: 24px;"></span>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="text-primary-dark fw-bold mb-1">EMAIL</h6>
+                                <p class="mb-0"><a href="mailto:brianchughes@gmail.com" class="text-secondary-dark text-decoration-none hover-gold">brianchughes@gmail.com</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Form Column -->
                 <div class="col-lg-7">
-                    <div class="bg-accent rounded-4 shadow-sm p-4">
+                    <div class="contact-form bg-accent rounded-4 shadow-sm p-4 p-md-5">
                         <h3 class="text-primary-dark fw-bold">SEND A MESSAGE</h3>
                         <p class="text-secondary-dark mb-4">Contact us now by filling out the form below.</p>
                         
                         <form>
-                            <div class="row g-2">
-                                <p class="mb-0"><span class="text-danger">*</span> indicates required fields</p>
+                            <div class="row g-3">
+                                <p class="mb-2"><span class="text-danger">*</span> indicates required fields</p>
                                 
                                 <div class="col-md-6">
-                                    <label class="form-label small mb-1">FIRST NAME<span class="text-danger">*</span></label>
+                                    <label class="form-label small mb-1 fw-bold">FIRST NAME<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" required>
                                 </div>
                                 
                                 <div class="col-md-6">
-                                    <label class="form-label small mb-1">LAST NAME<span class="text-danger">*</span></label>
+                                    <label class="form-label small mb-1 fw-bold">LAST NAME<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" required>
                                 </div>
                                 
                                 <div class="col-md-6">
-                                    <label class="form-label small mb-1">EMAIL<span class="text-danger">*</span></label>
+                                    <label class="form-label small mb-1 fw-bold">EMAIL<span class="text-danger">*</span></label>
                                     <input type="email" class="form-control" required>
                                 </div>
                                 
                                 <div class="col-md-6">
-                                    <label class="form-label small mb-1">PHONE<span class="text-danger">*</span></label>
+                                    <label class="form-label small mb-1 fw-bold">PHONE<span class="text-danger">*</span></label>
                                     <input type="tel" class="form-control" required>
                                 </div>
                                 
-                                <div class="col-12">
-                                    <label class="form-label small mb-1">I'M INTERESTED IN<span class="text-danger">*</span></label>
+                                <!-- <div class="col-12">
+                                    <label class="form-label small mb-1 fw-bold">I'M INTERESTED IN<span class="text-danger">*</span></label>
                                     <select class="form-select">
                                         <option selected disabled>Select an option</option>
                                         <option>Booking Information</option>
@@ -304,10 +355,10 @@
                                         <option>Property Management</option>
                                         <option>Other</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 
                                 <div class="col-12">
-                                    <label class="form-label small mb-1">MESSAGE</label>
+                                    <label class="form-label small mb-1 fw-bold">MESSAGE</label>
                                     <textarea class="form-control" rows="6"></textarea>
                                 </div>
                                 
@@ -321,7 +372,10 @@
                                 </div>
                                 
                                 <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-secondary-dark px-4 py-2 text-primary-light rounded-pill">SEND REQUEST</button>
+                                    <button type="submit" class="btn btn-secondary-dark px-4 py-3 text-primary-light rounded-pill fw-bold">
+                                        <span class="iconify me-2" data-icon="mdi:send" style="font-size: 18px;"></span>
+                                        SEND REQUEST
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -336,13 +390,13 @@
         <!-- Full-width background image -->
         <div class="vacation-bg-image w-100 position-relative bg-primary-dark" style="background-image: url('images.jpeg'); background-size: cover; background-position: center; min-height: 500px;">
             <!-- Dark overlay for better text readability -->
-            <div class="overlay position-absolute" style="background: linear-gradient(to bottom, var(--primary-dark) 85%, var(--secondary-dark) 75%); opacity: 0.85; height: 820px; width: 100%;"></div>
+            <div class="overlay position-absolute top-0 start-0 bottom-0 end-0" style="background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--secondary-dark) 100%); opacity: 0.85;"></div>
             <div class="container position-relative " style="z-index: 2;">
                 <div class="row justify-content-center text-center py-md-5">
                     <div class="col-lg-10">
-                        <div class="py-4 rental-content">
+                        <div class="py-4 py-md-5 rental-content">
                             <p class="text-accent small text-uppercase mb-1 fw-bold">BOOK NOW</p>
-                            <h2 class="display-4 text-primary-light fw-bold mb-4">DISCOVER YOUR PERFECT 30A<br class="d-none d-md-block"> VACATION RENTAL</h2>
+                            <h2 class="display-4 text-primary-light fw-bold mb-3 mb-md-4">DISCOVER YOUR PERFECT 30A<br class="d-none d-md-block"> VACATION RENTAL</h2>
                             <p class="text-primary-light mb-4 mx-auto" style="max-width: 800px;">Find your ideal 30A vacation rental with Eurest Properties. Our carefully curated homes offer everything you need for the perfect beach getaway. Enjoy beach access, pool amenities, and top-notch guest services.</p>
                             <p class="text-accent mb-2">Discover our stunning properties along the scenic 30A highway.</p>
                             <p class="text-accent fw-bold mb-4">Book your next beach getaway now!</p>

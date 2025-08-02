@@ -8,6 +8,12 @@
     --gold: #EFAD29;            /* Gold accent */
 }
 
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
+
 /* Background color classes */
 .bg-primary-dark {
     background-color: var(--primary-dark);

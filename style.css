@@ -31,7 +31,7 @@
     font-size: 1.13rem;
     line-height: 1.7;
     margin-bottom: 2.2rem;
-    max-width: 540px;
+    max-width: 840px;
 }
 
 .aboutus-btn {
@@ -185,7 +185,7 @@
     font-size: 1.13rem;
     line-height: 1.7;
     margin-bottom: 2.2rem;
-    max-width: 540px;
+    max-width: 840px;
 }
 
 .about-host-btn {
@@ -367,30 +367,56 @@
     font-size: 2rem;
     border: none;
     box-shadow: 0 2px 8px rgba(30, 178, 166, 0.10);
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
-
 .attraction-btn:hover {
     background: #143c5d;
     color: #fff;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.attraction-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .attraction-btn-left {
-    left: -30px;
+    left: -28px;
 }
 
 .attraction-btn-right {
-    right: -30px;
+    right: -28px;
+}
+
+.attraction-slider {
+    position: relative;
+    overflow: hidden;
+    margin: 0 10px;
+    padding: 10px 0;
+}
+
+.attraction-cards-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    padding: 10px 5px 20px;
+}
+
+.attraction-cards-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
 }
 
 .attraction-card-col {
-    min-width: 340px;
-    max-width: 370px;
+    min-width: calc(25% - 15px);
+    max-width: calc(25% - 15px);
+    flex: 0 0 auto;
     transition: transform 0.4s cubic-bezier(.4, 2, .3, 1), box-shadow 0.2s;
 }
 
@@ -401,18 +427,20 @@
     box-shadow: 0 4px 24px rgba(30, 178, 166, 0.07);
     transition: box-shadow 0.2s, transform 0.4s cubic-bezier(.4, 2, .3, 1);
     perspective: 800px;
+    height: 100%;
 }
 
 .attraction-card:hover {
-    transform: rotateY(18deg) scale(1.04);
+    transform: rotateY(8deg) scale(1.04);
     box-shadow: 0 12px 36px rgba(30, 178, 166, 0.18);
     z-index: 3;
 }
 
 .attraction-img {
-    min-height: 320px;
+    min-height: 380px;
     object-fit: cover;
     border-radius: 0;
+    width: 100%;
 }
 
 .attraction-caption {
@@ -425,36 +453,78 @@
     border-bottom-right-radius: 24px;
     letter-spacing: 0.02em;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: background-color 0.3s ease;
 }
 
+.attraction-card:hover .attraction-caption {
+    background: #0A3D65;
+}
+
+/* Large devices (desktops) */
+@media (max-width: 1200px) {
+    .attraction-card-col {
+        min-width: calc(33.333% - 14px);
+        max-width: calc(33.333% - 14px);
+    }
+}
+
+/* Medium devices (tablets) */
 @media (max-width: 991px) {
     .attraction-title {
-        font-size: 1.5rem;
-    }
-
-    .attraction-img {
-        min-height: 180px;
+        font-size: 1.8rem;
     }
 
     .attraction-card-col {
-        min-width: 260px;
-        max-width: 98vw;
+        min-width: calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+
+    .attraction-img {
+        min-height: 220px;
     }
 
     .attraction-btn-left,
     .attraction-btn-right {
-        left: 0;
-        right: 0;
         width: 44px;
         height: 44px;
         font-size: 1.5rem;
     }
+
+    .attraction-btn-left {
+        left: -10px;
+    }
+
+    .attraction-btn-right {
+        right: -10px;
+    }
 }
 
+/* Small devices (landscape phones) */
+@media (max-width: 767px) {
+    .attraction-card-col {
+        min-width: calc(100% - 10px);
+        max-width: calc(100% - 10px);
+    }
+    
+    .attraction-img {
+        min-height: 200px;
+    }
+    
+    .attraction-caption {
+        font-size: 1.2rem;
+        padding: 0.9rem 0.5rem;
+    }
+}
+
+/* Extra small devices (portrait phones) */
 @media (max-width: 600px) {
     .attraction-section {
         border-radius: 0;
         padding-bottom: 1.5rem;
+    }
+
+    .attraction-slider {
+        margin: 0;
     }
 
     .attraction-card {
@@ -462,12 +532,12 @@
     }
 
     .attraction-img {
-        min-height: 120px;
+        min-height: 180px;
     }
 
     .attraction-caption {
         font-size: 1rem;
-        padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+        padding: 0.7rem 0.2rem;
         border-radius: 0 0 12px 12px;
     }
 }
@@ -794,7 +864,7 @@
 }
 
 .footer-link:hover {
-    color: #143c5d;
+    color: #acc0d1;
     text-decoration: underline;
 }
 

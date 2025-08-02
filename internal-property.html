@@ -88,45 +88,55 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 0.5rem;
             border-radius: 1rem;
         }
 
         @media (min-width: 768px) {
             .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: 2fr 1fr 1fr;
             }
         }
 
         .main-gallery-image {
-            grid-column: span 2;
-            grid-row: span 2;
+            grid-column: 1;
+            grid-row: 1 / span 2;
             position: relative;
             cursor: pointer;
+            height: 400px; /* Set a fixed height for the main image */
         }
 
         .secondary-gallery-image {
             position: relative;
             cursor: pointer;
+            height: 195px; /* Approximately half the height of the main image */
         }
 
         .gallery-img {
             width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 0; /* Reset border radius for all images */
         }
 
         .show-all-btn {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: flex-end;
-            transform: translateY(-5rem) translateX(-0.75rem);
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 5;
+        }
+        
+        .show-all-btn button {
+            background-color: rgba(108, 117, 125, 0.8);
+            font-weight: 500;
         }
         
         .thumbnail-img {
             width: 100%;
             height: 96px; /* Equivalent to h-24 in Tailwind */
             object-fit: cover;
+            border-radius: 8px;
         }
         
         .active-thumbnail {
@@ -226,6 +236,7 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            border-radius: 8px;
         }
 
         /* This style is already defined above */
@@ -322,6 +333,10 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
+        }
+        
+        .all-images-grid img {
+            border-radius: 8px;
         }
 
         @media (min-width: 768px) {
@@ -520,8 +535,22 @@
         .review-text {
             color: var(--secondary-dark);
         }
+        /* Apply specific corner roundings using direct classes */
+        .left-rounded {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        
+        .top-right-rounded {
+            border-top-right-radius: 8px;
+        }
+        
+        .bottom-right-rounded {
+            border-bottom-right-radius: 8px;
+        }
+        
         .property-img {
-            border-radius: 2;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -539,34 +568,35 @@
             <div class="adr-area" style="margin-bottom: 20px;">
                                                     <h6 class="text-secondary-dark"><i class="fa-solid fa-location-dot text-secondary-dark"></i> lorem, xy</h6>
                                             </div>
-            <div class="gallery-grid" id="imageGrid">
-                <!-- Main large i mage -->
+            <div class="position-relative mb-4">
+                <div class="gallery-grid" id="imageGrid">
+                <!-- Main large image - left side rounded -->
                 <div class="main-gallery-image" onclick="openLightbox(0)">
-                    <img src="images.jpeg" alt="Cabin Exterior" class="gallery-img">
+                    <img src="images.jpeg" alt="Cabin Exterior" class="gallery-img left-rounded">
                 </div>
 
-                <!-- Secondary images -->
-                <div class="secondary-gallery-image " onclick="openLightbox(1)">
+                <!-- Secondary images - top row -->
+                <div class="secondary-gallery-image" onclick="openLightbox(1)">
                     <img src="images.jpeg" alt="Cabin Side View" class="gallery-img">
                 </div>
                 <div class="secondary-gallery-image" onclick="openLightbox(2)">
-                    <img src="images.jpeg" alt="Deck View" class="gallery-img">
+                    <img src="images.jpeg" alt="Deck View" class="gallery-img top-right-rounded">
                 </div>
-
+                
+                <!-- Secondary images - bottom row -->
                 <div class="secondary-gallery-image" onclick="openLightbox(3)">
                     <img src="images.jpeg" alt="King Bedroom" class="gallery-img">
                 </div>
-
                 <div class="secondary-gallery-image" onclick="openLightbox(4)">
-                    <img src="images.jpeg" alt="Game Room" class="gallery-img">
+                    <img src="images.jpeg" alt="Game Room" class="gallery-img bottom-right-rounded">
                 </div>
             </div>
-
-            <!-- Show All Button -->
-            <div class="show-all-btn">
-                <button onclick="openShowAll()" title="Show all photos" class="btn btn-secondary shadow-sm">
-                    <span>Show All</span>
-                </button>
+                <!-- Show All Button -->
+                <div class="show-all-btn">
+                    <button onclick="openShowAll()" title="Show all photos" class="btn btn-secondary shadow-sm">
+                        <span>Show All</span>
+                    </button>
+                </div>
             </div>
         </div>
 
