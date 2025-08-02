@@ -956,12 +956,8 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-.navbar {
-    padding: 1.5rem 0;
-}
-
 .navbar-brand img {
-    height: 60px;
+    height: 80px;
 }
 
 .navbar-nav .nav-link {
