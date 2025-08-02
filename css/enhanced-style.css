@@ -1,0 +1,159 @@
+
+/* Enhanced Testimonial Section */
+.testimonial-section {
+    background: linear-gradient(135deg, #f0f4f8, #e4edf5);
+    padding: 80px 0;
+}
+
+.testimonial-img {
+    border-radius: 15px;
+    box-shadow: 10px 10px 0 #143c5d;
+    transition: all 0.3s ease;
+}
+
+.testimonial-content {
+    padding-left: 30px;
+}
+
+.testimonial-quote {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    opacity: 0.15;
+    font-size: 5rem;
+    color: #143c5d;
+}
+
+.testimonial-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    font-weight: 500;
+    color: #143c5d;
+    margin-bottom: 30px;
+}
+
+.testimonial-author {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #555;
+}
+
+.testimonial_index-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: white;
+    color: #143c5d;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.testimonial_index-btn:hover {
+    background: #143c5d;
+    color: white;
+    border-color: #143c5d;
+}
+
+/* Enhanced Attraction Section */
+.attraction-section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.attraction-slider {
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.attraction-cards-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.attraction-card-col {
+    flex: 0 0 280px;
+    padding: 0 15px;
+}
+
+.attraction-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.attraction-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.attraction-img {
+    height: 220px;
+    object-fit: cover;
+}
+
+
+
+.attraction-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: white;
+    color: #143c5d;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.attraction-btn-left {
+    left: -25px;
+}
+
+.attraction-btn-right {
+    right: -25px;
+}
+
+.attraction-btn:hover {
+    background: #143c5d;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .testimonial-content {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+    
+    .attraction-card-col {
+        flex: 0 0 230px;
+    }
+    
+    .attraction-img {
+        height: 180px;
+    }
+}
+
+@media (max-width: 767px) {
+    
+    .property-img-wrap {
+        height: 200px;
+    }
+    
+    .testimonial-text {
+        font-size: 1.1rem;
+    }
+    
+    .attraction-card-col {
+        flex: 0 0 200px;
+    }
+    
+    .attraction-img {
+        height: 150px;
+    }
+    
+   
+}

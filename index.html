@@ -13,6 +13,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/enhanced-style.css">
     <link rel="icon" type="image/png" href="logo.jpeg">
     <script>
         // Load header and footer
@@ -30,6 +31,7 @@
                 });
         });
     </script>
+ 
 </head>
 <body class="bg-primary-light">
     <!-- Header placeholder -->
@@ -39,8 +41,8 @@
     <section class="banner-section">
         <div class="banner-content container">
             <h5 class="text-secondary-light">VA MOUNTAIN CABINS</h5>
-            <h1 class="text-primary-light">WE CAN'T WAIT TO WELCOME YOU TO THE MOUNTAINS</h1>
-            <p class="text-accent" >Discover a unique selection of beautiful vacation rentals in the scenic Virginia Mountains.</p>
+            <h1 class="text-primary-light mx-auto" style="max-width: 1200px;">WE CAN'T WAIT TO WELCOME YOU TO THE MOUNTAINS</h1>
+            <p class="text-accent mx-auto" style="max-width: 500px;">Discover a unique selection of beautiful vacation rentals in the scenic Virginia Mountains.</p>
             <form class="search-bar row gx-2 gy-2 justify-content-center align-items-center">
                 <div class="form-group col-auto d-flex align-items-center">
                     <span class="iconify" data-icon="mdi:calendar-month-outline"></span>
@@ -69,8 +71,8 @@
                     </select>
                 </div>
                 <div class="form-group col-auto">
-                    <button type="submit" class="btn btn-primary-dark rounded-pill">
-                        <span class="iconify" data-icon="mdi:magnify"></span> SEARCH
+                    <button type="submit" class="btn btn-search rounded-pill">
+                        <span class="iconify" data-icon="mdi:magnify" style="color: #fff !important;"></span> SEARCH
                     </button>
                 </div>
             </form>
@@ -103,26 +105,29 @@
     <!-- Property Section -->
     <section class="property-section py-5 bg-primary-light">
         <div class="container">
-            <div class="text-center my-2 mt-4">
+            <div class="text-center my-4 mt-5">
                 <span class="property-subtitle text-secondary-dark">DISCOVER OUR RENTALS</span>
-                <h2 class="property-title mb-4 text-primary-dark">OUR FEATURED PROPERTIES</h2>
+                <h2 class="property-title mb-5 text-primary-dark">OUR FEATURED PROPERTIES</h2>
             </div>
             <div class="row justify-content-center g-4">
                 <!-- Property Card 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="property-card card h-100 shadow-sm border-0">
+                    <div class="property-card card h-100">
+                        <div class="position-absolute end-0 top-0 m-3 px-3 py-1 rounded-pill bg-white shadow-sm text-primary-dark">
+                            <small class="fw-bold">NEW</small>
+                        </div>
                         <div class="property-img-wrap position-relative">
                             <img src="images.jpeg" class="card-img-top property-img" alt="Blue Moon">
                             <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
                         </div>
                         <div class="card-body bg-accent">
-                            <h5 class="card-title property-name text-primary-dark">BLUE MOON</h5>
-                            <div class="d-flex align-items-center gap-3 mb-2 property-meta text-secondary-dark">
+                            <h5 class="card-title property-name text-primary-dark mb-3">BLUE MOON</h5>
+                            <div class="d-flex align-items-center gap-3 mb-3 property-meta text-secondary-dark">
                                 <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 12</span>
                                 <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 4</span>
                                 <span><span class="iconify me-1" data-icon="mdi:shower"></span> 5</span>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
                                 <span class="property-location text-secondary-dark"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Mountain View</span>
                                 <span class="property-rating text-warning">
                                     <span class="iconify" data-icon="mdi:star"></span>
@@ -134,25 +139,30 @@
                             </div>
                         </div>
                         <div class="card-footer bg-accent border-0">
-                            <a href="internal-property.html" class="btn btn-secondary-dark w-100">ENTER DATES FOR PRICING</a>
+                            <a href="internal-property.html" class="btn btn-secondary-dark w-100 d-flex align-items-center justify-content-center">
+                                <span class="iconify me-2" data-icon="mdi:calendar-check"></span> CHECK AVAILABILITY
+                            </a>
                         </div>
                     </div>
                 </div>
                 <!-- Property Card 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="property-card card h-100 shadow-sm border-0">
+                    <div class="property-card card h-100">
+                        <div class="position-absolute end-0 top-0 m-3 px-3 py-1 rounded-pill bg-white shadow-sm text-primary-dark">
+                            <small class="fw-bold">POPULAR</small>
+                        </div>
                         <div class="property-img-wrap position-relative">
                             <img src="images.jpeg" class="card-img-top property-img" alt="New Beginnings">
                             <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
                         </div>
                         <div class="card-body bg-accent">
-                            <h5 class="card-title property-name text-primary-dark">NEW BEGINNINGS</h5>
-                            <div class="d-flex align-items-center gap-3 mb-2 property-meta text-secondary-dark">
+                            <h5 class="card-title property-name text-primary-dark mb-3">NEW BEGINNINGS</h5>
+                            <div class="d-flex align-items-center gap-3 mb-3 property-meta text-secondary-dark">
                                 <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 8</span>
                                 <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 3</span>
                                 <span><span class="iconify me-1" data-icon="mdi:shower"></span> 3</span>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
                                 <span class="property-location text-secondary-dark"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Pine Ridge</span>
                                 <span class="property-rating text-warning">
                                     <span class="iconify" data-icon="mdi:star"></span>
@@ -164,25 +174,30 @@
                             </div>
                         </div>
                         <div class="card-footer bg-accent border-0">
-                            <a href="internal-property.html" class="btn btn-secondary-dark w-100">ENTER DATES FOR PRICING</a>
+                            <a href="internal-property.html" class="btn btn-secondary-dark w-100 d-flex align-items-center justify-content-center">
+                                <span class="iconify me-2" data-icon="mdi:calendar-check"></span> CHECK AVAILABILITY
+                            </a>
                         </div>
                     </div>
                 </div>
                 <!-- Property Card 3 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="property-card card h-100 shadow-sm border-0">
+                    <div class="property-card card h-100">
+                        <div class="position-absolute end-0 top-0 m-3 px-3 py-1 rounded-pill bg-white shadow-sm text-primary-dark">
+                            <small class="fw-bold">FEATURED</small>
+                        </div>
                         <div class="property-img-wrap position-relative">
                             <img src="images.jpeg" class="card-img-top property-img" alt="Mountain Nest">
                             <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
                         </div>
                         <div class="card-body bg-accent">
-                            <h5 class="card-title property-name text-primary-dark">MOUNTAIN NEST</h5>
-                            <div class="d-flex align-items-center gap-3 mb-2 property-meta text-secondary-dark">
+                            <h5 class="card-title property-name text-primary-dark mb-3">MOUNTAIN NEST</h5>
+                            <div class="d-flex align-items-center gap-3 mb-3 property-meta text-secondary-dark">
                                 <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 10</span>
                                 <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 4</span>
                                 <span><span class="iconify me-1" data-icon="mdi:shower"></span> 5</span>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
                                 <span class="property-location text-secondary-dark"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Valley View</span>
                                 <span class="property-rating text-warning">
                                     <span class="iconify" data-icon="mdi:star"></span>
@@ -194,13 +209,15 @@
                             </div>
                         </div>
                         <div class="card-footer bg-accent border-0">
-                            <a href="internal-property.html" class="btn btn-secondary-dark w-100">ENTER DATES FOR PRICING</a>
+                            <a href="internal-property.html" class="btn btn-secondary-dark w-100 d-flex align-items-center justify-content-center">
+                                <span class="iconify me-2" data-icon="mdi:calendar-check"></span> CHECK AVAILABILITY
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn-secondary-dark mt-4 d-block mx-auto" onclick="window.location.href='property.html'">
-                        View All Properties
+                <div class="text-center mt-5">
+                    <button class="btn btn-secondary-dark px-4 py-3 shadow-sm rounded-pill d-inline-flex align-items-center" onclick="window.location.href='property.html'">
+                        <span class="iconify me-2" data-icon="mdi:home-group"></span> VIEW ALL PROPERTIES
                     </button>
                 </div>
             </div>
@@ -209,23 +226,48 @@
 
     <!-- Testimonial Section -->
     <section class="testimonial-section py-5 bg-secondary-light">
-        <div class="container">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <span class="text-secondary-dark fw-bold text-uppercase letter-spacing-2">What Our Guests Say</span>
+                <h2 class="text-primary-dark mt-2 mb-0 fw-bold">GUEST EXPERIENCES</h2>
+            </div>
             <div class="row justify-content-center align-items-center g-5">
                 <div class="col-lg-5">
-                    <div class="testimonial-img-wrap">
+                    <div class="testimonial-img-wrap position-relative">
+                        
                         <img src="images.jpeg" alt="Testimonial" class="img-fluid rounded-4 shadow testimonial-img">
+                        <div class="bg-white shadow p-3 rounded-3 position-absolute bottom-0 end-0 translate-middle-y">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="property-rating text-warning">
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                    <span class="iconify" data-icon="mdi:star"></span>
+                                </div>
+                                <span class="fw-bold text-primary-dark">5.0</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-7">
-                    <div class="testimonial-content position-relative">
+                    <div class="testimonial-content position-relative ps-lg-4">
                         <span class="iconify testimonial-quote" data-icon="mdi:format-quote-open" style="font-size:3rem; color:#0A3D65;"></span>
-                        <blockquote class="testimonial-text fw-bold mb-4 text-primary-dark text-capitalize" style="text-transform: capitalize !important;">"OUR FAMILY HAD A FANTASTIC TIME STAYING AT ONE OF VA MOUNTAIN CABINS' RENTALS. THE PROPERTY WAS IMMACULATE AND HAD EVERYTHING WE NEEDED FOR A COMFORTABLE STAY. THE CUSTOMER SERVICE WAS TOP-NOTCH, WITH PROMPT COMMUNICATION AND THOUGHTFUL TOUCHES THROUGHOUT OUR STAY!"</blockquote>
-                        <div class="testimonial-author text-secondary-dark mb-4">— Emma & Mike from Nashville, TN</div>
+                        <blockquote class="testimonial-text fw-bold mb-4 text-primary-dark">"Our family had a fantastic time staying at one of VA Mountain Cabins' rentals. The property was immaculate and had everything we needed for a comfortable stay. The customer service was top-notch, with prompt communication and thoughtful touches throughout our stay!"</blockquote>
+                        <div class="testimonial-author d-flex align-items-center mb-4">
+                            <div class="bg-primary-dark rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <span class="text-white fw-bold">E&M</span>
+                            </div>
+                            <div>
+                                <div class="fw-bold text-primary-dark">Emma & Mike</div>
+                                <div class="text-secondary-dark">Nashville, TN</div>
+                            </div>
+                        </div>
                         <div class="testimonial-nav d-flex gap-3">
-                            <button class="btn testimonial_index-btn" id="testimonial-prev" aria-label="Previous testimonial">
+                            <button class="btn testimonial_index-btn shadow-sm" id="testimonial-prev" aria-label="Previous testimonial">
                                 <span class="iconify" data-icon="mdi:arrow-left"></span>
                             </button>
-                            <button class="btn testimonial_index-btn " id="testimonial-next" aria-label="Next testimonial">
+                            <button class="btn testimonial_index-btn shadow-sm" id="testimonial-next" aria-label="Next testimonial">
                                 <span class="iconify" data-icon="mdi:arrow-right"></span>
                             </button>
                         </div>
@@ -244,7 +286,7 @@
                 <h2 class="attraction-title mb-4 text-primary-dark">EXPLORE ALL THAT VIRGINIA MOUNTAINS HAVE TO OFFER</h2>
             </div>
             <div class="position-relative">
-                <button class="btn btn-secondary-dark attraction-btn attraction-btn-left d-flex align-items-center justify-content-center" id="attraction-prev" aria-label="Previous attraction">
+                <button class="btn icon_btn attraction-btn attraction-btn-left d-flex align-items-center justify-content-center" id="attraction-prev" aria-label="Previous attraction">
                     <span class="iconify" data-icon="mdi:chevron-left" style="font-size: 3rem;"></span>
                 </button>
                 <div class="attraction-slider">
@@ -323,12 +365,14 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-secondary-dark attraction-btn attraction-btn-right d-flex align-items-center justify-content-center" id="attraction-next" aria-label="Next attraction">
-                    <span class="iconify" data-icon="mdi:chevron-right" style="font-size: 2.5rem;"></span>
+                <button class="btn icon_btn attraction-btn  attraction-btn-right d-flex align-items-center justify-content-center" id="attraction-next" aria-label="Next attraction">
+                    <span class="iconify" data-icon="mdi:chevron-right"></span>
                 </button>
             </div>
-            <div class="text-center mt-4">
-                <a href="attraction-list.html" class="btn btn-secondary-dark">VIEW ALL ATTRACTIONS</a>
+            <div class="text-center mt-5">
+                <a href="attraction-list.html" class="btn btn-secondary-dark px-4 py-3 shadow-sm rounded-pill d-inline-flex align-items-center">
+                    <span class="iconify me-2" data-icon="mdi:map-marker"></span> VIEW ALL ATTRACTIONS
+                </a>
             </div>
         </div>
     </section>

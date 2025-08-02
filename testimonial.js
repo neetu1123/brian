@@ -2,18 +2,27 @@
 const testimonials = [
     {
         img: "images.jpeg",
-        text: '"OUR FAMILY HAD A FANTASTIC TIME STAYING AT ONE OF KISMET PROPERTIES\' RENTALS. THE PROPERTY WAS IMMACULATE AND HAD EVERYTHING WE NEEDED FOR A COMFORTABLE STAY. THE CUSTOMER SERVICE WAS TOP-NOTCH, WITH PROMPT COMMUNICATION AND THOUGHTFUL TOUCHES THROUGHOUT OUR STAY!"',
-        author: '— Emma & Mike from Nashville, TN'
+        text: '"Our family had a fantastic time staying at one of VA Mountain Cabins\' rentals. The property was immaculate and had everything we needed for a comfortable stay. The customer service was top-notch, with prompt communication and thoughtful touches throughout our stay!"',
+        name: 'Emma & Mike',
+        location: 'Nashville, TN',
+        initials: 'E&M',
+        rating: '5.0'
     },
     {
         img: "images.jpeg",
-        text: '"THE LOCATION WAS PERFECT AND THE HOME WAS BEAUTIFUL. WE WILL DEFINITELY BE BACK NEXT YEAR!"',
-        author: '— Sarah from Atlanta, GA'
+        text: '"The location was perfect and the home was beautiful. We loved every moment of our stay in the mountains. The views were breathtaking and we will definitely be back next year!"',
+        name: 'Sarah',
+        location: 'Atlanta, GA',
+        initials: 'S',
+        rating: '4.9'
     },
     {
         img: "images.jpeg",
-        text: '"AMAZING EXPERIENCE! THE STAFF WAS FRIENDLY AND THE PROPERTY WAS EVEN BETTER THAN THE PHOTOS."',
-        author: '— John & Lisa from Dallas, TX'
+        text: '"Amazing experience! The staff was friendly and the property was even better than the photos. Our family had the most relaxing vacation we\'ve had in years. Highly recommend!"',
+        name: 'John & Lisa',
+        location: 'Dallas, TX',
+        initials: 'J&L',
+        rating: '5.0'
     }
 ];
 
@@ -22,10 +31,17 @@ let currentTestimonial = 0;
 function updateTestimonial(idx) {
     const testimonialImg = document.querySelector('.testimonial-img');
     const testimonialText = document.querySelector('.testimonial-text');
-    const testimonialAuthor = document.querySelector('.testimonial-author');
+    const testimonialRating = document.querySelector('.bg-white.shadow .fw-bold');
+    const testimonialInitials = document.querySelector('.testimonial-author .rounded-circle span');
+    const testimonialName = document.querySelector('.testimonial-author .fw-bold');
+    const testimonialLocation = document.querySelector('.testimonial-author .text-secondary-dark');
+    
     testimonialImg.src = testimonials[idx].img;
     testimonialText.textContent = testimonials[idx].text;
-    testimonialAuthor.textContent = testimonials[idx].author;
+    if (testimonialRating) testimonialRating.textContent = testimonials[idx].rating;
+    if (testimonialInitials) testimonialInitials.textContent = testimonials[idx].initials;
+    if (testimonialName) testimonialName.textContent = testimonials[idx].name;
+    if (testimonialLocation) testimonialLocation.textContent = testimonials[idx].location;
 }
 
 document.addEventListener('DOMContentLoaded', function () {

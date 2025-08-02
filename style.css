@@ -449,8 +449,8 @@
     font-size: 1.3rem;
     font-weight: 700;
     padding: 1.1rem 0.5rem 1.1rem 0.5rem;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
+    /* border-bottom-left-radius: 24px; */
+    /* border-bottom-right-radius: 24px; */
     letter-spacing: 0.02em;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
     transition: background-color 0.3s ease;
@@ -995,7 +995,9 @@ body {
 }
 
 .banner-section {
-    background: url('images.jpeg') center center/cover no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images.jpeg');
+ background-size: cover;
+    background-position: center;
    height: 100vh;
     position: relative;
     display: flex;
@@ -1021,7 +1023,7 @@ body {
 .banner-content {
     position: relative;
     z-index: 2;
-    margin-top: 10px;
+    margin-top: -150px;
 }
 
 .banner-content h5 {

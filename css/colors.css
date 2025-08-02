@@ -124,6 +124,20 @@
     background-color: var(--accent);
 }
 
+.icon_btn {
+     background-color: var(--secondary-dark);
+    color: var(--primary-light);
+    font-weight: 700;
+    border-radius: 30px;
+    font-size: 1rem;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(30, 178, 166, 0.08);
+}
+.icon_btn:hover {
+    background-color: var(--primary-dark);
+    color: #ffffff;
+}
 /* Override some Bootstrap defaults */
 /* .navbar {
     background-color: var(--primary-dark) !important;
