@@ -10,6 +10,8 @@
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="style.css">
@@ -31,6 +33,265 @@
                 });
         });
     </script>
+    <style>
+                .property-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+            height: 100%;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            /* box-shadow: 0 8px 30px rgba(0,0,0,0.12); */
+        }
+        
+        .property-image {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+        
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .property-card:hover .property-image img {
+            /* transform: scale(1.05); */
+        }
+        
+        .heart-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .heart-icon i {
+            color: #ccc;
+            font-size: 18px;
+        }
+        
+        .amenities {
+            background: rgba(255,255,255,0.95);
+            position: absolute;
+            bottom: -20px;
+            left: 12px;
+            right: 12px;
+            padding: 15px;
+             border-radius: 8px;
+            /* display: flex; */
+            /* justify-content: space-around; */
+            /* backdrop-filter: blur(10px); */
+        }
+        
+        .amenity {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .amenity i {
+            color: #3498db;
+            font-size: 14px;
+        }
+        
+        .property-details {
+            padding: 20px;
+        }
+        
+        .property-titles {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .property-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .rating-badge {
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .rating-badge.rating-35 {
+            background: #e67e22;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 2px;
+            margin-left: 5px;
+        }
+        
+        .star {
+            color: #ffc107;
+            font-size: 14px;
+        }
+        
+        .star.empty {
+            color: #dee2e6;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .location i {
+            color: #3498db;
+        }
+        
+        .pricing-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .price-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .from-text {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .per-night {
+            font-size: 14px;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .view-details {
+            background: transparent;
+            border: none;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .view-details:hover {
+            color: #3498db;
+        }
+        
+        .view-details i {
+            font-size: 16px;
+        }
+        
+        .highlighted-card {
+            /* border: 3px solid #e74c3c; */
+            position: relative;
+        }
+        
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .amenities {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .amenity {
+                font-size: 11px;
+            }
+            
+            .property-name {
+                font-size: 16px;
+            }
+            
+            .price {
+                font-size: 18px;
+            }
+        }
+
+        .star-location {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+            font-size: 14px;
+            /* margin-bottom: 10px; */
+        }
+        
+
+.property-amenities-list-wrap {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.property-amenities-list {
+    display: flex;
+    align-items: center;
+}
+
+.property-amenities-name span {
+    margin-left: 4px;
+    font-weight: 500;
+}
+.property-amenities-name span i {
+     margin-right: 5px;
+ /* font-weight: 500; */
+}
+.separator {
+    color: #aaa;
+    font-size: 16px;
+}
+
+    </style>
  
 </head>
 <body class="bg-primary-light">
@@ -109,118 +370,188 @@
                 <span class="property-subtitle text-secondary-dark">DISCOVER OUR RENTALS</span>
                 <h2 class="property-title mb-5 text-primary-dark">OUR FEATURED PROPERTIES</h2>
             </div>
-            <div class="row justify-content-center g-4">
-                <!-- Property Card 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="property-card card h-100">
-                        <div class="position-absolute end-0 top-0 m-3 px-3 py-1 rounded-pill bg-white shadow-sm text-primary-dark">
-                            <small class="fw-bold">NEW</small>
+             <div class="container">
+        <div class="row g-4">
+            <!-- The Salty Sandpiper - Highlighted Card -->
+            <div class="col-lg-4 col-md-6">
+                <div class="property-card highlighted-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Salty Sandpiper">
+                        <div class="heart-icon">
+                            <i class="far fa-heart"></i>
                         </div>
-                        <div class="property-img-wrap position-relative">
-                            <img src="images.jpeg" class="card-img-top property-img" alt="Blue Moon">
-                            <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
+                       
+                        <div class="property-amenities-list-wrapper amenities">
+  <ul class="property-amenities-list-wrap">
+    <li class="property-amenities-list guests-amenitie amenity" title="Guests: 6">
+      <div class="property-amenities-name"><span> <i class="fas fa-users"></i></span>6 <span>Guests</span></div>
+    </li>
+    <li class="separator">|</li>
+    <li class="property-amenities-list bedrooms-amenitie amenity" title="Bedrooms: 2">
+      <div class="property-amenities-name"><span> <i class="fas fa-bed"></i></span>2 <span>Bdrm</span></div>
+    </li>
+    <li class="separator">|</li>
+    <li class="property-amenities-list bathrooms-amenitie amenity" title="Bathrooms: 2">
+      <div class="property-amenities-name"><span> <i class="fas fa-bath"></i></span>2 <span>Baths</span></div>
+    </li>
+  </ul>
+</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-titles">
+                            <h3 class="property-name">The Salty Sandpiper</h3>
+                          
                         </div>
-                        <div class="card-body bg-accent">
-                            <h5 class="card-title property-name text-primary-dark mb-3">BLUE MOON</h5>
-                            <div class="d-flex align-items-center gap-3 mb-3 property-meta text-secondary-dark">
-                                <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 12</span>
-                                <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 4</span>
-                                <span><span class="iconify me-1" data-icon="mdi:shower"></span> 5</span>
+                        <div class="star-location">
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ocean Isle Beach</span>
+                        </div>
+                              <div class="stars">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <span class="property-location text-secondary-dark"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Mountain View</span>
-                                <span class="property-rating text-warning">
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                </span>
-                            </div>
                         </div>
-                        <div class="card-footer bg-accent border-0">
-                            <a href="internal-property.html" class="btn btn-secondary-dark w-100 d-flex align-items-center justify-content-center">
-                                <span class="iconify me-2" data-icon="mdi:calendar-check"></span> CHECK AVAILABILITY
-                            </a>
+                        <div class="pricing-section">
+                            <div class="price-info">
+                                <div class="from-text">From</div>
+                                <div class="price">$213.00<span class="per-night">/night</span></div>
+                            </div>
+                            <button class="view-details">
+                                VIEW DETAILS
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
-                <!-- Property Card 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="property-card card h-100">
-                        <div class="position-absolute end-0 top-0 m-3 px-3 py-1 rounded-pill bg-white shadow-sm text-primary-dark">
-                            <small class="fw-bold">POPULAR</small>
-                        </div>
-                        <div class="property-img-wrap position-relative">
-                            <img src="images.jpeg" class="card-img-top property-img" alt="New Beginnings">
-                            <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
-                        </div>
-                        <div class="card-body bg-accent">
-                            <h5 class="card-title property-name text-primary-dark mb-3">NEW BEGINNINGS</h5>
-                            <div class="d-flex align-items-center gap-3 mb-3 property-meta text-secondary-dark">
-                                <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 8</span>
-                                <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 3</span>
-                                <span><span class="iconify me-1" data-icon="mdi:shower"></span> 3</span>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <span class="property-location text-secondary-dark"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Pine Ridge</span>
-                                <span class="property-rating text-warning">
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-accent border-0">
-                            <a href="internal-property.html" class="btn btn-secondary-dark w-100 d-flex align-items-center justify-content-center">
-                                <span class="iconify me-2" data-icon="mdi:calendar-check"></span> CHECK AVAILABILITY
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Property Card 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="property-card card h-100">
-                        <div class="position-absolute end-0 top-0 m-3 px-3 py-1 rounded-pill bg-white shadow-sm text-primary-dark">
-                            <small class="fw-bold">FEATURED</small>
-                        </div>
-                        <div class="property-img-wrap position-relative">
-                            <img src="images.jpeg" class="card-img-top property-img" alt="Mountain Nest">
-                            <span class="iconify property-fav" data-icon="mdi:heart-outline"></span>
-                        </div>
-                        <div class="card-body bg-accent">
-                            <h5 class="card-title property-name text-primary-dark mb-3">MOUNTAIN NEST</h5>
-                            <div class="d-flex align-items-center gap-3 mb-3 property-meta text-secondary-dark">
-                                <span><span class="iconify me-1" data-icon="mdi:account-group-outline"></span> 10</span>
-                                <span><span class="iconify me-1" data-icon="mdi:bed-outline"></span> 4</span>
-                                <span><span class="iconify me-1" data-icon="mdi:shower"></span> 5</span>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <span class="property-location text-secondary-dark"><span class="iconify me-1" data-icon="mdi:map-marker-outline"></span> Valley View</span>
-                                <span class="property-rating text-warning">
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                    <span class="iconify" data-icon="mdi:star"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-accent border-0">
-                            <a href="internal-property.html" class="btn btn-secondary-dark w-100 d-flex align-items-center justify-content-center">
-                                <span class="iconify me-2" data-icon="mdi:calendar-check"></span> CHECK AVAILABILITY
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-secondary-dark px-4 py-3 shadow-sm rounded-pill d-inline-flex align-items-center" onclick="window.location.href='property.html'">
-                        <span class="iconify me-2" data-icon="mdi:home-group"></span> VIEW ALL PROPERTIES
-                    </button>
                 </div>
             </div>
+            
+            <!-- 157 OBW -->
+            <div class="col-lg-4 col-md-6">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="157 OBW">
+                        <div class="heart-icon">
+                            <i class="far fa-heart"></i>
+                        </div>
+                      
+                          <div class="property-amenities-list-wrapper amenities">
+  <ul class="property-amenities-list-wrap">
+    <li class="property-amenities-list guests-amenitie amenity" title="Guests: 6">
+      <div class="property-amenities-name"><span> <i class="fas fa-users"></i></span>6 <span>Guests</span></div>
+    </li>
+    <li class="separator">|</li>
+    <li class="property-amenities-list bedrooms-amenitie amenity" title="Bedrooms: 2">
+      <div class="property-amenities-name"><span> <i class="fas fa-bed"></i></span>2 <span>Bdrm</span></div>
+    </li>
+    <li class="separator">|</li>
+    <li class="property-amenities-list bathrooms-amenitie amenity" title="Bathrooms: 2">
+      <div class="property-amenities-name"><span> <i class="fas fa-bath"></i></span>2 <span>Baths</span></div>
+    </li>
+  </ul>
+</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-titles">
+                            <h3 class="property-name">157 OBW</h3>
+                            <!-- <div class="rating-badge rating-35">3.5</div> -->
+                           
+                        </div>
+                        <div class="star-location">
+
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Holden Beach</span>
+                            </div>
+                             <div class="stars">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star-half-alt star"></i>
+                                <i class="far fa-star star empty"></i>
+                            </div>
+                        </div>
+                        <div class="pricing-section">
+                            <div class="price-info">
+                                <div class="from-text">From</div>
+                                <div class="price">$1,466.00<span class="per-night">/night</span></div>
+                            </div>
+                            <button class="view-details">
+                                VIEW DETAILS
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 17 Sandpiper -->
+            <div class="col-lg-4 col-md-6">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="17 Sandpiper">
+                        <div class="heart-icon">
+                            <i class="far fa-heart"></i>
+                        </div>
+                      
+                          <div class="property-amenities-list-wrapper amenities">
+  <ul class="property-amenities-list-wrap">
+    <li class="property-amenities-list guests-amenitie amenity" title="Guests: 6">
+      <div class="property-amenities-name"><span> <i class="fas fa-users"></i></span>6 <span>Guests</span></div>
+    </li>
+    <li class="separator">|</li>
+    <li class="property-amenities-list bedrooms-amenitie amenity" title="Bedrooms: 2">
+      <div class="property-amenities-name"><span> <i class="fas fa-bed"></i></span>2 <span>Bdrm</span></div>
+    </li>
+    <li class="separator">|</li>
+    <li class="property-amenities-list bathrooms-amenitie amenity" title="Bathrooms: 2">
+      <div class="property-amenities-name"><span> <i class="fas fa-bath"></i></span>2 <span>Baths</span></div>
+    </li>
+  </ul>
+</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-titles">
+                            <h3 class="property-name">17 Sandpiper</h3>
+                          
+                        </div>
+                        <div class="star-location">
+
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Ocean Isle Beach</span>
+                            </div>
+                              <div class="stars">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                            </div>
+                        </div>
+                        <div class="pricing-section">
+                            <div class="price-info">
+                                <div class="from-text">From</div>
+                                <div class="price">$337.00<span class="per-night">/night</span></div>
+                            </div>
+                            <button class="view-details">
+                                VIEW DETAILS
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="text-center mt-5">
+                <a href="/property.html" class="btn px-4 py-3" style="background-color: var(--secondary-dark); color: white; border-radius: 50px; font-weight: 700;">
+                    <span class="iconify me-2" data-icon="mdi:view-grid-plus"></span> VIEW MORE PROPERTIES
+                </a>
+            </div> 
+        </div>
+    </div>
         </div>
     </section>
 
@@ -404,4 +735,46 @@
     <!-- Footer placeholder -->
     <div id="footer-placeholder"></div>
 </body>
+ <script>
+        // Add interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Heart icon toggle
+            const heartIcons = document.querySelectorAll('.heart-icon');
+            heartIcons.forEach(heart => {
+                heart.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        icon.style.color = '#e74c3c';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        icon.style.color = '#ccc';
+                    }
+                });
+            });
+
+            // View details button hover effect
+            const viewDetailsButtons = document.querySelectorAll('.view-details');
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('View details clicked for:', this.closest('.property-card').querySelector('.property-name').textContent);
+                });
+            });
+
+            // Card hover animations
+            const propertyCards = document.querySelectorAll('.property-card');
+            propertyCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
 </html>
