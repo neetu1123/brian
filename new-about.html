@@ -52,6 +52,12 @@
             padding: 5rem 0;
         }
         
+        @media (max-width: 991px) {
+            .section-b-space {
+                padding: 3rem 0;
+            }
+        }
+
         .abt-info {
             display: flex;
             flex-direction: row-reverse;
@@ -84,17 +90,17 @@
         }
         
         .btn-custom {
-            background-color: var(--gold);
-            color: white;
-            transition: all 0.3s ease;
+            background-color: var(--gold) !important;
+            color: white !important;
+            /* transition: all 0.3s ease; */
             border: none;
-            padding: 15px 30px;
+            padding: 15px 30px !important;
         }
 
         .btn-custom:hover {
             color: #ffffff;
             background-color: var(--gold);
-            transform: scale(1.01);
+            /* transform: scale(1.01); */
         }
         
         
@@ -187,9 +193,9 @@
         }
         
         .btn-outline-custom {
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            padding: 15px 30px;
+            color: var(--gold) !important;
+            border: 2px solid var(--gold) !important;
+            padding: 15px 30px !important;
             transition: all 0.3s ease;
         }
         
@@ -343,12 +349,12 @@
         
         .btn-primary-custom {
             background: linear-gradient(135deg, var(--gold), #f4d03f);
-            color: var(--secondary-dark);
+            color: var(--secondary-dark) !important;
             border: none;
-            padding: 18px 35px;
+            padding: 18px 35px !important;
             font-size: 1.1rem;
             font-weight: 700;
-            border-radius: 50px;
+            border-radius: 50px !important;
             transition: all 0.3s ease;
             /* box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3); */
             text-transform: uppercase;
@@ -360,7 +366,7 @@
         .btn-primary-custom:hover {
             /* transform: translateY(-3px) scale(1.05); */
             /* box-shadow: 0 15px 35px rgba(218, 165, 32, 0.4); */
-            color: var(--secondary-dark);
+            color: var(--secondary-dark) !important;
         }
         
         .btn-primary-custom::before {
@@ -379,13 +385,13 @@
         }
         
         .btn-secondary-custom {
-            background: transparent;
-            color: white;
-            border: 2px solid var(--gold);
-            padding: 16px 35px;
+            background: transparent !important;
+            color: white !important;
+            border: 2px solid var(--gold) !important;
+            padding: 16px 35px !important;
             font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: 50px !important;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -516,7 +522,7 @@
                 <div class="abt-content">
                     <div class="">
                         <div class="cont">
-                            <h2 class="text-primary-dark fw-bold pb-3">Our Story</h2>
+                            <h2 class="text-primary-dark fw-bold py-3">Our Story</h2>
                             <div class="text-primary-dark fw-bold py-2">VA Mountain Cabins began with a simple love for the Virginia mountains and a desire to share this stunning region with others.</div>
                             <p class="text-primary-dark">What started as a single cabin rental in 2010 has grown into a collection of premium properties offering unforgettable vacation experiences. Our founders, John and Mary Johnson, fell in love with the area during their honeymoon and decided to purchase their first cabin shortly after.</p>
                             <p class="text-primary-dark">Their passion for hospitality and the natural beauty of the region led them to acquire more properties and establish what is now VA Mountain Cabins. Today, we maintain the same dedication to exceptional service, beautiful accommodations, and creating memorable experiences for our guests that has defined us since the beginning.</p>
@@ -648,4 +654,6 @@
     <!-- Footer placeholder -->
     <div id="footer-placeholder"></div>
 </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>
