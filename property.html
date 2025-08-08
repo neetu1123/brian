@@ -52,7 +52,7 @@
             padding: 6px 16px;
             background-color: rgba(239, 173, 41, 0.15);
             border-radius: 50px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .property-titles {
@@ -62,7 +62,7 @@
             position: relative;
             display: inline-block;
             margin-bottom: 10px;
-            margin-top: 20px;
+            margin-top: 50px;
         }
         
         .property-card {
@@ -70,12 +70,12 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
         }
         
         .property-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             /* box-shadow: 0 8px 30px rgba(0,0,0,0.12); */
         }
         
@@ -302,11 +302,16 @@
 
 .property-amenities-list-wrap {
     display: flex;
-    gap: 12px;
+    gap: 25px;
     margin: 0;
     font-size: 14px;
+    justify-content: center;
+    list-style: none;
 }
-
+ .property-amenities-list-wrapper {
+        display: flex;
+        justify-content: center;
+      }
 .property-amenities-list {
     display: flex;
     align-items: center;
@@ -325,6 +330,146 @@
     font-size: 16px;
 }
 
+      /* Enhanced Search Bar Styles */
+      .search-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: 2rem auto 0;
+        padding: 0 15px;
+      }
+
+      .search-bar {
+        background: #fff;
+        border-radius: 100px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        /* border-radius: round; */
+      }
+
+      .search-group {
+        flex: 1;
+        position: relative;
+        padding: 20px 5px;
+      }
+
+      .search-group:last-child {
+        flex: 0 0 auto;
+        padding: 10px 15px 10px 20px;
+      }
+
+      .search-input-wrap {
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+      }
+
+      .search-icon {
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-icon .iconify {
+        color: var(--gold);
+        font-size: 24px;
+      }
+
+      .search-select {
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--primary-dark);
+        width: 100%;
+        padding: 5px 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .search-select:focus {
+        box-shadow: none;
+      }
+
+      .search-divider {
+        height: 40px;
+        width: 1px;
+        background-color: #e5e5e5;
+      }
+
+      .search-button {
+        background: var(--primary-dark);
+        color: white;
+        border: none;
+        border-radius: 100px;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 15px 50px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 4px 15px rgba(239, 173, 41, 0.25);
+      }
+
+      /* .search-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        } */
+
+      .search-button .iconify {
+        font-size: 20px;
+      }
+
+      @media (max-width: 992px) {
+        .search-bar {
+          flex-wrap: wrap;
+        }
+
+        .search-group {
+          flex: 1 0 40%;
+        }
+
+        .search-group:last-child {
+          flex: 1 0 100%;
+          justify-content: center;
+          display: flex;
+          padding: 15px;
+        }
+
+        .search-divider {
+          display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .search-group {
+          flex: 1 0 100%;
+          padding: 15px 20px;
+          border-bottom: 1px solid #f0f0f0;
+        }
+
+        .search-button {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .search-container {
+          padding: 0 10px;
+        }
+
+        .search-bar {
+          border-radius: 8px;
+        }
+      }
     </style>
 </head>
 <body class="bg-primary-light">
@@ -332,46 +477,69 @@
     <div id="header-placeholder"></div>
 
     <!-- Property Section -->
-    <section class="property-section py-5">
+    <section class="property-section py-3">
         <div class="container">
-            <div class="text-center my-4">
-                 <form class="search-bar row justify-content-center align-items-center mb-3">
-                <div class="form-group col-auto d-flex align-items-center">
-                    <span class="iconify" data-icon="mdi:calendar-month-outline"></span>
-                    <select class="form-select" aria-label="Check In">
-                        <option selected>CHECK IN</option>
-                        <option value="1">July 16, 2025</option>
-                        <option value="2">July 17, 2025</option>
-                    </select>
-                </div>
-                <div class="form-group col-auto d-flex align-items-center">
-                    <span class="iconify" data-icon="mdi:calendar-month-outline"></span>
-                    <select class="form-select" aria-label="Check Out">
-                        <option selected>CHECK OUT</option>
-                        <option value="1">July 20, 2025</option>
-                        <option value="2">July 21, 2025</option>
-                    </select>
-                </div>
-                <div class="form-group col-auto d-flex align-items-center">
-                    <span class="iconify" data-icon="mdi:bed-outline"></span>
-                    <select class="form-select" aria-label="Bedrooms">
-                        <option selected>BEDROOMS</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4+</option>
-                    </select>
-                </div>
-                <div class="form-group col-auto">
-                    <button type="submit" class="btn btn-search rounded-pill">
-                        <span class="iconify" data-icon="mdi:magnify" style="color: #fff !important;"></span> SEARCH
-                    </button>
-                </div>
-            </form>
-                <!-- <p class="property-subtitle">DISCOVER OUR RENTALS</p> -->
-                <h2 class="property-titles">OUR FEATURED PROPERTIES</h2>
-                <p class="text-secondary-dark mx-auto mb-4" style="max-width: 700px;">Explore our handpicked selection of luxury mountain cabins, each offering a perfect blend of rustic charm and modern comfort in Virginia's breathtaking Blue Ridge Mountains.</p>
+          <div class="search-container text-center">
+          <form class="search-bar">
+            <div class="search-group">
+              <div class="search-input-wrap">
+                <span class="search-icon">
+                  <span
+                    class="iconify"
+                    data-icon="mdi:calendar-month-outline"
+                  ></span>
+                </span>
+                <select class="search-select">
+                  <option selected>CHECK IN</option>
+                  <option value="1">July 16, 2025</option>
+                  <option value="2">July 17, 2025</option>
+                  <option value="3">July 18, 2025</option>
+                </select>
+              </div>
             </div>
+            <div class="search-divider"></div>
+            <div class="search-group">
+              <div class="search-input-wrap">
+                <span class="search-icon">
+                  <span
+                    class="iconify"
+                    data-icon="mdi:calendar-month-outline"
+                  ></span>
+                </span>
+                <select class="search-select">
+                  <option selected>CHECK OUT</option>
+                  <option value="1">July 20, 2025</option>
+                  <option value="2">July 21, 2025</option>
+                  <option value="3">July 22, 2025</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-divider"></div>
+            <div class="search-group">
+              <div class="search-input-wrap">
+                <span class="search-icon">
+                  <span class="iconify" data-icon="mdi:bed-outline"></span>
+                </span>
+                <select class="search-select">
+                  <option selected>GUESTS</option>
+                  <option value="1">1-2 Guests</option>
+                  <option value="2">3-4 Guests</option>
+                  <option value="3">5-6 Guests</option>
+                  <option value="4">7+ Guests</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-group">
+              <button type="submit" class="search-button">
+                <span class="iconify" data-icon="mdi:magnify"></span> SEARCH
+              </button>
+            </div>
+          </form>
+           <!-- <p class="property-subtitle">DISCOVER OUR RENTALS</p> -->
+                <h2 class="property-titles">OUR FEATURED PROPERTIES</h2>
+                <p class="text-secondary-dark mx-auto mb-5" style="max-width: 700px;">Explore our handpicked selection of luxury mountain cabins, each offering a perfect blend of rustic charm and modern comfort in Virginia's breathtaking Blue Ridge Mountains.</p>
+       
+        </div>
             <div class="my-4">
       
         
@@ -381,9 +549,6 @@
                 <div class="property-card highlighted-card">
                     <div class="property-image">
                         <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Salty Sandpiper">
-                        <div class="heart-icon">
-                            <i class="far fa-heart"></i>
-                        </div>
                        
                         <div class="property-amenities-list-wrapper amenities">
   <ul class="property-amenities-list-wrap">
@@ -438,9 +603,7 @@
                 <div class="property-card">
                     <div class="property-image">
                         <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="157 OBW">
-                        <div class="heart-icon">
-                            <i class="far fa-heart"></i>
-                        </div>
+                       
                       
                           <div class="property-amenities-list-wrapper amenities">
   <ul class="property-amenities-list-wrap">
@@ -497,9 +660,7 @@
                 <div class="property-card">
                     <div class="property-image">
                         <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="17 Sandpiper">
-                        <div class="heart-icon">
-                            <i class="far fa-heart"></i>
-                        </div>
+                       
                       
                           <div class="property-amenities-list-wrapper amenities">
   <ul class="property-amenities-list-wrap">
@@ -552,7 +713,7 @@
         </div>
     </div>
             
-           <div class="text-center mt-5">
+           <div class="text-center my-5">
                 <a href="/internal-property.html" class="btn px-4 py-3" style="background-color: var(--secondary-dark); color: white; border-radius: 50px; font-weight: 700;">
                     <span class="iconify me-2" data-icon="mdi:view-grid-plus"></span> VIEW MORE PROPERTIES
                 </a>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things to Do</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+        <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+                
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>  <!-- Header placeholder -->
+    <style>
+        /* body {
+            font-family: 'Georgia', serif;
+            background-color: #f8f9fa;
+        } */
+
+        .things-to-do-section {
+            padding: 30px 0;
+            background-color: var(--accent);
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3.5rem;
+            color: var(--secondary-dark);
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .title-underline {
+            width: 60px;
+            height: 4px;
+            background-color: var(--gold);
+            /* margin: 0 0 40px 0; */
+            margin: 0 auto;
+           /* padding: 12px; */
+        }
+
+        .description-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            max-width: 900px;
+        }
+
+        .tourism-card {
+            position: relative;
+            border-radius: 15px;
+            border: 6px solid white;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease;
+        }
+
+        .tourism-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .tourism-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(20, 36, 53, 0.7) 0%, rgba(4, 58, 102, 0.7) 100%);
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            transition: all 0.5s ease;
+            height: 80px;
+        }
+        
+        .tourism-card:hover .card-overlay {
+            background: linear-gradient(135deg, rgba(20, 36, 53, 0.7) 0%, rgba(4, 58, 102, 0.6) 100%);
+            /* top: 0;
+            height: 100%; */
+            /* align-items: center; */
+        }
+
+        .card-title {
+            color: white;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            /* margin: 300px 0px; */
+            padding: 15px 10px;
+            transition: transform 0.5s ease, text-shadow 0.5s ease;
+            width: 100%;
+            position: relative;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+        
+        .tourism-card:hover .card-title {
+            transform: scale(1.1);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+        
+        .tourism-card:hover .card-title::after {
+            width: 70%;
+            opacity: 1;
+        }
+
+        .franklin-card {
+            background-image: url('Screenshot-2025-04-16-at-14.17.37-1200x660.webp');
+            background-size: cover;
+            background-position: center;
+            transform-origin: center;
+        }
+
+        .gulf-card {
+            background-image: url('Songwriters-Festival_4-on-stools (1).webp');
+            background-size: cover;
+            background-position: center;
+            transform-origin: center;
+        }
+
+        .third-card {
+            background-image: url('about-1.png');
+            background-size: cover;
+            background-position: center;
+            transform-origin: center;
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 3rem;
+            }
+            .card-title {
+                font-size: 2rem;
+            }
+            .tourism-card {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .card-title {
+                font-size: 1.8rem;
+            }
+            .tourism-card {
+                height: 200px;
+                margin-bottom: 20px;
+            }
+            .description-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .card-title {
+                font-size: 1.5rem;
+            }
+            .tourism-card {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <div id="header-placeholder"></div>
+
+    <section class="things-to-do-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">Things to Do</h2>
+                    <div class="title-underline"></div>
+                    <!-- <p class="description-text">Explore the beautiful attractions and activities available in and around our cabins. From pristine beaches to historic sites, there's something for everyone to enjoy during your stay.</p> -->
+                </div>
+            </div>
+            
+            <div class="row my-5">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="tourism-card franklin-card" data-bs-toggle="modal" data-bs-target="#franklinModal">
+                        <a href="new-attraction.html">
+                        <div class="card-overlay">
+                            <h3 class="card-title">Franklin County Tourism</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="tourism-card gulf-card" data-bs-toggle="modal" data-bs-target="#gulfModal">
+                        <a href="new-attraction.html">
+                        <div class="card-overlay">
+                            <h3 class="card-title">Gulf County Tourism</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="tourism-card gulf-card" data-bs-toggle="modal" data-bs-target="#gulfModal">
+                        <a href="new-attraction.html">
+                        <div class="card-overlay">
+                            <h3 class="card-title">Gulf County Tourism</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                 <div class="col-lg-4 col-md-6 col-12">
+                    <div class="tourism-card gulf-card" data-bs-toggle="modal" data-bs-target="#gulfModal">
+                        <a href="new-attraction.html">
+                        <div class="card-overlay">
+                            <h3 class="card-title">Gulf County Tourism</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                 <div class="col-lg-4 col-md-6 col-12">
+                    <div class="tourism-card gulf-card" data-bs-toggle="modal" data-bs-target="#gulfModal">
+                        <a href="new-attraction.html">
+                        <div class="card-overlay">
+                            <h3 class="card-title">Gulf County Tourism</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                 <div class="col-lg-4 col-md-6 col-12">
+                    <div class="tourism-card gulf-card" data-bs-toggle="modal" data-bs-target="#gulfModal">
+                        <a href="new-attraction.html">
+                        <div class="card-overlay">
+                            <h3 class="card-title">Gulf County Tourism</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+ <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.tourism-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.cursor = 'pointer';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.cursor = 'default';
+                });
+            });
+            
+            // Add click analytics (placeholder)
+            cards.forEach((card, index) => {
+                card.addEventListener('click', function() {
+                    console.log(`Card ${index + 1} clicked`);
+                    // Add your analytics tracking here
+                });
+            });
+        });
+
+        // Smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.tourism-card');
+            
+            // Initial animation on page load
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px) scale(0.95)';
+                card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                
+                // Staggered animation
+                setTimeout(() => {
+                    observer.observe(card);
+                }, index * 150); // Stagger each card by 150ms
+            });
+            
+            // Enhanced hover effects
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.cursor = 'pointer';
+                    this.style.transform = 'translateY(-10px) scale(1.05)';
+                    this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.cursor = 'default';
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                });
+            });
+        });
+    </script>
+
+   <!-- Footer placeholder -->
+    <!-- <div id="footer-placeholder"></div> -->
+
+
+</script>
+</body>
+</html>
