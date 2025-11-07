@@ -1,0 +1,438 @@
+@php
+try {
+    $setting_data = \App\Models\BasicSetting::pluck('value', 'name')->toArray();
+} catch (\Throwable $e) {
+    $setting_data = [];
+}
+@endphp
+@extends("front.layouts.master")
+@section("title",$data->meta_title)
+@section("keywords",$data->meta_keywords)
+@section("description",$data->meta_description)
+@section("logo",$data->image)
+@section("header-section")
+{!! $data->header_section !!}
+@stop
+@section("footer-section")
+{!! $data->footer_section !!}
+@stop
+@section("container")
+@php
+$name=$data->name;
+$bannerImage=asset('front/images/breadcrumb.webp');
+if($data->bannerImage){
+$bannerImage=asset($data->bannerImage);
+}
+@endphp
+@include("front.layouts.banner")
+
+<!-- GET IN TOUCH Section -->
+<div class="py-2 text-center bg-primary-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="text-secondary-dark small text-uppercase my-1 fw-bold">GET IN TOUCH</p>
+                <h1 class="display-5 text-primary-dark fw-bold mb-2">CONTACT US</h1>
+                <div class="d-flex justify-content-center mb-3">
+                    <div style="width: 80px; height: 3px; background-color: var(--gold);"></div>
+                </div>
+                <p class="text-secondary-dark mx-auto fs-6" style="max-width: 700px;"> Whether you're curious about our properties, or craving personalized recommendations, our friendly team is here to make your stay hassle-free.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Details Column -->
+            <div class="col-lg-5 mb-4">
+                <div class="p-4 h-100">
+                    <p class="text-secondary-dark small text-uppercase mb-1 fw-bold">CONTACT</p>
+                    <h2 class="text-primary-dark fw-bold mb-4">CONTACT DETAILS</h2>
+                    <p class="text-secondary-dark mb-5">Don't hesitate to reach out! We're here to help you make lasting memories with our vacation homes.</p>
+                    
+                    <div class="d-flex align-items-center mb-4 contact-info-item">
+                        <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px; transition: all 0.3s;">
+                            <span class="iconify text-accent" data-icon="mdi:phone" style="font-size: 24px;"></span>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="text-primary-dark fw-bold mb-1">PHONE</h6>
+                            <p class="mb-0"><a href="tel:{!! $setting_data['mobile'] ?? '#' !!}" class="text-secondary-dark text-decoration-none hover-gold">{!! $setting_data['mobile'] ?? '#' !!}</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center contact-info-item">
+                        <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px; transition: all 0.3s;">
+                            <span class="iconify text-accent" data-icon="mdi:email" style="font-size: 24px;"></span>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="text-primary-dark fw-bold mb-1">EMAIL</h6>
+                            <p class="mb-0"><a href="mailto:{!! $setting_data['email'] ?? '#' !!}" class="text-secondary-dark text-decoration-none hover-gold">{!! $setting_data['email'] ?? '#' !!}</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mt-4 contact-info-item">
+                        <div class="rounded-circle bg-secondary-dark d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; min-width: 50px; transition: all 0.3s;">
+                            <span class="iconify text-accent" data-icon="mdi:map-marker" style="font-size: 24px;"></span>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="text-primary-dark fw-bold mb-1">LOCATION</h6>
+                            <p class="mb-0 text-secondary-dark">{!! $setting_data['address'] ?? '#' !!}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Column -->
+            <div class="col-lg-7">
+                <div class="contact-form bg-accent rounded-4 shadow-sm p-4 p-md-5">
+                    <h3 class="text-primary-dark fw-bold">SEND A MESSAGE</h3>
+                    <p class="text-secondary-dark mb-4">Contact us now by filling out the form below.</p>
+                    
+                    {!! Form::open(["route"=>"contactPost","id"=>"wendy-contact-us","class"=>"row g-3"])  !!}
+                        <p class="mb-2"><span class="text-danger">*</span> indicates required fields</p>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label small mb-1 fw-bold">FIRST NAME<span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label small mb-1 fw-bold">LAST NAME<span class="text-danger">*</span></label>
+                            <input type="text" name="lastname" class="form-control" required>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label small mb-1 fw-bold">EMAIL<span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label small mb-1 fw-bold">PHONE<span class="text-danger">*</span></label>
+                            <input type="tel" name="mobile" class="form-control" required>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="form-label small mb-1 fw-bold">MESSAGE</label>
+                            <textarea class="form-control" name="message" rows="6"></textarea>
+                        </div>
+                        
+                        <!-- Captcha Section -->
+                        <div class="col-12">
+                            <div class="form-group mt-3">
+                                <div class="captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                    <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                    &#x21bb;
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mt-3">
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" title="Enter Captcha" name="captcha">
+                            </div>
+                            
+                            @if ($errors->has('captcha'))
+                                <div class="text-danger">
+                                    <strong>{{ $errors->first('captcha') }}</strong>
+                                </div>
+                            @endif
+                            
+                            @if($setting_data['g_captcha_enabled'])
+                                @if($setting_data['g_captcha_enabled']=="yes")
+                                    @if($setting_data['google_captcha_site_key']!="" && $setting_data['google_captcha_secret_key']!="")
+                                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                        <div class="g-recaptcha" data-sitekey="{{ $setting_data['google_captcha_site_key'] }}"></div>
+                                    </div>
+                                    @endif
+                                @endif
+                            @endif
+                        </div>
+                        
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" class="btn btn-secondary-dark px-4 py-3 text-primary-light rounded-pill fw-bold">
+                                <span class="iconify me-2" data-icon="mdi:send" style="font-size: 18px;"></span>
+                                SEND REQUEST
+                            </button>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <iframe src="{!! $setting_data['map'] ?? '#' !!}" width="100%" height="450" style="border:0; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vacation Rental Section -->
+<section class="vacation-rental-section position-relative mt-5">
+    <!-- Full-width background image -->
+    <div class="vacation-bg-image w-100 position-relative bg-primary-dark" style="background-image: url('images.jpeg'); background-size: cover; background-position: center; min-height: 500px;">
+        <!-- Dark overlay for better text readability -->
+        <div class="overlay position-absolute top-0 start-0 bottom-0 end-0" style="background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--secondary-dark) 100%); opacity: 0.85;"></div>
+        <div class="container position-relative " style="z-index: 2;">
+            <div class="row justify-content-center text-center py-md-5">
+                <div class="col-lg-10">
+                    <div class="py-4 py-md-5 rental-content">
+                        <p class="text-accent small text-uppercase mb-1 fw-bold">BOOK NOW</p>
+                        <h2 class="display-4 text-primary-light fw-bold mb-3 mb-md-4">DISCOVER YOUR PERFECT 30A<br class="d-none d-md-block"> VACATION RENTAL</h2>
+                        <p class="text-primary-light mb-4 mx-auto" style="max-width: 800px;">Find your ideal 30A vacation rental with Eurest Properties. Our carefully curated homes offer everything you need for the perfect beach getaway. Enjoy beach access, pool amenities, and top-notch guest services.</p>
+                        <p class="text-accent mb-2">Discover our stunning properties along the scenic 30A highway.</p>
+                        <p class="text-accent fw-bold mb-4">Book your next beach getaway now!</p>
+                        <a href="#" class="btn btn-accent text-secondary-dark px-5 py-3 rounded-pill fw-bold mt-2 book-now-btn">BOOK NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@stop
+@section("css")
+@parent
+<link rel="stylesheet" href="{{ asset('front')}}/css/contact.css" />
+<link rel="stylesheet" href="{{ asset('front')}}/css/contact-responsive.css" />
+<style>
+    .py-md-6 {
+        padding-top: 5rem !important;
+        padding-bottom: 5rem !important;
+    }
+    
+    .contact-section {
+        padding: 10px 0;
+    }
+
+    .contact-form {
+        background: linear-gradient(135deg, var(--accent) 60%, var(--secondary-light) 100%);
+        padding: 40px;
+        border-radius: 18px;
+        box-shadow: 0 12px 32px rgba(4,58,102,0.12);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid var(--secondary-light);
+        padding: 8px 15px;
+        margin-bottom: 14px;
+        border-radius: 8px;
+        background-color: var(--primary-light);
+        font-size: 1.05rem;
+        transition: all 0.3s ease;
+        color: var(--primary-dark);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--secondary-dark);
+        box-shadow: 0 0 0 0.2rem rgba(4,58,102,0.18);
+        transform: translateY(-2px);
+    }
+
+    .form-label {
+        color: var(--primary-dark);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+    
+    .hover-gold:hover {
+        color: var(--gold) !important;
+        transition: color 0.3s ease;
+    }
+    
+    .contact-info-card {
+        background: linear-gradient(120deg, var(--primary-dark) 80%, var(--secondary-dark) 100%);
+        color: var(--primary-light);
+        padding: 40px 32px;
+        border-radius: 18px;
+        height: 100%;
+        box-shadow: 0 14px 36px rgba(21,36,53,0.18);
+        border: 1.5px solid var(--secondary-light);
+    }
+    
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 28px;
+    }
+    
+    .contact-icon {
+        font-size: 1.7rem;
+        color: var(--gold);
+        margin-right: 18px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255,255,255,0.13);
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(21,36,53,0.08);
+    }
+    
+    .contact-text {
+        color: var(--primary-light);
+        font-size: 1.07rem;
+        font-weight: 500;
+    }
+    
+    .contact-text a {
+        color: var(--primary-light);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    .contact-text a:hover {
+        color: var(--gold);
+    }
+    
+    .contact-heading {
+        color: var(--primary-dark);
+        margin-bottom: 30px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+    
+    .contact-subheading {
+        color: var(--secondary-dark);
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    
+    .social-icons {
+        margin-top: 30px;
+    }
+    
+    .social-icon {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255,255,255,0.13);
+        border-radius: 50%;
+        margin-right: 12px;
+        color: var(--gold);
+        font-size: 1.25rem;
+        transition: all 0.3s;
+    }
+    
+    .social-icon:hover {
+        background-color: var(--secondary-light);
+        color: var(--primary-dark);
+        transform: translateY(-3px) scale(1.08);
+    }
+    
+    /* Vacation Rental Section Styles */
+    .vacation-rental-section {
+        margin-top: 44px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .vacation-bg-image {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* border-radius: 18px; */
+        box-shadow: 0 14px 36px rgba(21,36,53,0.13);
+        background-color: var(--primary-dark);
+    }
+
+    .btn-accent {
+        background-color: var(--gold);
+        color: var(--primary-dark);
+        border: none;
+        transition: all 0.3s ease;
+        font-weight: 700;
+        letter-spacing: 0.7px;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 8px rgba(21,36,53,0.08);
+    }
+
+    .btn-accent:hover {
+        background-color: var(--primary-dark);
+        color: var(--accent);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 24px rgba(21,36,53,0.13);
+    }
+
+    .book-now-btn {
+        box-shadow: 0 6px 16px rgba(21,36,53,0.13);
+    }
+
+    .rental-content {
+        animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 992px) {
+        .vacation-bg-image {
+            min-height: 450px;
+        }
+        .rental-content {
+            padding: 40px 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .vacation-bg-image {
+            min-height: 400px;
+        }
+        .display-4 {
+            font-size: calc(1.375rem + 1.5vw);
+        }
+        .contact-info-card {
+            margin-bottom: 20px;
+        }
+        .form-control, .form-select {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .vacation-bg-image {
+            min-height: 350px;
+        }
+        .book-now-btn {
+            padding: 10px 20px !important;
+            font-size: 1rem;
+        }
+        .contact-section {
+            padding: 10px 0;
+        }
+        .py-md-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+    }
+</style>
+@stop 
+@section("js")
+@parent
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script src="{{ asset('front')}}/js/contact.js" ></script>
+@stop

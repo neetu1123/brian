@@ -1,0 +1,89 @@
+.memory-section {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.memory-item {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.memory-content {
+    padding: 30px;
+}
+
+.memory-content h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.memory-content .description {
+    color: #666;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.memory-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.memory-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.memory-item:hover {
+    transform: translateY(-5px);
+}
+
+.memory-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .memory-section {
+        padding: 40px 0;
+    }
+
+    .memory-content {
+        padding: 20px;
+    }
+
+    .memory-content h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .memory-image {
+        margin-bottom: 20px;
+    }
+
+    .col-12.mb-5:last-child {
+        margin-bottom: 0 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .memory-content {
+        padding: 15px;
+    }
+
+    .memory-content h2 {
+        font-size: 22px;
+    }
+
+    .memory-content .description {
+        font-size: 15px;
+    }
+}
